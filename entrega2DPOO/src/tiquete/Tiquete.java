@@ -1,13 +1,31 @@
 package tiquete;
 
-public abstract class Tiquete {
-	public String idTiquete;
-	public boolean valido;
-	public boolean fastPass;
+public class Tiquete {
+	
+	protected String idTiquete;
+	protected boolean valido;
+	protected boolean fastPass;
+	
 	public Tiquete(String idTiquete, boolean fastPass) {
-		super();
 		this.idTiquete = idTiquete;
 		this.fastPass = fastPass;
+		this.valido = true;
+	}
+
+	public String getIdTiquete() {
+		return idTiquete;
+	}
+
+	public boolean isValido() {
+		return valido;
+	}
+
+	public boolean isFastPass() {
+		return fastPass;
+	}
+	
+	public void desvalidar() {
+		valido = false;
 	}
 	
 }
