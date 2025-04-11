@@ -6,11 +6,11 @@ public class Taquilla{
 	
 	private String ubicacion;
 	private Queue<PedidoTiquete> pedidosTiquetes;
-	private ArrayList<String> codigosUtilizados;
+	private static double IDs = 10000000;
+	
 	
 	public Taquilla(String ubicacion) {
 		this.ubicacion = ubicacion;
-		this.codigosUtilizados = new ArrayList<String>();
 		this.pedidosTiquetes = new LinkedList<PedidoTiquete>();
 	}
 	
@@ -22,12 +22,8 @@ public class Taquilla{
 		pedidosTiquetes.add(pedido);
 	}
 	
-	public boolean codigoEstaUtilizado(String codigo) {
-		return codigosUtilizados.contains(codigo);
-	}
-	
-	public void addCodigo(String codigo) {
-		codigosUtilizados.add(codigo);
+	public double generarCodigo() {
+		IDs++; return IDs;
 	}
 	
 	public PedidoTiquete pedidoEnFila() {

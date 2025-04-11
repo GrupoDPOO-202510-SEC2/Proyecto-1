@@ -14,9 +14,8 @@ public class Usuario {
 	private ArrayList<String> restricciones;
 	private HashMap<String, Integer> compras;
 	private Tiquete tiqueteEnUso;
-	private ArrayList<Tiquete> tiquetesUsados;
-	private ArrayList<Tiquete> tiquetesSinUsar;
-	private Parque parque;
+	private ArrayList<Tiquete> tiquetesComprados;
+	protected static Parque parque;
 	
 	public Usuario(String nombre, String login, String password, float altura, float peso) {
 		super();
@@ -28,8 +27,32 @@ public class Usuario {
 		this.restricciones = new ArrayList<String>();
 		this.compras = new HashMap<String, Integer>();
 		this.tiqueteEnUso = null;
-		this.tiquetesUsados = new ArrayList<Tiquete>();
-		this.tiquetesSinUsar = new ArrayList<Tiquete>();
+		this.tiquetesComprados= new ArrayList<Tiquete>();
+	}
+	
+	
+	
+	public ArrayList<Double> getTiquetesFuncionales(){
+		ArrayList<Double> retorno = new ArrayList<Double>();
+		for(Tiquete tiquete:tiquetesComprados) {
+			if(tiquete.isValido()) {
+				retorno.add(tiquete.getIdTiquete());
+			}
+		}
+
+		return retorno;
+	}
+	
+	public void setTiqueteEnUso(Tiquete tiquete) {
+		this.tiqueteEnUso = tiquete;
+	}
+	
+	public void invalidarTiquete() {
+		this.tiqueteEnUso.desvalidar();
+	}
+	
+	public Tiquete getTiqueteEnUso() {
+		return this.tiqueteEnUso;
 	}
 	
 	public String getNombre() {
@@ -56,12 +79,19 @@ public class Usuario {
 		return peso;
 	}
 	
+	
 	public HashMap<String, Integer> getCompras(){
 		return compras;
 	}
 	
+	
+	public ArrayList<Tiquete> getTiquetesComprados() {
+		return tiquetesComprados;
+	}
+
+	
 	public void addTiquete(Tiquete tiquete) {
-		tiquetesSinUsar.add(tiquete);
+		tiquetesComprados.add(tiquete);
 	}
 	
 	public void comprarTiquete(String tipo, String atraccion, String fInicio, String fFin, String exclusividad, boolean fastPass) {

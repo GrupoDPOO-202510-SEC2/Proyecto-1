@@ -2,17 +2,19 @@ package tiquete;
 
 public class Tiquete {
 	
-	protected String idTiquete;
+	protected double idTiquete;
 	protected boolean valido;
 	protected boolean fastPass;
+	protected boolean enUso;
 	
-	public Tiquete(String idTiquete, boolean fastPass) {
+	public Tiquete(double idTiquete, boolean fastPass) {
 		this.idTiquete = idTiquete;
 		this.fastPass = fastPass;
 		this.valido = true;
+		
 	}
 
-	public String getIdTiquete() {
+	public double getIdTiquete() {
 		return idTiquete;
 	}
 

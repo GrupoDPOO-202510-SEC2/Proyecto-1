@@ -8,7 +8,7 @@ public class TiqueteTemporada extends TiqueteExclusividad{
 	private String fechaInicio;
 	private String fechaFin;
 
-	public TiqueteTemporada(String idTiquete, boolean fastPass, String exclusividad, String fechaInicio, String fechaFin) {
+	public TiqueteTemporada(double idTiquete, boolean fastPass, String exclusividad, String fechaInicio, String fechaFin) {
 		super(idTiquete, fastPass, exclusividad);
 		this.fechaFin = fechaFin;
 		this.fechaInicio = fechaInicio;

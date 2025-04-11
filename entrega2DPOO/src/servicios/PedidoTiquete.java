@@ -60,8 +60,8 @@ public class PedidoTiquete{
 	public String getExclusividad() {
 		return exclusividad;
 	}
-
-	public boolean isFastPass() {
+	public boolean isFastPass(
+) {
 		return fastPass;
 	}
 }

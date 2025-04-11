@@ -9,4 +9,7 @@ public class AtraccionCultural extends Atraccion{
 	this.edadMinima = edadMinima;
 	this.esInteractiva = esInteractiva;
 	}
+	
+	
+	
 }

@@ -7,6 +7,10 @@ public class ServicioGeneral extends Empleado{
 		super(nombre, login, password, altura, peso, rol, turno, lugarDeTrabajo);
 	}
 
+	
+	public String getLugar() {
+		return this.lugarDeTrabajo;
+	}
 	public void asignarLugar(String nuevoLugar) {
 		lugarDeTrabajo = nuevoLugar;
 	}
