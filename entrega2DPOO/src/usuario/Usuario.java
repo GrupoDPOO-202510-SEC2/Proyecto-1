@@ -99,28 +99,6 @@ public class Usuario {
 		parque.getTaquilla().nuevaPeticion(nuevoPedido);
 	}
 	
-	public void comprarComida(String nombreCafeteria, String nombreComida, int cantidad) {
-		Cafeteria cafe = parque.getCafeteria(nombreCafeteria);
-		if(cafe.existeProducto(nombreComida) == true) {
-			Comestible comida = (Comestible)cafe.getProducto(nombreComida);
-			if(comida.getCantidad() >= cantidad) {
-				Pedido pedido = new Pedido(this, nombreComida, cantidad);
-				cafe.getPedidosSinAtender().add(pedido);
-			}
-		}
-	}
-	
-	public void comprarSouvenir(String nombreTienda, String nombreS, int cantidad) {
-		Cafeteria cafe = parque.getCafeteria(nombreTienda);
-		if(cafe.existeProducto(nombreS) == true) {
-			Comestible comida = (Comestible)cafe.getProducto(nombreS);
-			if(comida.getCantidad() >= cantidad) {
-				Pedido pedido = new Pedido(this, nombreS, cantidad);
-				cafe.getPedidosSinAtender().add(pedido);
-			}
-		}
-	}
-	
 	public void agregarRestriccion(String nuevaRestriccion) {
 		restricciones.add(nuevaRestriccion);
 	}
