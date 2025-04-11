@@ -5,14 +5,19 @@ import java.util.HashSet;
 import usuario.*;
 
 public abstract class Atraccion {
-    private String nombre;
+    protected String nombre;
     private int capacidadMaxima;
-    private int empleadosMinimos;
-    private boolean operativa;
+    private int cantidadDePpl;
+    protected int empleadosMinimos;
+    protected boolean operativaDia;
+    protected boolean operativaNoche;
     private String ubicacion;
     private String nivelExclusividad;
     private HashSet<String> climasRestringidos;
-    private HashMap<String, OperadorAtraccion> Operadores;
+    protected HashMap<String, OperadorAtraccion> operadoresDia;
+    protected HashMap<String, OperadorAtraccion> operadoresNoche;
+    protected static final String DIURNO = "diurno";
+    protected static final String NOCTURNO = "nocturno";
     
 
     public Atraccion(String nombre, int capacidadMaxima, int empleadosMinimos, String ubicacion,
@@ -25,43 +30,47 @@ public abstract class Atraccion {
         this.climasRestringidos = new HashSet<>();
     }
 
+    
+    
+
+	public int getCantidadDePpl() {
+		return cantidadDePpl;
+	}
+
+	public void setCantidadDePpl(int cantidadDePpl) {
+		this.cantidadDePpl = cantidadDePpl;
+	}
 
 	public void setNombre(String nombre) {
 		this.nombre = nombre;
 	}
 
-
 	public void setCapacidadMaxima(int capacidadMaxima) {
 		this.capacidadMaxima = capacidadMaxima;
 	}
-
 
 	public void setEmpleadosMinimos(int empleadosMinimos) {
 		this.empleadosMinimos = empleadosMinimos;
 	}
 
-
-	public void setOperativa(boolean operativa) {
-		this.operativa = operativa;
+	public void setOperativaDia(boolean operativa) {
+		this.operativaDia = operativa;
 	}
-
-
-	public void setUbicacion(String ubicacion) {
-		this.ubicacion = ubicacion;
+	public void setOperativaNoche(boolean operativa) {
+		this.operativaNoche= operativa;
 	}
-
 
 	public void setNivelExclusividad(String nivelExclusividad) {
 		this.nivelExclusividad = nivelExclusividad;
 	}
 
-	public void addClimasRestringidos(String climaRestringido) {
-		this.climasRestringidos.add(climaRestringido);
+	public boolean addClimasRestringidos(String climaRestringido) {
+		return this.climasRestringidos.add(climaRestringido);
 		
 	}
 	
-	public void deleteClimasRestringidos(String climaRestringido) {
-		this.climasRestringidos.remove(climaRestringido);
+	public boolean deleteClimasRestringidos(String climaRestringido) {
+		return this.climasRestringidos.remove(climaRestringido);
 	}
 
 
@@ -80,8 +89,9 @@ public abstract class Atraccion {
 	}
 
 
-	public boolean isOperativa() {
-		return operativa;
+	public boolean[] isOperativa() {
+		
+		return new boolean[] {this.operativaDia,this.operativaNoche};
 	}
 
 
@@ -99,11 +109,19 @@ public abstract class Atraccion {
 		return climasRestringidos;
 	}
 	
+	public boolean deleteOperador(String login, String turno) {
+		if (turno.equals(DIURNO)) {
+			operadoresDia.remove(login);
+			return true;
+		}
+		if (turno.equals(NOCTURNO)) {
+			operadoresNoche.remove(login);
+			return true;
+		}
+		
+		return false;
+	}
 	
-	
-	
-	
-    
 }
 
 

@@ -8,9 +8,6 @@ public class ServicioGeneral extends Empleado{
 	}
 
 	
-	public String getLugar() {
-		return this.lugarDeTrabajo;
-	}
 	public void asignarLugar(String nuevoLugar) {
 		lugarDeTrabajo = nuevoLugar;
 	}

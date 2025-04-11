@@ -11,5 +11,14 @@ public class OperadorAtraccion extends Empleado{
 		super(nombre, login, password, altura, peso, rol, turno, lugarDeTrabajo);
 		this.capacitaciones = new ArrayList<>();
 	}
+
+	public ArrayList<String> getCapacitaciones() {
+		return capacitaciones;
+	}
+	
+	
+	public void addCapacitaciones(String capacitacion) {
+		this.capacitaciones.add(capacitacion);
+	}
 	
 }

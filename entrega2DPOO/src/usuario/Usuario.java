@@ -125,4 +125,7 @@ public class Usuario {
 		restricciones.add(nuevaRestriccion);
 	}
 	
+	
+	
+	
 }

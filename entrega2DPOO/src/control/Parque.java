@@ -4,6 +4,7 @@ import atraccion.AtraccionCultural;
 import atraccion.AtraccionMecanica;
 import atraccion.Espectaculo;
 import tiquete.Tiquete;
+import usuario.Empleado;
 import servicios.Cafeteria;
 import servicios.Tienda;
 import servicios.Taquilla;
@@ -18,6 +19,7 @@ public class Parque {
 	public HashMap<String, Espectaculo> espectaculos;
 	public HashMap<Double, Tiquete> tiquetes;
 	public HashMap<String, Producto> inventario;
+	public HashMap<String, Empleado> empleados;
 	private Taquilla taquilla;
 
 	public Parque(String ubicacionTaquilla) {
