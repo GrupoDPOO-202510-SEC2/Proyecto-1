@@ -3,25 +3,30 @@ package atraccion;
 import java.util.HashMap;
 import java.util.HashSet;
 import usuario.*;
+import java.time.*;
 
-public abstract class Atraccion {
-    protected String nombre;
+public abstract class Atraccion { 
     private int capacidadMaxima;
-    private int cantidadDePpl;
-    protected int empleadosMinimos;
-    protected boolean operativaDia;
-    protected boolean operativaNoche;
+    private int cantidadDePpl = 0;
     private String ubicacion;
-    private String nivelExclusividad;
+    private int nivelExclusividad;
     private HashSet<String> climasRestringidos;
+    private HashSet<String> restriccionesSalud;
+    protected String nombre;
+    protected int empleadosMinimos;
+    protected boolean enServicio;
     protected HashMap<String, OperadorAtraccion> operadoresDia;
     protected HashMap<String, OperadorAtraccion> operadoresNoche;
     protected static final String DIURNO = "diurno";
     protected static final String NOCTURNO = "nocturno";
+    protected static final int BASICO = 1;
+    protected static final int FAMILIAR = 2;
+    protected static final int ORO = 3;
+    protected static final int DIAMANTE = 4;
     
 
     public Atraccion(String nombre, int capacidadMaxima, int empleadosMinimos, String ubicacion,
-                     String nivelExclusividad) {
+                     int nivelExclusividad) {
         this.nombre = nombre;
         this.capacidadMaxima = capacidadMaxima;
         this.empleadosMinimos = empleadosMinimos;
@@ -30,8 +35,13 @@ public abstract class Atraccion {
         this.climasRestringidos = new HashSet<>();
     }
 
-    
-    
+	public int getOperadoresDia() {
+		return operadoresDia.size();
+	}
+
+	public int getOperadoresNoche() {
+		return operadoresNoche.size();
+	}
 
 	public int getCantidadDePpl() {
 		return cantidadDePpl;
@@ -53,14 +63,10 @@ public abstract class Atraccion {
 		this.empleadosMinimos = empleadosMinimos;
 	}
 
-	public void setOperativaDia(boolean operativa) {
-		this.operativaDia = operativa;
+	public void setEnServicio(boolean operativa) {
+		this.enServicio = operativa;
 	}
-	public void setOperativaNoche(boolean operativa) {
-		this.operativaNoche= operativa;
-	}
-
-	public void setNivelExclusividad(String nivelExclusividad) {
+	public void setNivelExclusividad(int nivelExclusividad) {
 		this.nivelExclusividad = nivelExclusividad;
 	}
 
@@ -89,9 +95,9 @@ public abstract class Atraccion {
 	}
 
 
-	public boolean[] isOperativa() {
+	public boolean isEnServicio() {
 		
-		return new boolean[] {this.operativaDia,this.operativaNoche};
+		return this.enServicio;
 	}
 
 
@@ -100,7 +106,7 @@ public abstract class Atraccion {
 	}
 
 
-	public String getNivelExclusividad() {
+	public int getNivelExclusividad() {
 		return nivelExclusividad;
 	}
 
@@ -122,6 +128,44 @@ public abstract class Atraccion {
 		return false;
 	}
 	
+	public boolean estaRestringido(Usuario usuario) {
+		for(String restriccion:usuario.getRestricciones()) {
+			if(this.restriccionesSalud.contains(restriccion));
+				return true;
+		}
+		return false;
+	}
+	
+	public boolean addRestriccionSalud(String restriccion) {
+		return this.restriccionesSalud.add(restriccion);
+	}
+	public boolean removeRestriccionSalud(String restriccion) {
+		return this.restriccionesSalud.remove(restriccion);
+	}
+	
+	
+	public boolean isOperable() {
+		if(isDia()) {
+			if(this.getOperadoresDia() >= this.getEmpleadosMinimos()) {
+				return true;
+			}
+			return false;
+		}
+		if(this.getOperadoresNoche() >= this.getEmpleadosMinimos()) {
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean isDia() {
+		LocalTime horaAhora = LocalTime.now();
+		LocalTime medioDia = LocalTime.of(12, 0, 0, 0);
+		int ampm = horaAhora.compareTo(medioDia);
+		if(ampm >= 0) {
+			return false;
+		}
+		return true;
+	}
 }
 
 

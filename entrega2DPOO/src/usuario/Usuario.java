@@ -16,6 +16,10 @@ public class Usuario {
 	private Tiquete tiqueteEnUso;
 	private ArrayList<Tiquete> tiquetesComprados;
 	protected static Parque parque;
+	protected static final int BASICO = 1;
+    protected static final int FAMILIAR = 2;
+    protected static final int ORO = 3;
+    protected static final int DIAMANTE = 4;
 	
 	public Usuario(String nombre, String login, String password, float altura, float peso) {
 		super();
@@ -94,7 +98,7 @@ public class Usuario {
 		tiquetesComprados.add(tiquete);
 	}
 	
-	public void comprarTiquete(String tipo, String atraccion, String fInicio, String fFin, String exclusividad, boolean fastPass) {
+	public void comprarTiquete(String tipo, String atraccion, String fInicio, String fFin, int exclusividad, boolean fastPass) {
 		PedidoTiquete nuevoPedido = new PedidoTiquete(this, tipo, atraccion, fInicio, fFin, exclusividad, fastPass);
 		parque.getTaquilla().nuevaPeticion(nuevoPedido);
 	}
@@ -121,10 +125,17 @@ public class Usuario {
 		}
 	}
 	
-	public void agregarRestriccion(String nuevaRestriccion) {
+	public void addRestriccion(String nuevaRestriccion) {
 		restricciones.add(nuevaRestriccion);
 	}
 	
+	public void deleteRestriccion(String Restriccion) {
+		restricciones.remove(Restriccion);
+	}
+	
+	public ArrayList<String> getRestricciones() {
+		return restricciones;
+	}
 	
 	
 	

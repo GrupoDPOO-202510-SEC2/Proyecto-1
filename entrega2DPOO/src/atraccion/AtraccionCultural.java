@@ -10,7 +10,7 @@ public class AtraccionCultural extends Atraccion{
 	
 	
 	public AtraccionCultural(String nombre, int capacidadMaxima, int empleadosMinimos, String ubicacion,
-            String nivelExclusividad, int edadMinima, boolean esInteractiva) {
+            int nivelExclusividad, int edadMinima, boolean esInteractiva) {
 	super(nombre, capacidadMaxima, empleadosMinimos, ubicacion, nivelExclusividad);
 	this.edadMinima = edadMinima;
 	this.esInteractiva = esInteractiva;
@@ -37,12 +37,10 @@ public class AtraccionCultural extends Atraccion{
 	public boolean addOperador(OperadorAtraccion operador, String turno) {
 		if (turno.equals(DIURNO) && !operador.getTurnoDia()){
 			this.operadoresDia.put(operador.getLogin(), operador);
-			this.operativaDia = this.operadoresDia.size() >= this.empleadosMinimos;
 			return true;
 		}
 		if (turno.equals(NOCTURNO) && !operador.getTurnoNoche()){
 			this.operadoresNoche.put(operador.getLogin(), operador);
-			this.operativaNoche = this.operadoresNoche.size() >= this.empleadosMinimos;
 			return true;
 		}
 		return false;

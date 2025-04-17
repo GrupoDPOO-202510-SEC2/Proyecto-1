@@ -1,6 +1,8 @@
 package usuario;
 import java.time.*;
 
+
+
 public class Empleado extends Usuario{
 	protected String rol;
 	protected boolean turnoDia;
@@ -10,7 +12,6 @@ public class Empleado extends Usuario{
 	public Empleado(String nombre, String login, String password, float altura, float peso, String rol, String turno, String lugarDeTrabajo) {
 		super(nombre, login, password, altura, peso);
 		this.rol = rol;
-		this.turno = turno;
 		this.lugarDeTrabajo = lugarDeTrabajo;
 		this.disponible = estaDisponible();
 	}

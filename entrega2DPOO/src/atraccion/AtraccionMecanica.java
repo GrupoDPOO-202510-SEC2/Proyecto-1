@@ -3,19 +3,22 @@ package atraccion;
 import java.util.HashSet;
 
 import usuario.OperadorAtraccion;
+import usuario.Usuario;
 
 public class AtraccionMecanica extends Atraccion{
-	private float alturaMinima;
-	private float alturaMaxima;
-	private float pesoMaximo;
+	private int alturaMinima;
+	private int alturaMaxima;
+	private int pesoMaximo;
+	private int pesoMinimo;
 	private HashSet<String> restriccionesSalud;
 	private boolean riesgoAlto;
 	public AtraccionMecanica(String nombre, int capacidadMaxima, int empleadosMinimos, String ubicacion,
-            String nivelExclusividad, float alturaMinima, float alturaMaxima, float pesoMaximo, boolean riesgoAlto) {
+            int nivelExclusividad, int alturaMinima, int alturaMaxima, int pesoMinimo, int pesoMaximo, boolean riesgoAlto) {
 		super(nombre, capacidadMaxima, empleadosMinimos, ubicacion, nivelExclusividad);
 		this.alturaMinima = alturaMinima;
 		this.alturaMaxima = alturaMaxima;
 		this.pesoMaximo = pesoMaximo;
+		this.pesoMinimo = pesoMinimo;
 		this.riesgoAlto = riesgoAlto;
 		this.restriccionesSalud = new HashSet<>();
 	}
@@ -23,18 +26,15 @@ public class AtraccionMecanica extends Atraccion{
 	
 	
 	public boolean addOperador(OperadorAtraccion operador, String turno) {
-		
 		if (turno.equals(DIURNO) && !operador.getTurnoDia()){
-			if(operador.getCapacitaciones().contains(this.nombre)) {
+			if(operador.getCapacitaciones().contains(this.nombre) || !this.riesgoAlto ) {
 			this.operadoresDia.put(operador.getLogin(), operador);
-			this.operativaDia = this.operadoresDia.size() >= this.empleadosMinimos;
 			return true;
 			}
 		}
 		if (turno.equals(NOCTURNO) && !operador.getTurnoNoche()){
-			if(operador.getCapacitaciones().contains(this.nombre)) {
+			if(operador.getCapacitaciones().contains(this.nombre) || !this.riesgoAlto ) {
 			this.operadoresNoche.put(operador.getLogin(), operador);
-			this.operativaNoche = this.operadoresNoche.size() >= this.empleadosMinimos;
 			return true;
 			}
 		}
@@ -61,40 +61,50 @@ public class AtraccionMecanica extends Atraccion{
 		return riesgoAlto;
 	}
 
+	public float getPesoMinimo() {
+		return pesoMinimo;
+	}
 
+	public void setPesoMinimo(int pesoMinimo) {
+		this.pesoMinimo = pesoMinimo;
+	}
 
-	public void setAlturaMinima(float alturaMinima) {
+	public void setAlturaMinima(int alturaMinima) {
 		this.alturaMinima = alturaMinima;
 	}
 
-
-
-	public void setAlturaMaxima(float alturaMaxima) {
+	public void setAlturaMaxima(int alturaMaxima) {
 		this.alturaMaxima = alturaMaxima;
 	}
 
 
 
-	public void setPesoMaximo(float pesoMaximo) {
+	public void setPesoMaximo(int pesoMaximo) {
 		this.pesoMaximo = pesoMaximo;
 	}
 
 
 
-	public void setRestriccionesSalud(String restriccionSalud) {
+	public void addRestriccionesSalud(String restriccionSalud) {
 		this.restriccionesSalud.add(restriccionSalud);
 	}
 	
 	public void deleteRestriccionesSalud(String restriccionSalud) {
 		this.restriccionesSalud.remove(restriccionSalud);
 	}
-
-
-
+	
 	public void setRiesgoAlto(boolean riesgoAlto) {
 		this.riesgoAlto = riesgoAlto;
 	}
 
+	public boolean cumpleCondicionesFisicas(Usuario usuario) {
+		if(this.alturaMinima>usuario.getAltura() && usuario.getAltura() > this.alturaMaxima) {
+			if(this.pesoMinimo > usuario.getPeso() && usuario.getPeso() > this.pesoMaximo) {
+				return true;
+			}
+		}
+		return false;
+	}
 	
 	
 	

@@ -19,7 +19,7 @@ public class Espectaculo {
 		this.fechaInicio = fechaInicio;
 		this.fechaFin = fechaFin;
 		this.climasRestringidos = climasRestringidos;
-	}
+	}	
 	
 	public Espectaculo(String nombre, String horario, String ubicacion,HashSet<String> climasRestringidos) {
 
@@ -78,6 +78,10 @@ public class Espectaculo {
 	
 	public boolean addClimaRestringido(String clima){
 		return this.climasRestringidos.add(clima);
+	}
+	
+	public boolean deleteClimaRestringido(String clima){
+		return this.climasRestringidos.remove(clima);
 	}
 	
 }

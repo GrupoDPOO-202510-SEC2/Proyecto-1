@@ -9,11 +9,11 @@ public class PedidoTiquete{
 	private String atraccionParaIndividuales;
 	private String fechaInicioParaTemporales;
 	private String fechaFinParaTemporales;
-	private String exclusividad;
+	private int exclusividad;
 	private boolean fastPass;
 
 	public PedidoTiquete(Usuario usuario, String tipo, String atraccionParaIndividuales,
-			String fechaInicioParaTemporales, String fechaFinParaTemporales, String exclusividad, boolean fastPass) {
+			String fechaInicioParaTemporales, String fechaFinParaTemporales, int exclusividad, boolean fastPass) {
 		this.usuario = usuario;
 		this.tipo = tipo;
 		this.atraccionParaIndividuales = atraccionParaIndividuales;
@@ -31,7 +31,7 @@ public class PedidoTiquete{
 			atraccionParaIndividuales = "";
 		}
 		else if(tipo == "TiqueteIndividual") {
-			exclusividad = "";
+			exclusividad = 4;
 			fechaInicioParaTemporales = "";
 			fechaFinParaTemporales = "";
 		}
@@ -57,7 +57,7 @@ public class PedidoTiquete{
 		return fechaFinParaTemporales;
 	}
 
-	public String getExclusividad() {
+	public int getExclusividad() {
 		return exclusividad;
 	}
 	public boolean isFastPass(
