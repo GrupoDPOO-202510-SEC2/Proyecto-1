@@ -10,7 +10,6 @@ public class AtraccionMecanica extends Atraccion{
 	private int alturaMaxima;
 	private int pesoMaximo;
 	private int pesoMinimo;
-	private HashSet<String> restriccionesSalud;
 	private boolean riesgoAlto;
 	public AtraccionMecanica(String nombre, int capacidadMaxima, int empleadosMinimos, String ubicacion,
             int nivelExclusividad, int alturaMinima, int alturaMaxima, int pesoMinimo, int pesoMaximo, boolean riesgoAlto) {
@@ -20,7 +19,6 @@ public class AtraccionMecanica extends Atraccion{
 		this.pesoMaximo = pesoMaximo;
 		this.pesoMinimo = pesoMinimo;
 		this.riesgoAlto = riesgoAlto;
-		this.restriccionesSalud = new HashSet<>();
 	}
 	
 	
@@ -41,16 +39,20 @@ public class AtraccionMecanica extends Atraccion{
 		return false;
 	}
 
-	public float getAlturaMinima() {
+	public int getAlturaMinima() {
 		return alturaMinima;
 	}
 
-	public float getAlturaMaxima() {
+	public int getAlturaMaxima() {
 		return alturaMaxima;
 	}
 
-	public float getPesoMaximo() {
+	public int getPesoMaximo() {
 		return pesoMaximo;
+	}
+	
+	public int getPesoMinimo() {
+		return pesoMinimo;
 	}
 
 	public HashSet<String> getRestriccionesSalud() {
@@ -61,29 +63,21 @@ public class AtraccionMecanica extends Atraccion{
 		return riesgoAlto;
 	}
 
-	public float getPesoMinimo() {
-		return pesoMinimo;
+	public void setAlturaMaxima(int alturaMaxima) {
+		this.alturaMaxima = alturaMaxima;
 	}
-
-	public void setPesoMinimo(int pesoMinimo) {
-		this.pesoMinimo = pesoMinimo;
-	}
-
+	
 	public void setAlturaMinima(int alturaMinima) {
 		this.alturaMinima = alturaMinima;
 	}
 
-	public void setAlturaMaxima(int alturaMaxima) {
-		this.alturaMaxima = alturaMaxima;
-	}
-
-
-
 	public void setPesoMaximo(int pesoMaximo) {
 		this.pesoMaximo = pesoMaximo;
 	}
-
-
+	
+	public void setPesoMinimo(int pesoMinimo) {
+		this.pesoMinimo = pesoMinimo;
+	}
 
 	public void addRestriccionesSalud(String restriccionSalud) {
 		this.restriccionesSalud.add(restriccionSalud);

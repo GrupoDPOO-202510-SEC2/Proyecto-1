@@ -9,7 +9,7 @@ public class Empleado extends Usuario{
 	protected boolean turnoNoche;
 	protected String lugarDeTrabajo;
 	protected boolean disponible;
-	public Empleado(String nombre, String login, String password, float altura, float peso, String rol, String turno, String lugarDeTrabajo) {
+	public Empleado(String nombre, String login, String password, float altura, float peso, String rol, String lugarDeTrabajo) {
 		super(nombre, login, password, altura, peso);
 		this.rol = rol;
 		this.lugarDeTrabajo = lugarDeTrabajo;

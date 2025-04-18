@@ -14,9 +14,9 @@ public class Cajero extends Empleado {
 	
 	protected LugarDeServicio lugarServicio;
 	
-	public Cajero(String nombre, String login, String password, float altura, float peso, String rol, String turno,
+	public Cajero(String nombre, String login, String password, float altura, float peso, String rol,
 			String lugarDeTrabajo, LugarDeServicio lugarServicio) {
-		super(nombre, login, password, altura, peso, rol, turno, lugarDeTrabajo);
+		super(nombre, login, password, altura, peso, rol, lugarDeTrabajo);
 		this.lugarServicio = lugarServicio;
 	}
 	

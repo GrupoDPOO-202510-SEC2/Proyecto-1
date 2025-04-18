@@ -11,7 +11,7 @@ public abstract class Atraccion {
     private String ubicacion;
     private int nivelExclusividad;
     private HashSet<String> climasRestringidos;
-    private HashSet<String> restriccionesSalud;
+    protected HashSet<String> restriccionesSalud;
     protected String nombre;
     protected int empleadosMinimos;
     protected boolean enServicio;
@@ -33,6 +33,7 @@ public abstract class Atraccion {
         this.ubicacion = ubicacion;
         this.nivelExclusividad = nivelExclusividad;
         this.climasRestringidos = new HashSet<>();
+        this.restriccionesSalud = new HashSet<>();
     }
 
 	public int getOperadoresDia() {
@@ -49,10 +50,6 @@ public abstract class Atraccion {
 
 	public void setCantidadDePpl(int cantidadDePpl) {
 		this.cantidadDePpl = cantidadDePpl;
-	}
-
-	public void setNombre(String nombre) {
-		this.nombre = nombre;
 	}
 
 	public void setCapacidadMaxima(int capacidadMaxima) {
@@ -75,7 +72,7 @@ public abstract class Atraccion {
 		
 	}
 	
-	public boolean deleteClimasRestringidos(String climaRestringido) {
+	public boolean removeClimasRestringidos(String climaRestringido) {
 		return this.climasRestringidos.remove(climaRestringido);
 	}
 

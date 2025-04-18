@@ -11,8 +11,8 @@ public class CajeroTaquilla extends Empleado{
 	Taquilla taquilla;
 	
 	public CajeroTaquilla(String nombre, String login, String password, float altura, float peso, String rol,
-			String turno, String lugarDeTrabajo, Taquilla taquilla) {
-		super(nombre, login, password, altura, peso, rol, turno, lugarDeTrabajo);
+			String lugarDeTrabajo, Taquilla taquilla) {
+		super(nombre, login, password, altura, peso, rol, lugarDeTrabajo);
 		this.taquilla = parque.getTaquilla();
 	}
 

@@ -6,9 +6,8 @@ public class OperadorAtraccion extends Empleado{
 	
 	private ArrayList<String> capacitaciones;
 	
-	public OperadorAtraccion(String nombre, String login, String password, float altura, float peso, String rol,
-			String turno, String lugarDeTrabajo) {
-		super(nombre, login, password, altura, peso, rol, turno, lugarDeTrabajo);
+	public OperadorAtraccion(String nombre, String login, String password, float altura, float peso, String rol) {
+		super(nombre, login, password, altura, peso, rol, null);
 		this.capacitaciones = new ArrayList<>();
 	}
 
