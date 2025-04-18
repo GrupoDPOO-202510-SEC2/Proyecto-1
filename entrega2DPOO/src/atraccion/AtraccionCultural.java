@@ -35,11 +35,11 @@ public class AtraccionCultural extends Atraccion{
 	
 	
 	public boolean addOperador(OperadorAtraccion operador, String turno) {
-		if (turno.equals(DIURNO) && !operador.getTurnoDia()){
+		if (turno.equals(DIURNO)){
 			this.operadoresDia.put(operador.getLogin(), operador);
 			return true;
 		}
-		if (turno.equals(NOCTURNO) && !operador.getTurnoNoche()){
+		if (turno.equals(NOCTURNO)){
 			this.operadoresNoche.put(operador.getLogin(), operador);
 			return true;
 		}

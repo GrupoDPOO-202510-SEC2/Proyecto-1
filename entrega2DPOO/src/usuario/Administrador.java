@@ -18,20 +18,31 @@ public class Administrador extends Usuario{
 	}
 	
 	public void cambiarFechaEspectaculo(String nombre, String fechai, String fechaf) {
-		parque.espectaculos.get(nombre).setFechaInicio(fechai);
-		parque.espectaculos.get(nombre).setFechaInicio(fechaf);
+		
+		Espectaculo espectaculo = parque.espectaculos.get(nombre);
+		espectaculo.setFechaInicio(fechai);
+		espectaculo.setFechaInicio(fechaf);
+		
+		parque.espectaculos.put(nombre, espectaculo);
+		
 	}
 	
 	public Espectaculo getEspectaculo(String nombre) {
 		return parque.espectaculos.get(nombre);
 	}
 	
-	public boolean agregarClimaRestringidoE(String espectaculo,String clima) {
-		return parque.espectaculos.get(espectaculo).addClimaRestringido(clima);
+	public boolean agregarClimaRestringidoE(String nombre,String clima) {
+		Espectaculo espectaculo = parque.espectaculos.get(nombre);
+		boolean retorno =  espectaculo.addClimaRestringido(clima);
+		parque.espectaculos.put(nombre, espectaculo);
+		return retorno;
 	}
 	
-	public boolean eliminarClimaRestringidoE(String espectaculo,String clima) {
-		return parque.espectaculos.get(espectaculo).deleteClimaRestringido(clima);
+	public boolean eliminarClimaRestringidoE(String nombre,String clima) {
+		Espectaculo espectaculo = parque.espectaculos.get(nombre);
+		boolean retorno =  espectaculo.deleteClimaRestringido(clima);
+		parque.espectaculos.put(nombre, espectaculo);
+		return retorno;
 	}
 	
 	
@@ -143,13 +154,33 @@ public class Administrador extends Usuario{
 		
 		if(parque.aMecanicas.containsKey(nombreAtraccion)) {
 			AtraccionMecanica atraccion = parque.aMecanicas.get(nombreAtraccion);
-			retorno = atraccion.addOperador((OperadorAtraccion) parque.empleados.get(loginOperador), getLogin());
+			retorno = atraccion.addOperador((OperadorAtraccion) parque.empleados.get(loginOperador), turno);
 			parque.aMecanicas.put(nombreAtraccion, atraccion);
+			OperadorAtraccion operador = (OperadorAtraccion) parque.empleados.get(loginOperador);
+			if (turno.equals(DIURNO)) {
+				operador.setTurnoDia(true);
+				operador.setLugarDeTrabajoDia(nombreAtraccion);
+			}else {
+				operador.setTurnoNoche(true);
+				operador.setLugarDeTrabajoNoche(nombreAtraccion);
+			}
+			parque.empleados.put(loginOperador, operador);
+			
+			
 		}
 		if (parque.aCulturales.containsKey(nombreAtraccion)) {
 			AtraccionCultural atraccion = parque.aCulturales.get(nombreAtraccion);
-			retorno = atraccion.addOperador((OperadorAtraccion) parque.empleados.get(loginOperador), getLogin());
+			retorno = atraccion.addOperador((OperadorAtraccion) parque.empleados.get(loginOperador), turno);
 			parque.aCulturales.put(nombreAtraccion, atraccion);
+			OperadorAtraccion operador = (OperadorAtraccion) parque.empleados.get(loginOperador);
+			if (turno.equals(DIURNO)) {
+				operador.setTurnoDia(true);
+				operador.setLugarDeTrabajoDia(nombreAtraccion);
+			}else {
+				operador.setTurnoNoche(true);
+				operador.setLugarDeTrabajoNoche(nombreAtraccion);
+			}
+			parque.empleados.put(loginOperador, operador);
 		}
 		return retorno;
 	}
@@ -163,11 +194,30 @@ public class Administrador extends Usuario{
 			AtraccionMecanica atraccion = parque.aMecanicas.get(nombreAtraccion);
 			retorno = atraccion.deleteOperador(loginOperador, getLogin());
 			parque.aMecanicas.put(nombreAtraccion, atraccion);
+			OperadorAtraccion operador = (OperadorAtraccion) parque.empleados.get(loginOperador);
+			if (turno.equals(DIURNO)) {
+				operador.setTurnoDia(false);
+				operador.setLugarDeTrabajoDia(null);
+			}else {
+				operador.setTurnoNoche(true);
+				operador.setLugarDeTrabajoNoche(nombreAtraccion);
+			}
+			parque.empleados.put(loginOperador, operador);
 		}
 		if (parque.aCulturales.containsKey(nombreAtraccion)) {
 			AtraccionCultural atraccion = parque.aCulturales.get(nombreAtraccion);
 			retorno = atraccion.deleteOperador(loginOperador, getLogin());
 			parque.aCulturales.put(nombreAtraccion, atraccion);
+			OperadorAtraccion operador = (OperadorAtraccion) parque.empleados.get(loginOperador);
+			if (turno.equals(DIURNO)) {
+				operador.setTurnoDia(false);
+				operador.setLugarDeTrabajoDia(null);
+			}else {
+				operador.setTurnoNoche(true);
+				operador.setLugarDeTrabajoNoche(nombreAtraccion);
+			}
+			parque.empleados.put(loginOperador, operador);
+			
 		}
 		return retorno;
 	}
@@ -252,7 +302,7 @@ public class Administrador extends Usuario{
 	
 	//------------------------ATRACCIONES MECANICAS---------------------------//
 	
-	public int[] getRangosMecanicos(String nombreAtraccion) {
+	public int[] getAlturasPesos(String nombreAtraccion) {
 		AtraccionMecanica atraccion = parque.aMecanicas.get(nombreAtraccion);
 		return new int[] {atraccion.getAlturaMaxima(),atraccion.getAlturaMinima(),atraccion.getPesoMaximo(),atraccion.getPesoMinimo()};
 	}
@@ -311,7 +361,42 @@ public class Administrador extends Usuario{
 		parque.aCulturales.put(nombreAtraccion, atraccion);
 	}
 	
-	 
+	//--------------------------EMPLEADOS---------------------------//
+	
+	public String getLugarDeTrabajo(String loginEmpleado) {
+		
+		return parque.empleados.get(loginEmpleado).getLugarDeTrabajo();
+	}
+
+	public boolean setLugarDeTrabajo(String lugarDeTrabajo, String loginEmpleado) {
+		Empleado empleado = parque.empleados.get(loginEmpleado);
+		boolean retorno = empleado.setLugarDeTrabajo(lugarDeTrabajo);
+		parque.empleados.put(loginEmpleado, empleado);
+		return retorno;
+	}
+
+	public String getRol(String loginEmpleado) {
+		return parque.empleados.get(loginEmpleado).getRol();
+	}
+	
+	
+	public boolean[] getTurnos(String loginEmpleado) {
+		return new boolean[] {parque.empleados.get(loginEmpleado).getTurnoDia(),parque.empleados.get(loginEmpleado).getTurnoNoche()};
+	}
+	
+	public boolean setTurnoDia(boolean turnoDia, String loginEmpleado) {
+		Empleado empleado = parque.empleados.get(loginEmpleado);
+		boolean retorno = empleado.setTurnoDia(turnoDia);
+		parque.empleados.put(loginEmpleado, empleado);
+		return retorno;
+	}
+	
+	public boolean setTurnoNoche(boolean turnoNoche, String loginEmpleado) {
+		Empleado empleado = parque.empleados.get(loginEmpleado);
+		boolean retorno = empleado.setTurnoNoche(turnoNoche);
+		parque.empleados.put(loginEmpleado, empleado);
+		return retorno;
+	}
 	
 }
 

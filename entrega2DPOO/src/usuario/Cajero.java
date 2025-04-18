@@ -22,9 +22,9 @@ public class Cajero extends Empleado {
 	
 	public boolean vender(String nombreProducto, int cantidad) {
 		boolean estaEnElMenu = lugarServicio.existeProducto(nombreProducto);
-		boolean estaEnElInventario = this.parque.inventario.containsKey(nombreProducto);
+		boolean estaEnElInventario = parque.inventario.containsKey(nombreProducto);
 		if(estaEnElMenu && estaEnElInventario) {
-			Producto producto = this.parque.inventario.get(nombreProducto);
+			Producto producto = parque.inventario.get(nombreProducto);
 			boolean cafeteriaYComestible = lugarServicio.getTipo().equals("cafeteria") && String.valueOf(producto.getClass()).equals("Comestible");
 			boolean tiendaYSouvenir = lugarServicio.getTipo().equals("tienda") && String.valueOf(producto.getClass()).equals("Souvenir");
 			
@@ -32,7 +32,7 @@ public class Cajero extends Empleado {
 				for(int i=0; i<cantidad; i++) {
 					producto.vender();
 				}
-				this.parque.inventario.put(nombreProducto, producto);
+				parque.inventario.put(nombreProducto, producto);
 				return true;
 			}
 		}

@@ -125,6 +125,8 @@ public abstract class Atraccion {
 		return false;
 	}
 	
+	
+	
 	public boolean estaRestringido(Usuario usuario) {
 		for(String restriccion:usuario.getRestricciones()) {
 			if(this.restriccionesSalud.contains(restriccion));

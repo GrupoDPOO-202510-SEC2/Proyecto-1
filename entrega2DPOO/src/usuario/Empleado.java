@@ -16,6 +16,15 @@ public class Empleado extends Usuario{
 		this.disponible = estaDisponible();
 	}
 	
+	public String getLugarDeTrabajo() {
+		return lugarDeTrabajo;
+	}
+
+	public boolean setLugarDeTrabajo(String lugarDeTrabajo) {
+		this.lugarDeTrabajo = lugarDeTrabajo;
+		return true;
+	}
+
 	public String getRol() {
 		return this.rol;
 	}
@@ -29,17 +38,16 @@ public class Empleado extends Usuario{
 		return this.turnoNoche;
 	}
 	
-	public void setTurnoDia(boolean turnoDia) {
+	public boolean setTurnoDia(boolean turnoDia) {
 		this.turnoDia = turnoDia;
+		return true;
 	}
 
-	public void setTurnoNoche(boolean turnoNoche) {
+	public boolean setTurnoNoche(boolean turnoNoche) {
 		this.turnoNoche = turnoNoche;
+		return true;
 	}
 
-	public String getLugar() {
-		return this.lugarDeTrabajo;
-	}
 	
 	public boolean estaDisponible() {
 		LocalTime horaAhora = LocalTime.now();

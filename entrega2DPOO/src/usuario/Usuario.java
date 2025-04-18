@@ -16,6 +16,12 @@ public class Usuario {
 	private Tiquete tiqueteEnUso;
 	private ArrayList<Tiquete> tiquetesComprados;
 	protected static Parque parque;
+	protected static final String DIURNO = "diurno";
+    protected static final String NOCTURNO = "nocturno";
+    protected static final int BASICO = 1;
+    protected static final int FAMILIAR = 2;
+    protected static final int ORO = 3;
+    protected static final int DIAMANTE = 4;
 	
 	public Usuario(String nombre, String login, String password, float altura, float peso) {
 		super();
@@ -30,7 +36,9 @@ public class Usuario {
 		this.tiquetesComprados= new ArrayList<Tiquete>();
 	}
 	
-	
+	public ArrayList<String> getRestricciones() {
+		return restricciones;
+	}
 	
 	public ArrayList<Double> getTiquetesFuncionales(){
 		ArrayList<Double> retorno = new ArrayList<Double>();

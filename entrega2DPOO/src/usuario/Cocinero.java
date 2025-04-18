@@ -18,11 +18,11 @@ public class Cocinero extends Cajero{
 	
 	public boolean cocinar(String nombreComida, int cantidad) {
 		if(lugarServicio.existeProducto(nombreComida) && alimentosPreparables.contains(nombreComida)) {
-			Producto producto = this.parque.inventario.get(nombreComida);
+			Producto producto = parque.inventario.get(nombreComida);
 			if(producto != null && String.valueOf(producto.getClass()).equals("Comestible")) {
 				Comestible comida = (Comestible) producto;
 				comida.cocinarMas(cantidad);
-				this.parque.inventario.put(nombreComida, comida);
+				parque.inventario.put(nombreComida, comida);
 				return true;
 			}
 		}

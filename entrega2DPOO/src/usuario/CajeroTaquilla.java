@@ -27,6 +27,9 @@ public class CajeroTaquilla extends Empleado{
 		return false;
 	}
 	
+	@Override
+	public boolean setLugarDeTrabajo(String lugarDeTrabajo) {return false;}
+	
 	public void registrarSalida(Usuario usuario) {
 		
 		if (String.valueOf(usuario.getTiqueteEnUso().getClass()).equals("TiqueteExclusividad")) {
