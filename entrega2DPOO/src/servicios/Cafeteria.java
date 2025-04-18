@@ -3,22 +3,20 @@ import java.util.*;
 
 public class Cafeteria extends LugarDeServicio{
 	
-	private HashMap<String, Comestible> menu;
+	private ArrayList<String> menu;
 
 
-	public Cafeteria(String nombre, String ubicacion, String tipo, HashMap<String, Comestible> menu) {
+	public Cafeteria(String nombre, String ubicacion, String tipo) {
 		super(nombre, ubicacion, tipo);
 		this.tipo = "cafeteria";
-		this.menu = menu;
+		this.menu = new ArrayList<String>();
 	}
 	
 	@Override
 	public boolean existeProducto(String nombreP) {
-		return menu.containsKey(nombreP);
+		return menu.contains(nombreP);
 	}
 	
-	public Producto getProducto(String nombreP) {
-		return menu.get(nombreP);
-	}
+	
 	
 }

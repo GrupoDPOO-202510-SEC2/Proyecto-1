@@ -16,10 +16,6 @@ public class Usuario {
 	private Tiquete tiqueteEnUso;
 	private ArrayList<Tiquete> tiquetesComprados;
 	protected static Parque parque;
-	protected static final int BASICO = 1;
-    protected static final int FAMILIAR = 2;
-    protected static final int ORO = 3;
-    protected static final int DIAMANTE = 4;
 	
 	public Usuario(String nombre, String login, String password, float altura, float peso) {
 		super();
@@ -103,40 +99,8 @@ public class Usuario {
 		parque.getTaquilla().nuevaPeticion(nuevoPedido);
 	}
 	
-	public void comprarComida(String nombreCafeteria, String nombreComida, int cantidad) {
-		Cafeteria cafe = parque.getCafeteria(nombreCafeteria);
-		if(cafe.existeProducto(nombreComida) == true) {
-			Comestible comida = (Comestible)cafe.getProducto(nombreComida);
-			if(comida.getCantidad() >= cantidad) {
-				Pedido pedido = new Pedido(this, nombreComida, cantidad);
-				cafe.getPedidosSinAtender().add(pedido);
-			}
-		}
-	}
-	
-	public void comprarSouvenir(String nombreTienda, String nombreS, int cantidad) {
-		Cafeteria cafe = parque.getCafeteria(nombreTienda);
-		if(cafe.existeProducto(nombreS) == true) {
-			Comestible comida = (Comestible)cafe.getProducto(nombreS);
-			if(comida.getCantidad() >= cantidad) {
-				Pedido pedido = new Pedido(this, nombreS, cantidad);
-				cafe.getPedidosSinAtender().add(pedido);
-			}
-		}
-	}
-	
-	public void addRestriccion(String nuevaRestriccion) {
+	public void agregarRestriccion(String nuevaRestriccion) {
 		restricciones.add(nuevaRestriccion);
 	}
-	
-	public void deleteRestriccion(String Restriccion) {
-		restricciones.remove(Restriccion);
-	}
-	
-	public ArrayList<String> getRestricciones() {
-		return restricciones;
-	}
-	
-	
 	
 }

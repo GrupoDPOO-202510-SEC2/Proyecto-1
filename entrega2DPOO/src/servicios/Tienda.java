@@ -3,21 +3,16 @@ import java.util.*;
 
 public class Tienda extends LugarDeServicio{
 	
-	private HashMap<String, Souvenir> items;
+	private ArrayList<String> items;
 
-	public Tienda(String nombre, String ubicacion, String tipo, HashMap<String, Souvenir> items) {
+	public Tienda(String nombre, String ubicacion, String tipo) {
 		super(nombre, ubicacion, tipo);
 		this.tipo = "tienda";
-		this.items = items;
+		items = new ArrayList<String>();
 	}
 	
 	@Override
 	public boolean existeProducto(String nombreP) {
-		return items.containsKey(nombreP);
+		return items.contains(nombreP);
 	}
-	
-	public Producto getProducto(String nombreP) {
-		return items.get(nombreP);
-	}
-	
 }
