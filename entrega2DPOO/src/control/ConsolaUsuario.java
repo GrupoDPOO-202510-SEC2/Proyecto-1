@@ -48,8 +48,8 @@ public class ConsolaUsuario extends ConsolaBasica {
             String nombre = pedirCadenaAlUsuario("Nombre:");
             String login = pedirCadenaAlUsuario("Login:");
             String password = pedirCadenaAlUsuario("Contraseña:");
-            int altura = (int) pedirNumeroAlUsuario("Altura (m):");
-            int peso = (int) pedirNumeroAlUsuario("Peso (kg):");
+            int altura = (int) pedirEnteroAlUsuario("Altura (cm):");
+            int peso = (int) pedirEnteroAlUsuario("Peso (kg):");
 
             usuario = new Usuario(nombre, login, password, altura, peso);
             parque.Usuarios.put(login, usuario);
