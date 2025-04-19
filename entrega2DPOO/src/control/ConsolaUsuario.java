@@ -1,16 +1,17 @@
 package control;
 
 import usuario.Usuario;
+import control.Parque;
 import tiquete.Tiquete;
 
 import java.util.ArrayList;
 
 public class ConsolaUsuario extends ConsolaBasica {
 
-    private ArrayList<Usuario> usuarios;
+    private Parque parque;
 
-    public ConsolaUsuario(ArrayList<Usuario> usuarios) {
-        this.usuarios = usuarios;
+    public ConsolaUsuario(Parque parque) {
+        this.parque = parque;
     }
 
     public void iniciar() {
@@ -28,7 +29,7 @@ public class ConsolaUsuario extends ConsolaBasica {
             String login = pedirCadenaAlUsuario("Ingrese su login");
             String password = pedirCadenaAlUsuario("Ingrese su contraseña");
 
-            for (Usuario u : usuarios) {
+            for (Usuario u : parque.Usuarios.values()) {
                 if (u.getLogin().equals(login) && u.getPassword().equals(password)) {
                     usuario = u;
                     System.out.println("Inicio de sesión exitoso. Bienvenido, " + usuario.getNombre() + ".");
@@ -49,7 +50,7 @@ public class ConsolaUsuario extends ConsolaBasica {
             double peso = pedirNumeroAlUsuario("Peso (kg):");
 
             usuario = new Usuario(nombre, login, password, altura, peso);
-            usuarios.add(usuario);
+            parque.Usuarios.put(login, usuario);
             System.out.println("Usuario creado exitosamente.");
 
             while (true) {
@@ -149,3 +150,4 @@ public class ConsolaUsuario extends ConsolaBasica {
         }
     }
 }
+
