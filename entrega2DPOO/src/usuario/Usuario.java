@@ -9,8 +9,8 @@ public class Usuario {
 	private String nombre;
 	private String login;
 	private String password;
-	private double altura;
-	private double peso;
+	private int altura;
+	private int peso;
 	private ArrayList<String> restricciones;
 	private HashMap<String, Integer> compras;
 	private Tiquete tiqueteEnUso;
@@ -23,7 +23,7 @@ public class Usuario {
     protected static final int ORO = 3;
     protected static final int DIAMANTE = 4;
 	
-	public Usuario(String nombre, String login, String password, double altura, double peso) {
+	public Usuario(String nombre, String login, String password, int altura, int peso) {
 		super();
 		this.nombre = nombre;
 		this.login = login;
@@ -78,12 +78,12 @@ public class Usuario {
 	}
 
 
-	public float getAltura() {
+	public int getAltura() {
 		return altura;
 	}
 
 
-	public float getPeso() {
+	public int getPeso() {
 		return peso;
 	}
 	

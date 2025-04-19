@@ -10,7 +10,7 @@ public class Cocinero extends Cajero{
 	
 	private ArrayList<String> alimentosPreparables;
 
-	public Cocinero(String nombre, String login, String password, float altura, float peso, String rol, String turno,
+	public Cocinero(String nombre, String login, String password, int altura, int peso, String rol, String turno,
 			String lugarDeTrabajo, LugarDeServicio lugarServicio, ArrayList<String> alimentosPreparables) {
 		super(nombre, login, password, altura, peso, rol);
 		this.alimentosPreparables = alimentosPreparables;

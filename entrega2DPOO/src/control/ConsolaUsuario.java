@@ -4,6 +4,8 @@ import usuario.Usuario;
 import control.Parque;
 import tiquete.Tiquete;
 
+import org.json.JSONObject;
+
 import java.util.ArrayList;
 
 public class ConsolaUsuario extends ConsolaBasica {
@@ -46,8 +48,8 @@ public class ConsolaUsuario extends ConsolaBasica {
             String nombre = pedirCadenaAlUsuario("Nombre:");
             String login = pedirCadenaAlUsuario("Login:");
             String password = pedirCadenaAlUsuario("Contraseña:");
-            double altura = pedirNumeroAlUsuario("Altura (m):");
-            double peso = pedirNumeroAlUsuario("Peso (kg):");
+            int altura = (int) pedirNumeroAlUsuario("Altura (m):");
+            int peso = (int) pedirNumeroAlUsuario("Peso (kg):");
 
             usuario = new Usuario(nombre, login, password, altura, peso);
             parque.Usuarios.put(login, usuario);
@@ -123,7 +125,7 @@ public class ConsolaUsuario extends ConsolaBasica {
                     ArrayList<Double> ids = usuario.getTiquetesFuncionales();
                     if (index >= 0 && index < ids.size()) {
                         for (Tiquete t : usuario.getTiquetesComprados()) {
-                            if (t.getIdTiquete() == ids.get(index)) {
+                            if (t.getIdTiquete() == ids.get(index)) {	
                                 usuario.setTiqueteEnUso(t);
                             }
                         }

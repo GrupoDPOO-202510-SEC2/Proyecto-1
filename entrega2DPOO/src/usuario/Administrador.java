@@ -7,7 +7,7 @@ import servicios.*;
 
 public class Administrador extends Usuario{
 
-	public Administrador(String nombre, String login, String password, float altura, float peso) {
+	public Administrador(String nombre, String login, String password, int altura, int peso) {
 		super(nombre, login, password, altura, peso);
 	}
 	

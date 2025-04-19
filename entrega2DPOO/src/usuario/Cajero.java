@@ -14,7 +14,7 @@ public class Cajero extends Empleado {
 	
 	protected LugarDeServicio lugarServicio = null;
 	
-	public Cajero(String nombre, String login, String password, float altura, float peso, String rol) {
+	public Cajero(String nombre, String login, String password, int altura, int peso, String rol) {
 		super(nombre, login, password, altura, peso, rol, null);
 	}
 	

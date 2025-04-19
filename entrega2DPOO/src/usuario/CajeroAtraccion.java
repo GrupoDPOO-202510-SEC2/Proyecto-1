@@ -5,7 +5,7 @@ import tiquete.*;
 
 public class CajeroAtraccion  extends Empleado{
 
-	public CajeroAtraccion(String nombre, String login, String password, float altura, float peso, String rol,
+	public CajeroAtraccion(String nombre, String login, String password, int altura, int peso, String rol,
 			String lugarDeTrabajo) {
 		super(nombre, login, password, altura, peso, rol, lugarDeTrabajo);
 	}
