@@ -12,7 +12,7 @@ public class Cocinero extends Cajero{
 
 	public Cocinero(String nombre, String login, String password, float altura, float peso, String rol, String turno,
 			String lugarDeTrabajo, LugarDeServicio lugarServicio, ArrayList<String> alimentosPreparables) {
-		super(nombre, login, password, altura, peso, rol, lugarDeTrabajo, lugarServicio);
+		super(nombre, login, password, altura, peso, rol);
 		this.alimentosPreparables = alimentosPreparables;
 	}
 	
