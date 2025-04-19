@@ -1,45 +1,86 @@
 package control;
 
 import usuario.Usuario;
-import usuario.Empleado;
-import control.Parque;
+import tiquete.Tiquete;
+
+import java.util.ArrayList;
 
 public class ConsolaUsuario extends ConsolaBasica {
 
-    private Parque parque;
+    private ArrayList<Usuario> usuarios;
 
-    public ConsolaUsuario(Parque parque) {
-        this.parque = parque;
+    public ConsolaUsuario(ArrayList<Usuario> usuarios) {
+        this.usuarios = usuarios;
     }
 
     public void iniciar() {
         System.out.println("==== Bienvenido al sistema del parque ====");
 
-        String login = pedirCadenaAlUsuario("Ingrese su login");
-        String password = pedirCadenaAlUsuario("Ingrese su contraseña");
+        String[] opcionesInicio = {
+            "Ingresar con usuario existente",
+            "Crear nuevo usuario"
+        };
 
-        Empleado usuario = parque.empleados.get(login);
+        int opcion = mostrarMenu("Seleccione una opción", opcionesInicio);
+        Usuario usuario = null;
 
-        if (usuario != null && usuario.getPassword().equals(password)) {
-            System.out.println("Inicio de sesión exitoso. Bienvenido, " + usuario.getNombre() + ".");
+        if (opcion == 1) {
+            String login = pedirCadenaAlUsuario("Ingrese su login");
+            String password = pedirCadenaAlUsuario("Ingrese su contraseña");
+
+            for (Usuario u : usuarios) {
+                if (u.getLogin().equals(login) && u.getPassword().equals(password)) {
+                    usuario = u;
+                    System.out.println("Inicio de sesión exitoso. Bienvenido, " + usuario.getNombre() + ".");
+                    break;
+                }
+            }
+
+            if (usuario == null) {
+                System.out.println("Credenciales incorrectas.");
+                return;
+            }
+
+        } else if (opcion == 2) {
+            String nombre = pedirCadenaAlUsuario("Nombre:");
+            String login = pedirCadenaAlUsuario("Login:");
+            String password = pedirCadenaAlUsuario("Contraseña:");
+            double altura = pedirNumeroAlUsuario("Altura (m):");
+            double peso = pedirNumeroAlUsuario("Peso (kg):");
+
+            usuario = new Usuario(nombre, login, password, altura, peso);
+            usuarios.add(usuario);
+            System.out.println("Usuario creado exitosamente.");
+
+            while (true) {
+                String restriccion = pedirCadenaAlUsuario("Agrega una restricción (o deja vacío para terminar):");
+                if (restriccion.isEmpty()) break;
+                usuario.agregarRestriccion(restriccion);
+            }
+        }
+
+        if (usuario != null) {
             ejecutarMenu(usuario);
-        } else {
-            System.out.println("Credenciales incorrectas.");
         }
     }
 
     private void ejecutarMenu(Usuario usuario) {
         String[] opcionesMenu = {
             "Comprar tiquete",
-            "Comprar comida",
-            "Comprar souvenir",
             "Ver restricciones",
+            "Agregar restricción",
+            "Eliminar restricción",
+            "Ver tiquetes funcionales",
+            "Asignar tiquete en uso",
+            "Invalidar tiquete en uso",
+            "Ver tiquete en uso",
+            "Ver historial de compras",
             "Salir"
         };
 
         boolean continuar = true;
         while (continuar) {
-            int opcion = mostrarMenu("Menú Principal", opcionesMenu);
+            int opcion = mostrarMenu("Menú Usuario", opcionesMenu);
 
             switch (opcion) {
                 case 1:
@@ -50,36 +91,60 @@ public class ConsolaUsuario extends ConsolaBasica {
                     int exclusividad = pedirEnteroAlUsuario("Nivel de exclusividad (1-4)");
                     boolean fastPass = pedirConfirmacionAlUsuario("¿Desea Fast Pass?");
                     usuario.comprarTiquete(tipo, atraccion, fInicio, fFin, exclusividad, fastPass);
-                    System.out.println("Tiquete solicitado.");
                     break;
 
                 case 2:
-                    String cafeteria = pedirCadenaAlUsuario("Nombre de la cafetería");
-                    String comida = pedirCadenaAlUsuario("Nombre del producto");
-                    int cantidadComida = pedirEnteroAlUsuario("Cantidad");
-                    usuario.comprarComida(cafeteria, comida, cantidadComida);
-                    System.out.println("Pedido de comida enviado.");
+                    System.out.println("Restricciones: " + usuario.getRestricciones());
                     break;
 
                 case 3:
-                    String tienda = pedirCadenaAlUsuario("Nombre de la tienda");
-                    String souvenir = pedirCadenaAlUsuario("Nombre del souvenir");
-                    int cantidadSouvenir = pedirEnteroAlUsuario("Cantidad");
-                    usuario.comprarSouvenir(tienda, souvenir, cantidadSouvenir);
-                    System.out.println("Pedido de souvenir enviado.");
+                    String nueva = pedirCadenaAlUsuario("Ingrese nueva restricción:");
+                    usuario.agregarRestriccion(nueva);
                     break;
 
                 case 4:
-                    System.out.println("Restricciones del usuario: " + usuario.getRestricciones());
+                    ArrayList<String> restricciones = usuario.getRestricciones();
+                    for (int i = 0; i < restricciones.size(); i++) {
+                        System.out.println((i + 1) + ". " + restricciones.get(i));
+                    }
+                    int eliminar = pedirEnteroAlUsuario("Número de restricción a eliminar:");
+                    if (eliminar >= 1 && eliminar <= restricciones.size()) {
+                        restricciones.remove(eliminar - 1);
+                    }
                     break;
 
                 case 5:
-                    System.out.println("Gracias por usar el sistema. Hasta pronto.");
-                    continuar = false;
+                    System.out.println("Tiquetes funcionales: " + usuario.getTiquetesFuncionales());
                     break;
 
-                default:
-                    System.out.println("Opción inválida.");
+                case 6:
+                    int index = pedirEnteroAlUsuario("Índice del tiquete funcional a usar:");
+                    ArrayList<Double> ids = usuario.getTiquetesFuncionales();
+                    if (index >= 0 && index < ids.size()) {
+                        for (Tiquete t : usuario.getTiquetesComprados()) {
+                            if (t.getIdTiquete() == ids.get(index)) {
+                                usuario.setTiqueteEnUso(t);
+                            }
+                        }
+                    }
+                    break;
+
+                case 7:
+                    usuario.invalidarTiquete();
+                    break;
+
+                case 8:
+                    System.out.println("Tiquete en uso: " + usuario.getTiqueteEnUso());
+                    break;
+
+                case 9:
+                    System.out.println("Compras realizadas: " + usuario.getCompras());
+                    break;
+
+                case 10:
+                    continuar = false;
+                    System.out.println("Sesión finalizada.");
+                    break;
             }
         }
     }
