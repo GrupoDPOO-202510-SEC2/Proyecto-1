@@ -2,6 +2,7 @@ package usuario;
 import java.util.HashSet;
 
 import atraccion.*;
+import servicios.*;
 
 
 public class Administrador extends Usuario{
@@ -397,6 +398,42 @@ public class Administrador extends Usuario{
 		parque.empleados.put(loginEmpleado, empleado);
 		return retorno;
 	}
+	
+	//--------------------------LUGAR DE SERVICIO----------------------------------//
+	
+	public void crearCafeteria(String nombre, String ubicacion, String tipo) {
+		parque.mapaCafeterias.put(nombre, new Cafeteria(nombre, ubicacion, tipo));
+	}
+	
+	public void crearTienda(String nombre, String ubicacion, String tipo) {
+		parque.mapaTiendas.put(nombre, new Tienda(nombre, ubicacion, tipo));
+	}
+
+	public HashSet<String> getMenu() {
+		return Cafeteria.menu;
+	}
+	
+	public HashSet<String> getItems() {
+		return Tienda.items;
+	}
+	
+	public boolean addComia(String comia) {
+		return Cafeteria.menu.add(comia);
+	}
+	
+	public boolean removeComia(String comia) {
+		return Cafeteria.menu.remove(comia);
+	}
+
+	
+	public boolean additem(String item) {
+		return Tienda.items.add(item);
+	}
+	
+	public boolean removeitem(String item) {
+		return Tienda.items.remove(item);
+	}
+	
 	
 }
 

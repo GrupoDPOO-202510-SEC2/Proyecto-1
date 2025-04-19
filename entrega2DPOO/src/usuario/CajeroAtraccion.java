@@ -10,6 +10,17 @@ public class CajeroAtraccion  extends Empleado{
 		super(nombre, login, password, altura, peso, rol, lugarDeTrabajo);
 	}
 	
+	@Override
+	public boolean setLugarDeTrabajo(String lugarDeTrabajo) {
+		
+		if(parque.aCulturales.containsKey(lugarDeTrabajo) || parque.aMecanicas.containsKey(lugarDeTrabajo)) {
+		
+			this.lugarDeTrabajo = lugarDeTrabajo;
+			return true;
+		}
+		return false;
+	}
+	
 	public boolean puedePasar(Usuario usuario) {
 		
 		Tiquete tiquete = usuario.getTiqueteEnUso();

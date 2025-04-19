@@ -19,6 +19,10 @@ public class OperadorAtraccion extends Empleado{
 	public String getLugarDeTrabajoNoche() {
 		return lugarDeTrabajoNoche;
 	}
+	
+	public String getLugarDeTrabajoDia() {
+		return lugarDeTrabajoDia;
+	}
 
 
 

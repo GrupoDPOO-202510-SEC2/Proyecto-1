@@ -12,13 +12,28 @@ import servicios.Producto;
 
 public class Cajero extends Empleado {
 	
-	protected LugarDeServicio lugarServicio;
+	protected LugarDeServicio lugarServicio = null;
 	
 	public Cajero(String nombre, String login, String password, float altura, float peso, String rol,
-			String lugarDeTrabajo, LugarDeServicio lugarServicio) {
-		super(nombre, login, password, altura, peso, rol, lugarDeTrabajo);
-		this.lugarServicio = lugarServicio;
+			String lugarDeTrabajo) {
+		super(nombre, login, password, altura, peso, rol, null);
 	}
+	
+	
+	@Override
+	public boolean setLugarDeTrabajo(String lugarDeTrabajo) {
+		if(parque.mapaCafeterias.containsKey(lugarDeTrabajo)){
+			this.lugarDeTrabajo = lugarDeTrabajo;
+			this.lugarServicio = parque.mapaCafeterias.get(lugarDeTrabajo);
+			return true;
+		}if( parque.mapaTiendas.containsKey(lugarDeTrabajo)) {
+			this.lugarDeTrabajo = lugarDeTrabajo;
+			this.lugarServicio = parque.mapaTiendas.get(lugarDeTrabajo);
+			return true;
+		}
+		return false;
+	}
+	
 	
 	public boolean vender(String nombreProducto, int cantidad) {
 		boolean estaEnElMenu = lugarServicio.existeProducto(nombreProducto);
