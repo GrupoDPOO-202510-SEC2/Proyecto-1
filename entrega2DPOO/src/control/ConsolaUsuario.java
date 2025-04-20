@@ -1,10 +1,7 @@
 package control;
 
 import usuario.Usuario;
-import control.Parque;
 import tiquete.Tiquete;
-
-import org.json.JSONObject;
 
 import java.util.ArrayList;
 
