@@ -1,13 +1,6 @@
 package usuario;
 
-import java.util.HashMap;
-
 import servicios.LugarDeServicio;
-import servicios.Pedido;
-import servicios.Cafeteria;
-import servicios.Tienda;
-import servicios.Comestible;
-import servicios.Souvenir;
 import servicios.Producto;
 
 public class Cajero extends Empleado {

@@ -8,6 +8,8 @@ public class Comestible extends Producto{
 	
 	@Override
 	public void cocinarMas(int cuantosMas) {
-		cantidad += cuantosMas;
+		if(cuantosMas > 0) {
+			cantidad += cuantosMas;
+		}
 	}
 }

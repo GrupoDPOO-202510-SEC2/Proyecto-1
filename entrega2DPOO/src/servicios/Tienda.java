@@ -11,6 +11,10 @@ public class Tienda extends LugarDeServicio{
 		items = new ArrayList<String>();
 	}
 	
+	public void setItems(ArrayList<String> itemsNuevo) {
+		this.items = itemsNuevo;
+	}
+	
 	@Override
 	public boolean existeProducto(String nombreP) {
 		return items.contains(nombreP);

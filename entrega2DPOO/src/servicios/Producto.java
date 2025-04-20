@@ -18,7 +18,9 @@ public class Producto {
 	}
 
 	public void vender() {
-		cantidad -= 1;
+		if(cantidad != 0) {
+			cantidad -= 1;
+		}
 	}
 	
 	public void cocinarMas(int cuantosMas) {}
