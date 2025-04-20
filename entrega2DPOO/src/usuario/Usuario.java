@@ -14,7 +14,7 @@ public class Usuario {
 	private ArrayList<String> restricciones;
 	private HashMap<String, Integer> compras;
 	private Tiquete tiqueteEnUso;
-	private ArrayList<Tiquete> tiquetesComprados;
+	private ArrayList<Double> tiquetesComprados;
 	protected static Parque parque;
 	protected static final String DIURNO = "diurno";
     protected static final String NOCTURNO = "nocturno";
@@ -33,7 +33,7 @@ public class Usuario {
 		this.restricciones = new ArrayList<String>();
 		this.compras = new HashMap<String, Integer>();
 		this.tiqueteEnUso = null;
-		this.tiquetesComprados= new ArrayList<Tiquete>();
+		this.tiquetesComprados= new ArrayList<Double>();
 	}
 	
 	public ArrayList<String> getRestricciones() {
@@ -42,7 +42,8 @@ public class Usuario {
 	
 	public ArrayList<Double> getTiquetesFuncionales(){
 		ArrayList<Double> retorno = new ArrayList<Double>();
-		for(Tiquete tiquete:tiquetesComprados) {
+		for(Double tiquet:tiquetesComprados) {
+			Tiquete tiquete = parque.tiquetes.get(tiquet);
 			if(tiquete.isValido()) {
 				retorno.add(tiquete.getIdTiquete());
 			}
@@ -93,17 +94,17 @@ public class Usuario {
 	}
 	
 	
-	public ArrayList<Tiquete> getTiquetesComprados() {
+	public ArrayList<Double> getTiquetesComprados() {
 		return tiquetesComprados;
 	}
 
 	
 	public void addTiquete(Tiquete tiquete) {
-		tiquetesComprados.add(tiquete);
+		tiquetesComprados.add(tiquete.getIdTiquete());
 	}
 	
 	public void comprarTiquete(String tipo, String atraccion, String fInicio, String fFin, int exclusividad, boolean fastPass) {
-		PedidoTiquete nuevoPedido = new PedidoTiquete(this, tipo, atraccion, fInicio, fFin, exclusividad, fastPass);
+		PedidoTiquete nuevoPedido = new PedidoTiquete(this.login, tipo, atraccion, fInicio, fFin, exclusividad, fastPass);
 		parque.getTaquilla().nuevaPeticion(nuevoPedido);
 	}
 	

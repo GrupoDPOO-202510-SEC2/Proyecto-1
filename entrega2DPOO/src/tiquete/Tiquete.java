@@ -5,7 +5,6 @@ public class Tiquete {
 	protected double idTiquete;
 	protected boolean valido;
 	protected boolean fastPass;
-	protected boolean enUso;
 	
 	public Tiquete(double idTiquete, boolean fastPass) {
 		this.idTiquete = idTiquete;
@@ -14,7 +13,7 @@ public class Tiquete {
 		
 	}
 
-	public double getIdTiquete() {
+	public Double getIdTiquete() {
 		return idTiquete;
 	}
 

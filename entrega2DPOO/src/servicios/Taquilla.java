@@ -22,10 +22,27 @@ public class Taquilla{
 		pedidosTiquetes.add(pedido);
 	}
 	
-	public double generarCodigo() {
+	public static double generarCodigo() {
 		IDs++; return IDs;
 	}
 	
+	public Queue<PedidoTiquete> getPedidosTiquetes() {
+		return pedidosTiquetes;
+	}
+
+	public void addPedidoTiquete(PedidoTiquete pedido) {
+		this.pedidosTiquetes.add(pedido);
+	}
+	
+	
+	public static double getIDs() {
+		return IDs;
+	}
+
+	public static void setIDs(double iDs) {
+		IDs = iDs;
+	}
+
 	public PedidoTiquete pedidoEnFila() {
 		return pedidosTiquetes.remove();
 	}

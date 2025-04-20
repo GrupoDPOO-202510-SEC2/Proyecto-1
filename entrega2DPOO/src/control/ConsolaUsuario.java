@@ -1,6 +1,6 @@
 package control;
 
-import usuario.Usuario;
+import usuario.*;
 import control.Parque;
 import tiquete.Tiquete;
 
@@ -31,7 +31,7 @@ public class ConsolaUsuario extends ConsolaBasica {
             String login = pedirCadenaAlUsuario("Ingrese su login");
             String password = pedirCadenaAlUsuario("Ingrese su contraseña");
 
-            for (Usuario u : parque.Usuarios.values()) {
+            for (Usuario u : parque.usuarios.values()) {
                 if (u.getLogin().equals(login) && u.getPassword().equals(password)) {
                     usuario = u;
                     System.out.println("Inicio de sesión exitoso. Bienvenido, " + usuario.getNombre() + ".");
@@ -52,7 +52,7 @@ public class ConsolaUsuario extends ConsolaBasica {
             int peso = (int) pedirNumeroAlUsuario("Peso (kg):");
 
             usuario = new Usuario(nombre, login, password, altura, peso);
-            parque.Usuarios.put(login, usuario);
+            parque.usuarios.put(login, usuario);
             System.out.println("Usuario creado exitosamente.");
 
             while (true) {
@@ -124,9 +124,9 @@ public class ConsolaUsuario extends ConsolaBasica {
                     int index = pedirEnteroAlUsuario("Índice del tiquete funcional a usar:");
                     ArrayList<Double> ids = usuario.getTiquetesFuncionales();
                     if (index >= 0 && index < ids.size()) {
-                        for (Tiquete t : usuario.getTiquetesComprados()) {
-                            if (t.getIdTiquete() == ids.get(index)) {	
-                                usuario.setTiqueteEnUso(t);
+                        for (double t : usuario.getTiquetesComprados()) {
+                            if (parque.tiquetes.get(t).getIdTiquete() == ids.get(index)) {	
+                                usuario.setTiqueteEnUso(parque.tiquetes.get(t));
                             }
                         }
                     }

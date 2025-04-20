@@ -12,6 +12,8 @@ import servicios.*;
 import java.util.*;
 
 public class Parque {
+	
+	public Taquilla taquilla;
 	public HashMap<String, AtraccionCultural> aCulturales;
 	public HashMap<String, AtraccionMecanica> aMecanicas;
 	public HashMap<String, Cafeteria> mapaCafeterias;
@@ -20,10 +22,7 @@ public class Parque {
 	public HashMap<Double, Tiquete> tiquetes;
 	public HashMap<String, Producto> inventario;
 	public HashMap<String, Empleado> empleados;
-	public HashMap<String, Usuario> Usuarios;
-	
-	
-	private Taquilla taquilla;
+	public HashMap<String, Usuario> usuarios;
 
 	public Parque(String ubicacionTaquilla) {
 		this.aCulturales = new HashMap<String, AtraccionCultural>();

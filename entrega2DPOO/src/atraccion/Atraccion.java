@@ -6,6 +6,7 @@ import usuario.*;
 import java.time.*;
 
 public abstract class Atraccion { 
+	
     private int capacidadMaxima;
     private int cantidadDePpl = 0;
     private String ubicacion;
@@ -15,8 +16,8 @@ public abstract class Atraccion {
     protected String nombre;
     protected int empleadosMinimos;
     protected boolean enServicio;
-    protected HashMap<String, OperadorAtraccion> operadoresDia;
-    protected HashMap<String, OperadorAtraccion> operadoresNoche;
+    protected HashSet<String> operadoresDia;
+    protected HashSet<String> operadoresNoche;
     protected static final String DIURNO = "diurno";
     protected static final String NOCTURNO = "nocturno";
     protected static final int BASICO = 1;
@@ -36,11 +37,15 @@ public abstract class Atraccion {
         this.restriccionesSalud = new HashSet<>();
     }
 
-	public int getOperadoresDia() {
+	public HashSet<String> getRestriccionesSalud() {
+		return restriccionesSalud;
+	}
+
+	public int getOperadoresDiaSize() {
 		return operadoresDia.size();
 	}
 
-	public int getOperadoresNoche() {
+	public int getOperadoresNocheSize() {
 		return operadoresNoche.size();
 	}
 
@@ -145,17 +150,25 @@ public abstract class Atraccion {
 	
 	public boolean isOperable() {
 		if(isDia()) {
-			if(this.getOperadoresDia() >= this.getEmpleadosMinimos()) {
+			if(this.getOperadoresDiaSize() >= this.getEmpleadosMinimos()) {
 				return true;
 			}
 			return false;
 		}
-		if(this.getOperadoresNoche() >= this.getEmpleadosMinimos()) {
+		if(this.getOperadoresNocheSize() >= this.getEmpleadosMinimos()) {
 			return true;
 		}
 		return false;
 	}
 	
+	public HashSet<String> getOperadoresDia() {
+		return operadoresDia;
+	}
+
+	public HashSet<String> getOperadoresNoche() {
+		return operadoresNoche;
+	}
+
 	public boolean isDia() {
 		LocalTime horaAhora = LocalTime.now();
 		LocalTime medioDia = LocalTime.of(12, 0, 0, 0);

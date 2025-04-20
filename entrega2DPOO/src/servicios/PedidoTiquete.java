@@ -4,7 +4,7 @@ import usuario.Usuario;
 
 public class PedidoTiquete{
 	
-	private Usuario usuario;
+	private String loginUsuario;
 	private String tipo;
 	private String atraccionParaIndividuales;
 	private String fechaInicioParaTemporales;
@@ -12,9 +12,9 @@ public class PedidoTiquete{
 	private int exclusividad;
 	private boolean fastPass;
 
-	public PedidoTiquete(Usuario usuario, String tipo, String atraccionParaIndividuales,
+	public PedidoTiquete(String loginUsuario, String tipo, String atraccionParaIndividuales,
 			String fechaInicioParaTemporales, String fechaFinParaTemporales, int exclusividad, boolean fastPass) {
-		this.usuario = usuario;
+		this.loginUsuario = loginUsuario;
 		this.tipo = tipo;
 		this.atraccionParaIndividuales = atraccionParaIndividuales;
 		this.fechaInicioParaTemporales = fechaInicioParaTemporales;
@@ -37,8 +37,8 @@ public class PedidoTiquete{
 		}
 	}
 
-	public Usuario getUsuario() {
-		return usuario;
+	public String getLogin() {
+		return loginUsuario;
 	}
 
 	public String getTipo() {

@@ -5,9 +5,9 @@ import tiquete.*;
 
 public class CajeroAtraccion  extends Empleado{
 
-	public CajeroAtraccion(String nombre, String login, String password, int altura, int peso, String rol,
+	public CajeroAtraccion(String nombre, String login, String password, int altura, int peso,
 			String lugarDeTrabajo) {
-		super(nombre, login, password, altura, peso, rol, lugarDeTrabajo);
+		super(nombre, login, password, altura, peso, lugarDeTrabajo);
 	}
 	
 	@Override
@@ -24,7 +24,7 @@ public class CajeroAtraccion  extends Empleado{
 	public boolean puedePasar(Usuario usuario) {
 		
 		Tiquete tiquete = usuario.getTiqueteEnUso();
-		String clase = tiquete.getClass().toString();
+		String clase = tiquete.getClass().getSimpleName();
 		
 		
 		if(parque.aCulturales.containsKey(this.lugarDeTrabajo)) {
