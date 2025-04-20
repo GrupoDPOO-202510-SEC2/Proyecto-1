@@ -1,10 +1,13 @@
 package control;
+import java.io.IOException;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
 import java.util.Map;
 import java.io.PrintWriter;
+import java.nio.file.Files;
+import java.nio.file.Paths;
 
 import org.json.JSONArray;
 import org.json.JSONException;
@@ -461,4 +464,33 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		jpedido.put("fastPass", pedido.isFastPass());
 		
 	}
+	
+//--------------------------------------------Cargar shit--------------------------------------------------------//
+	
+	
+	public Parque cargarParque() throws Exception {
+		
+		String contenido = new String(Files.readAllBytes(Paths.get("../data/parque.json")));
+		JSONObject jsonParque = new JSONObject(contenido);
+		Parque parque = new Parque("Entrada");
+		cargarTaquilla(parque, jsonParque.getJSONObject("taquilla"));
+		cargarACulturales(parque,parque.aCulturales);
+		cargarAMecanicas(parque,parque.aMecanicas);
+		cargarMapaCafeterias(parque,parque.mapaCafeterias);
+		cargarMapaTiendas(parque,parque.mapaTiendas);
+		cargarEspectaculos(parque,parque.espectaculos);
+		cargarTiquetes(parque,parque.tiquetes);
+		cargarInventario(parque,parque.inventario);
+		cargarEmpleados(parque,parque.empleados);
+		cargarUsuarios(parque,parque.usuarios);
+		
+		
+		
+		return parque;
+		
+	}
+	
+	
+	
+	
 }
