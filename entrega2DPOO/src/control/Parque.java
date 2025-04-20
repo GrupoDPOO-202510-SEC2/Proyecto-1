@@ -30,7 +30,7 @@ public class Parque {
 		this.mapaCafeterias = new  HashMap<String, Cafeteria>();
 		this.mapaTiendas = new HashMap<String, Tienda>();
 		this.taquilla = new Taquilla("Entrada");
-		this.Usuarios = new HashMap<>(); 
+		this.usuarios = new HashMap<>(); 
 	}
 		
 	public AtraccionCultural getAtraccionCultural(String nombreAtraccion) {
