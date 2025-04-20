@@ -31,15 +31,12 @@ public class Cajero extends Empleado {
 	
 	
 	public LugarDeServicio getLugarDeServicio() {
-		LugarDeServicio lugarServicio;
 		
 		if(parque.mapaCafeterias.containsKey(this.lugarDeTrabajo)) {
-			lugarServicio = parque.mapaCafeterias.get(this.lugarDeTrabajo);
+			 return (Cafeteria) parque.mapaCafeterias.get(this.lugarDeTrabajo);
 		}else {
-			lugarServicio = parque.mapaTiendas.get(this.lugarDeTrabajo);
+			return (Tienda) parque.mapaTiendas.get(this.lugarDeTrabajo);
 		}
-		
-		return lugarServicio;
 	}
 	
 	

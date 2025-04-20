@@ -4,7 +4,9 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.LinkedList;
 import java.util.Map;
+import java.util.Queue;
 import java.io.PrintWriter;
 import java.nio.file.Files;
 import java.nio.file.Paths;
@@ -473,8 +475,8 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		String contenido = new String(Files.readAllBytes(Paths.get("../data/parque.json")));
 		JSONObject jsonParque = new JSONObject(contenido);
 		Parque parque = new Parque("Entrada");
-		cargarTaquilla(parque, jsonParque.getJSONObject("taquilla"));
-		cargarACulturales(parque,parque.aCulturales);
+		parque.taquilla = cargarTaquilla(jsonParque.getJSONObject("taquilla"));
+		cargarACulturales(jsonParque.getJSONObject("aCulturales"));
 		cargarAMecanicas(parque,parque.aMecanicas);
 		cargarMapaCafeterias(parque,parque.mapaCafeterias);
 		cargarMapaTiendas(parque,parque.mapaTiendas);
@@ -490,9 +492,34 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 	}
 
-	private void cargarTaquilla(Parque parque, JSONObject jsonObject) {
+	private Taquilla cargarTaquilla(JSONObject jtaquilla) throws Exception {
+		
 		// TODO Auto-generated method stub
 		
+		Taquilla taquilla = new Taquilla(jtaquilla.getString("ubicacion"));
+		Taquilla.setIDs(jtaquilla.getDouble("IDs"));
+		JSONArray jpedidos = jtaquilla.getJSONArray("pedidosTiquetes");
+		
+		Queue<PedidoTiquete> pedidos = new LinkedList<PedidoTiquete>();
+		
+		for(int i = 0;i<jpedidos.length();i++) {
+			
+			JSONObject jpedido = jpedidos.getJSONObject(i);
+			PedidoTiquete pedido = cargarPedido(jpedido);
+			pedidos.add(pedido);
+			
+		}
+		
+		taquilla.setPedidosTiquetes(pedidos);
+		
+		return taquilla;
+	}
+
+	private PedidoTiquete cargarPedido(JSONObject jpedido) throws Exception {
+		
+		PedidoTiquete pedido = new PedidoTiquete(jpedido.getString("loginUsuario"),jpedido.getString("tipo") ,jpedido.getString("atraccionParaIndividuales" ) 
+				, jpedido.getString("fechaInicioParaTemporales" ), jpedido.getString("fechaFinParaTemporales"), jpedido.getInt("exclusividad"), jpedido.getBoolean("fastPass") );
+		return pedido;
 	}
 	
 	

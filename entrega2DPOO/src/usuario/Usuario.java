@@ -17,7 +17,7 @@ public class Usuario {
 	private ArrayList<Double> tiquetesComprados;
 	protected static Parque parque;
 	protected static final String DIURNO = "diurno";
-    protected static final String NOCTURNO = "nocturno";
+	protected static final String NOCTURNO = "nocturno";
     protected static final int BASICO = 1;
     protected static final int FAMILIAR = 2;
     protected static final int ORO = 3;

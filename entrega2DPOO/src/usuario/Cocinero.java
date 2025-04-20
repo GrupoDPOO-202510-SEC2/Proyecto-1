@@ -14,7 +14,7 @@ public class Cocinero extends Cajero{
 		return alimentosPreparables;
 	}
 
-	public Cocinero(String nombre, String login, String password, int altura, int peso, String turno,
+	public Cocinero(String nombre, String login, String password, int altura, int peso,
 			String lugarDeTrabajo, ArrayList<String> alimentosPreparables) {
 		super(nombre, login, password, altura, peso);
 		this.alimentosPreparables = alimentosPreparables;
@@ -32,4 +32,10 @@ public class Cocinero extends Cajero{
 		}
 		return false;
 	}
+	
+	public void addAlimentoPreparable(String alimento) {
+		this.alimentosPreparables.add(alimento);
+	}
+	
+	
 }

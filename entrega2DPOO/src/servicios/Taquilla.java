@@ -14,6 +14,10 @@ public class Taquilla{
 		this.pedidosTiquetes = new LinkedList<PedidoTiquete>();
 	}
 	
+	public void setPedidosTiquetes(Queue<PedidoTiquete> pedidosTiquetes) {
+		this.pedidosTiquetes = pedidosTiquetes;
+	}
+
 	public String getUbicacion() {
 		return ubicacion;
 	}

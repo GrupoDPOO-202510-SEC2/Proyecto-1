@@ -1,4 +1,5 @@
 package usuario;
+import java.util.ArrayList;
 import java.util.HashSet;
 
 import atraccion.*;
@@ -435,5 +436,105 @@ public class Administrador extends Usuario{
 	}
 	
 	
+	//---------------------------------------EMPLEADOS 2.0--------------------------------------------------//
+	
+	
+	public boolean crearCajero(String nombre, String login, String password, int altura, int peso, String lugarDeTrabajo, String turno) {
+		Cajero cajero = new Cajero(nombre, login, password, altura, peso);
+		if (cajero.setLugarDeTrabajo(lugarDeTrabajo)) {
+			if (turno.equals(DIURNO)) {
+				cajero.setTurnoDia(true);
+				parque.empleados.put(login, cajero);
+				return true;
+			}if (turno.equals(NOCTURNO)) {
+				cajero.setTurnoNoche(true);
+				parque.empleados.put(login, cajero);
+				return true;
+			}
+		}
+	return false;
+	}
+	
+	public boolean crearCajeroAtraccion(String nombre, String login, String password, int altura, int peso,
+			String lugarDeTrabajo,String turno) {
+		CajeroAtraccion cajero = new CajeroAtraccion(nombre,login,password,altura,peso,null);
+		if(cajero.setLugarDeTrabajo(lugarDeTrabajo)) {
+			if (turno.equals(DIURNO)) {
+				cajero.setTurnoDia(true);
+				parque.empleados.put(login, cajero);
+				return true;
+			}if (turno.equals(NOCTURNO)) {
+				cajero.setTurnoNoche(true);
+				parque.empleados.put(login, cajero);
+				return true;
+			}
+		}
+		return false;
+		
+	}
+	
+	public boolean crearCajeroTaquilla(String nombre, String login, String password, int altura, int peso,
+		String turno) {
+		CajeroTaquilla cajero = new CajeroTaquilla(nombre,login,password,altura,peso,"Taquilla");
+		if (turno.equals(DIURNO)) {
+			cajero.setTurnoDia(true);
+			parque.empleados.put(login, cajero);
+			return true;
+		}if (turno.equals(NOCTURNO)) {
+			cajero.setTurnoNoche(true);
+			parque.empleados.put(login, cajero);
+			return true;
+		}
+		return false;
+	}
+	
+	public boolean crearCocinero(String nombre, String login, String password, int altura, int peso,
+			String turno, String lugarDeTrabajo) {
+		
+		Cocinero cocinero = new Cocinero(nombre,login,password,altura,peso, null,new ArrayList<String>());
+		if(cocinero.setLugarDeTrabajo(lugarDeTrabajo)) {
+			if (turno.equals(DIURNO)) {
+				cocinero.setTurnoDia(true);
+				parque.empleados.put(login, cocinero);
+				return true;
+			}if (turno.equals(NOCTURNO)) {
+				cocinero.setTurnoNoche(true);
+				parque.empleados.put(login, cocinero);
+				return true;
+			}
+		}
+		
+		return false;
+	}
+	
+	public boolean addComidaCocinero(String loginCocinero, String comia) {
+		Cocinero cocinero = (Cocinero) parque.empleados.get(loginCocinero);
+		cocinero.addAlimentoPreparable(comia);
+		parque.empleados.put(loginCocinero,cocinero); 
+		return true;
+	}
+	
+	
+	public boolean crearOperadorAtraccion(String nombre, String login, String password, int altura, int peso) {
+		OperadorAtraccion operador = new OperadorAtraccion(nombre, login, password, altura, peso);
+		parque.empleados.put(login,operador);
+		return true;
+	}
+	
+	public boolean crearServicioGeneral(String nombre, String login, String password, int altura, int peso
+			, String lugarDeTrabajo, String turno) {
+		ServicioGeneral empleado = new ServicioGeneral(nombre, login, password, altura, peso, lugarDeTrabajo);
+		empleado.setLugarDeTrabajo(lugarDeTrabajo);
+		if (turno.equals(DIURNO)) {
+			empleado.setTurnoDia(true);
+			parque.empleados.put(login, empleado);
+			return true;
+		}if (turno.equals(NOCTURNO)) {
+			empleado.setTurnoNoche(true);
+			parque.empleados.put(login, empleado);
+			return true;
+		}
+		return false;
+	}
 }
 
