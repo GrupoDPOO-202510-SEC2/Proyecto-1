@@ -15,7 +15,7 @@ public class Usuario {
 	private HashMap<String, Integer> compras;
 	private Tiquete tiqueteEnUso;
 	private ArrayList<Double> tiquetesComprados;
-	protected static Parque parque;
+	public static Parque parque;
 	protected static final String DIURNO = "diurno";
 	protected static final String NOCTURNO = "nocturno";
     protected static final int BASICO = 1;
