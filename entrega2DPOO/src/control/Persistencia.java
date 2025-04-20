@@ -489,6 +489,11 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return parque;
 		
 	}
+
+	private void cargarTaquilla(Parque parque, JSONObject jsonObject) {
+		// TODO Auto-generated method stub
+		
+	}
 	
 	
 	
