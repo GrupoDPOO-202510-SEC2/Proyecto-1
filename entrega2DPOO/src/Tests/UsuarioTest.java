@@ -1,7 +1,11 @@
+package Tests;
+
+
 import org.junit.jupiter.api.Test;
 import static org.junit.jupiter.api.Assertions.*;
 import usuario.Usuario;
 import tiquete.Tiquete;
+
 import java.util.List;
 
 public class UsuarioTest {
@@ -19,8 +23,15 @@ public class UsuarioTest {
         Tiquete t1 = new Tiquete(1.0, false);
         Tiquete t2 = new Tiquete(2.0, false);
         t2.desvalidar();
+        control.Parque parque = new control.Parque("taquilla");
+        parque.tiquetes = new java.util.HashMap<>();
+        parque.tiquetes.put(t1.getIdTiquete(), t1);
+        parque.tiquetes.put(t2.getIdTiquete(), t2);
+        usuario.Usuario.parque = parque;
+
         u.addTiquete(t1);
         u.addTiquete(t2);
+
         List<Double> validos = u.getTiquetesFuncionales();
         assertEquals(1, validos.size());
         assertEquals(1.0, validos.get(0));
