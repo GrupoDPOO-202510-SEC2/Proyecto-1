@@ -1,4 +1,4 @@
-package control;
+package persistencia;
 import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
@@ -13,6 +13,7 @@ import org.json.JSONObject;
 import atraccion.AtraccionCultural;
 import atraccion.AtraccionMecanica;
 import atraccion.Espectaculo;
+import control.Parque;
 import servicios.*;
 import tiquete.*;
 import usuario.*;
