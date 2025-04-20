@@ -19,7 +19,7 @@ public class ConsolaAdministrador extends ConsolaBasica {
         String login = pedirCadenaAlUsuario("Login:");
         String password = pedirCadenaAlUsuario("Contraseña:");
 
-        Usuario u = parque.Usuarios.get(login);
+        Usuario u = parque.usuarios.get(login);
         if (u instanceof Administrador && u.getPassword().equals(password))
             {
                 Administrador admin = (Administrador) u;
