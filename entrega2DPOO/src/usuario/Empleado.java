@@ -4,14 +4,12 @@ import java.time.*;
 
 
 public class Empleado extends Usuario{
-	protected String rol;
 	protected boolean turnoDia;
 	protected boolean turnoNoche;
 	protected String lugarDeTrabajo;
-	protected boolean disponible;
-	public Empleado(String nombre, String login, String password, int altura, int peso, String rol, String lugarDeTrabajo) {
+	protected boolean disponible; 
+	public Empleado(String nombre, String login, String password, int altura, int peso, String lugarDeTrabajo) {
 		super(nombre, login, password, altura, peso);
-		this.rol = rol;
 		this.lugarDeTrabajo = lugarDeTrabajo;
 		this.disponible = estaDisponible();
 	}
@@ -24,11 +22,6 @@ public class Empleado extends Usuario{
 		this.lugarDeTrabajo = lugarDeTrabajo;
 		return true;
 	}
-
-	public String getRol() {
-		return this.rol;
-	}
-	
 	
 	public boolean getTurnoDia() {
 		return this.turnoNoche;

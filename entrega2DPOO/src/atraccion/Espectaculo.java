@@ -5,6 +5,10 @@ import java.util.*;
 public class Espectaculo {
 
 	private String nombre;
+	public HashSet<String> getClimasRestringidos() {
+		return climasRestringidos;
+	}
+
 	private String horario;
 	private String ubicacion;
 	private String fechaInicio;

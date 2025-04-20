@@ -26,13 +26,13 @@ public class AtraccionMecanica extends Atraccion{
 	public boolean addOperador(OperadorAtraccion operador, String turno) {
 		if (turno.equals(DIURNO) && !operador.getTurnoDia()){
 			if(operador.getCapacitaciones().contains(this.nombre) || !this.riesgoAlto ) {
-			this.operadoresDia.put(operador.getLogin(), operador);
+			this.operadoresDia.add(operador.getLogin());
 			return true;
 			}
 		}
 		if (turno.equals(NOCTURNO) && !operador.getTurnoNoche()){
 			if(operador.getCapacitaciones().contains(this.nombre) || !this.riesgoAlto ) {
-			this.operadoresNoche.put(operador.getLogin(), operador);
+			this.operadoresNoche.add(operador.getLogin());
 			return true;
 			}
 		}

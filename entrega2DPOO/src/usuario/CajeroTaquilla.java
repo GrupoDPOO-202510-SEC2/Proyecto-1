@@ -8,12 +8,9 @@ import tiquete.*;
 
 public class CajeroTaquilla extends Empleado{
 	
-	Taquilla taquilla;
-	
-	public CajeroTaquilla(String nombre, String login, String password, int altura, int peso, String rol,
-			String lugarDeTrabajo, Taquilla taquilla) {
-		super(nombre, login, password, altura, peso, rol, lugarDeTrabajo);
-		this.taquilla = parque.getTaquilla();
+	public CajeroTaquilla(String nombre, String login, String password, int altura, int peso, 
+			String lugarDeTrabajo) {
+		super(nombre, login, password, altura, peso, lugarDeTrabajo);
 	}
 
 	public boolean dejarEntrar(Usuario usuario,double codigoTiquete) {
@@ -32,16 +29,16 @@ public class CajeroTaquilla extends Empleado{
 	
 	public void registrarSalida(Usuario usuario) {
 		
-		if (String.valueOf(usuario.getTiqueteEnUso().getClass()).equals("TiqueteExclusividad")) {
+		if (usuario.getTiqueteEnUso().getClass().getSimpleName().equals("TiqueteExclusividad")) {
 			usuario.invalidarTiquete();
 			usuario.setTiqueteEnUso(null);
 		}
 	}
 	
 	public void venderTiquete() {
-		PedidoTiquete pedido = taquilla.pedidoEnFila();
+		PedidoTiquete pedido = parque.taquilla.pedidoEnFila();
 		
-		Double idTiquete = taquilla.generarCodigo();
+		Double idTiquete = Taquilla.generarCodigo();
 		
 		Tiquete nuevoTiquete = null;
 		
@@ -55,7 +52,7 @@ public class CajeroTaquilla extends Empleado{
 			nuevoTiquete = new Tiquete(idTiquete, pedido.isFastPass());
 		}
 		
-		pedido.getUsuario().addTiquete(nuevoTiquete);
+		parque.usuarios.get(pedido.getLogin()).addTiquete(nuevoTiquete);
 		parque.addTiquete(nuevoTiquete, idTiquete);
 		
 	}

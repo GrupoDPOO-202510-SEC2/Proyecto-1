@@ -11,11 +11,11 @@ public class Main extends ConsolaBasica {
     public void ejecutar() {
         Parque parque = new Parque("Taquilla principal");
         Administrador admin = new Administrador("Administrador", "sopa", "sopa", 180, 70);
-        parque.Usuarios.put("sopa", admin);
+        parque.usuarios.put("sopa", admin);
 
-        if (parque.Usuarios == null)
+        if (parque.usuarios == null)
         {
-            parque.Usuarios = new java.util.HashMap<>();
+            parque.usuarios = new java.util.HashMap<>();
         }
 
         String[] opciones = {

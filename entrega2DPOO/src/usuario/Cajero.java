@@ -12,10 +12,8 @@ import servicios.Producto;
 
 public class Cajero extends Empleado {
 	
-	protected LugarDeServicio lugarServicio = null;
-	
-	public Cajero(String nombre, String login, String password, int altura, int peso, String rol) {
-		super(nombre, login, password, altura, peso, rol, null);
+	public Cajero(String nombre, String login, String password, int altura, int peso) {
+		super(nombre, login, password, altura, peso, null);
 	}
 	
 	
@@ -23,18 +21,32 @@ public class Cajero extends Empleado {
 	public boolean setLugarDeTrabajo(String lugarDeTrabajo) {
 		if(parque.mapaCafeterias.containsKey(lugarDeTrabajo)){
 			this.lugarDeTrabajo = lugarDeTrabajo;
-			this.lugarServicio = parque.mapaCafeterias.get(lugarDeTrabajo);
 			return true;
 		}if( parque.mapaTiendas.containsKey(lugarDeTrabajo)) {
 			this.lugarDeTrabajo = lugarDeTrabajo;
-			this.lugarServicio = parque.mapaTiendas.get(lugarDeTrabajo);
 			return true;
 		}
 		return false;
 	}
 	
 	
+	public LugarDeServicio getLugarDeServicio() {
+		LugarDeServicio lugarServicio;
+		
+		if(parque.mapaCafeterias.containsKey(this.lugarDeTrabajo)) {
+			lugarServicio = parque.mapaCafeterias.get(this.lugarDeTrabajo);
+		}else {
+			lugarServicio = parque.mapaTiendas.get(this.lugarDeTrabajo);
+		}
+		
+		return lugarServicio;
+	}
+	
+	
 	public boolean vender(String nombreProducto, int cantidad) {
+		
+		LugarDeServicio lugarServicio = getLugarDeServicio();
+		
 		boolean estaEnElMenu = lugarServicio.existeProducto(nombreProducto);
 		boolean estaEnElInventario = parque.inventario.containsKey(nombreProducto);
 		if(estaEnElMenu && estaEnElInventario) {

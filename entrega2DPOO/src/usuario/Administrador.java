@@ -136,13 +136,13 @@ public class Administrador extends Usuario{
 		
 		if(parque.aMecanicas.containsKey(nombre)) {
 			AtraccionMecanica atraccion = parque.aMecanicas.get(nombre);
-			retorno[0] = atraccion.getOperadoresDia();
-			retorno[1] = atraccion.getOperadoresNoche();
+			retorno[0] = atraccion.getOperadoresDiaSize();
+			retorno[1] = atraccion.getOperadoresNocheSize();
 		}
 		if (parque.aCulturales.containsKey(nombre)) {
 			AtraccionCultural atraccion = parque.aCulturales.get(nombre);
-			retorno[0] = atraccion.getOperadoresDia();
-			retorno[1] = atraccion.getOperadoresNoche();
+			retorno[0] = atraccion.getOperadoresDiaSize();
+			retorno[1] = atraccion.getOperadoresNocheSize();
 			
 		}
 		
@@ -377,7 +377,7 @@ public class Administrador extends Usuario{
 	}
 
 	public String getRol(String loginEmpleado) {
-		return parque.empleados.get(loginEmpleado).getRol();
+		return parque.empleados.get(loginEmpleado).getClass().getSimpleName();
 	}
 	
 	
