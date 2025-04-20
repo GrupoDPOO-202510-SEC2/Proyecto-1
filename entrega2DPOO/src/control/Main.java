@@ -1,5 +1,7 @@
 package control;
 
+import usuario.Administrador;
+
 public class Main extends ConsolaBasica {
 
     public static void main(String[] args) {
@@ -8,6 +10,8 @@ public class Main extends ConsolaBasica {
 
     public void ejecutar() {
         Parque parque = new Parque("Taquilla principal");
+        Administrador admin = new Administrador("Administrador", "sopa", "sopa", 180, 70);
+        parque.Usuarios.put("sopa", admin);
 
         if (parque.Usuarios == null)
         {
