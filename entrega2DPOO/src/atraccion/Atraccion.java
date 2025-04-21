@@ -36,6 +36,22 @@ public abstract class Atraccion {
         this.climasRestringidos = new HashSet<>();
         this.restriccionesSalud = new HashSet<>();
     }
+    
+    public void setClimasRestringidos(HashSet<String> climasRestringidos) {
+		this.climasRestringidos = climasRestringidos;
+	}
+
+	public void setRestriccionesSalud(HashSet<String> restriccionesSalud) {
+		this.restriccionesSalud = restriccionesSalud;
+	}
+
+	public void setOperadoresDia(HashSet<String> operadoresDia) {
+		this.operadoresDia = operadoresDia;
+	}
+
+	public void setOperadoresNoche(HashSet<String> operadoresNoche) {
+		this.operadoresNoche = operadoresNoche;
+	}
 
 	public HashSet<String> getRestriccionesSalud() {
 		return restriccionesSalud;

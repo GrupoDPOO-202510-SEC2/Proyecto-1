@@ -4,6 +4,7 @@ import java.io.PrintWriter;
 import java.util.ArrayList;
 import java.util.HashMap;
 import java.util.HashSet;
+import java.util.Iterator;
 import java.util.LinkedList;
 import java.util.Map;
 import java.util.Queue;
@@ -294,7 +295,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 			
 		}
 		
-		jtienda.put("menu", jitems);
+		jtienda.put("items", jitems);
 	}
 	private static void guardarMenu(JSONObject jcafeteria) throws Exception {
 		
@@ -476,11 +477,12 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		JSONObject jsonParque = new JSONObject(contenido);
 		Parque parque = new Parque("Entrada");
 		parque.taquilla = cargarTaquilla(jsonParque.getJSONObject("taquilla"));
-		cargarACulturales(jsonParque.getJSONObject("aCulturales"));
-		cargarAMecanicas(parque,parque.aMecanicas);
-		cargarMapaCafeterias(parque,parque.mapaCafeterias);
-		cargarMapaTiendas(parque,parque.mapaTiendas);
-		cargarEspectaculos(parque,parque.espectaculos);
+		parque.aCulturales = cargarACulturales(jsonParque.getJSONObject("aCulturales"));
+		parque.aMecanicas= cargarAMecanicas(jsonParque.getJSONObject("aMecanicas"));
+		parque.mapaCafeterias= cargarMapaCafeterias(jsonParque.getJSONObject("mapaCafeterias"));
+		parque.mapaTiendas= cargarMapaTiendas(jsonParque.getJSONObject("mapaTiendas"));
+		parque.espectaculos= cargarEspectaculos(jsonParque.getJSONObject("espectaculos"));
+		parque.tiquetes= cargarTiquetes(jsonParque.getJSONObject("tiquetes"));
 		cargarTiquetes(parque,parque.tiquetes);
 		cargarInventario(parque,parque.inventario);
 		cargarEmpleados(parque,parque.empleados);
@@ -492,9 +494,316 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 	}
 
-	private Taquilla cargarTaquilla(JSONObject jtaquilla) throws Exception {
-		
+	private HashMap<Double, Tiquete> cargarTiquetes(JSONObject jsonObject) {
 		// TODO Auto-generated method stub
+		return null;
+	}
+
+	private HashMap<String, Espectaculo> cargarEspectaculos(JSONObject jespectaculos) throws Exception {
+		
+		HashMap<String, Espectaculo> espectaculos = new HashMap<String, Espectaculo>(); 
+		
+		Iterator<String> keys = jespectaculos.keys();
+		
+		while (keys.hasNext()) {
+			String key = keys.next();
+			JSONObject jespectaculo= (JSONObject) jespectaculos.get(key);
+			Espectaculo espectaculo = cargarEspectaculo(jespectaculo);
+			espectaculos.put(espectaculo.getNombre(), espectaculo);
+			}
+		
+		return espectaculos;
+	}
+
+	private Espectaculo cargarEspectaculo(JSONObject jespectaculo) throws Exception {
+		
+		
+		
+		String nombre = jespectaculo.getString("nombre");
+		String horario = jespectaculo.getString("horario");
+		String ubicacion = jespectaculo.getString("ubicacion");
+		String fechaInicio = jespectaculo.getString("fechaInicio");
+		String fechaFin = jespectaculo.getString("fechaFin");
+		HashSet<String> climasRestringidos = new HashSet<String>(); 
+		for(int i = 0; i< jespectaculo.getJSONArray("climasRestringidos").length(); i++) {
+			climasRestringidos.add(jespectaculo.getJSONArray("climasRestringidos").getString(i));
+		}
+		
+		return new Espectaculo(nombre, horario, ubicacion, fechaInicio, fechaFin,climasRestringidos);
+	}
+
+	private HashMap<String, Tienda> cargarMapaTiendas(JSONObject jaCafeterias) throws Exception {
+		
+		HashMap<String, Cafeteria> mapaCafeterias = new HashMap<String, Cafeteria>(); 
+		JSONArray jmenu = jaCafeterias.getJSONArray("items");
+		HashSet<String> menu = new HashSet<String>();
+		
+		for(int i = 0;i<jmenu.length();i++) {
+			
+			String comia= jmenu.getString(i);
+			menu.add(comia);
+		}
+		Tienda.items = menu;
+		
+		Iterator<String> keys = jaCafeterias.keys();
+		
+		while (keys.hasNext()) {
+			String key = keys.next();
+			JSONObject jcafeteria= (JSONObject) jaCafeterias.get(key);
+			Tienda cafeteria = cargarTienda(jcafeteria);
+			mapaCafeterias.put(cafeteria.getNombre(), cafeteria);
+			}
+		
+		return mapaCafeterias;
+	}
+
+	private Tienda cargarTienda(JSONObject jaCafeterias) {
+		
+		HashMap<String, Cafeteria> mapaCafeterias = new HashMap<String, Cafeteria>(); 
+		JSONArray jmenu = jaCafeterias.getJSONArray("menu");
+		HashSet<String> menu = new HashSet<String>();
+		
+		for(int i = 0;i<jmenu.length();i++) {
+			
+			String comia= jmenu.getString(i);
+			menu.add(comia);
+		}
+		Cafeteria.menu = menu;
+		
+		
+		
+		Iterator<String> keys = jaCafeterias.keys();
+		
+		while (keys.hasNext()) {
+			String key = keys.next();
+			JSONObject jcafeteria= (JSONObject) jaCafeterias.get(key);
+			Cafeteria cafeteria = cargarCafeteria(jcafeteria);
+			mapaCafeterias.put(cafeteria.getNombre(), cafeteria);
+			}
+		
+		return mapaCafeterias;
+	}
+
+	private HashMap<String, Cafeteria> cargarMapaCafeterias(JSONObject jaCafeterias) throws Exception {
+		
+		HashMap<String, Cafeteria> mapaCafeterias = new HashMap<String, Cafeteria>(); 
+		JSONArray jmenu = jaCafeterias.getJSONArray("menu");
+		HashSet<String> menu = new HashSet<String>();
+		
+		for(int i = 0;i<jmenu.length();i++) {
+			
+			String comia= jmenu.getString(i);
+			menu.add(comia);
+		}
+		Cafeteria.menu = menu;
+		
+		
+		
+		Iterator<String> keys = jaCafeterias.keys();
+		
+		while (keys.hasNext()) {
+			String key = keys.next();
+			JSONObject jcafeteria= (JSONObject) jaCafeterias.get(key);
+			Cafeteria cafeteria = cargarCafeteria(jcafeteria);
+			mapaCafeterias.put(cafeteria.getNombre(), cafeteria);
+			}
+		
+		return mapaCafeterias;
+	}
+	
+	
+	
+
+	private Cafeteria cargarCafeteria(JSONObject jcafeteria) throws Exception {
+		
+		String nombre = jcafeteria.getString("nombre");
+		String ubicacion = jcafeteria.getString("ubicacion");
+		String tipo =	jcafeteria.getString("tipo");
+		
+		return new Cafeteria(nombre,ubicacion,tipo);
+	}
+
+	private HashMap<String, AtraccionMecanica> cargarAMecanicas(JSONObject jaMecanicas) throws Exception {
+		HashMap<String, AtraccionMecanica> aMecanica = new HashMap<String, AtraccionMecanica>(); 
+		
+		//  extraido de: https://stackoverflow.com/questions/9151619/how-to-iterate-over-a-jsonobject  //
+
+		Iterator<String> keys = jaMecanicas.keys();
+	
+		while (keys.hasNext()) {
+		String key = keys.next();
+		JSONObject jatraccionMecanica= (JSONObject) jaMecanicas.get(key);
+		AtraccionMecanica atraccionMecanica= cargarAtraccionMecanica(jatraccionMecanica);
+		aMecanica.put(atraccionMecanica.getNombre(), atraccionMecanica);
+		}
+
+		return aMecanica;
+		
+	}
+
+	private AtraccionMecanica cargarAtraccionMecanica(JSONObject jatraccionMecanica) throws Exception {
+		
+		int capacidadMaxima = jatraccionMecanica.getInt("capacidadMaxima");
+		int cantidadDePpl = jatraccionMecanica.getInt("cantidadDePpl");
+		String ubicacion = jatraccionMecanica.getString("ubicacion");
+		int nivelExclusividad = jatraccionMecanica.getInt("nivelExclusividad");
+		
+		HashSet<String> climasRestringidos = new HashSet<String>();
+		
+		JSONArray jclimasRestringidos = jatraccionMecanica.getJSONArray("climasRestringidos");
+		for(int i = 0;i<jclimasRestringidos.length();i++) {
+			
+			String clima = jclimasRestringidos.getString(i);
+			climasRestringidos.add(clima);
+			
+		}
+		
+		
+		HashSet<String> restriccionesSalud = new HashSet<String>();
+		
+		JSONArray jrestriccionesSalud = jatraccionMecanica.getJSONArray("restriccionesSalud");
+		for(int i = 0;i<jrestriccionesSalud.length();i++) {
+			
+			String restriccion = jrestriccionesSalud.getString(i);
+			restriccionesSalud.add(restriccion);
+			
+		}
+		
+		
+		String nombre = jatraccionMecanica.getString("nombre");
+		int empleadosMinimos = jatraccionMecanica.getInt("empleadosMinimos");
+		boolean enServicio = jatraccionMecanica.getBoolean("enServicio");
+		
+		
+		HashSet<String> operadoresDia = new HashSet<String>();
+		
+		JSONArray joperadoresDia = jatraccionMecanica.getJSONArray("operadoresDia");
+		for(int i = 0;i<joperadoresDia.length();i++) {
+			
+			String operador = joperadoresDia.getString(i);
+			operadoresDia.add(operador);
+			
+		}
+		
+
+		HashSet<String> operadoresNoche = new HashSet<String>();
+		
+		JSONArray joperadoresNoche = jatraccionMecanica.getJSONArray("operadoresNoche");
+		for(int i = 0;i<joperadoresNoche.length();i++) {
+			
+			String operador = joperadoresNoche.getString(i);
+			operadoresNoche.add(operador);
+		}
+			
+		int alturaMinima = jatraccionMecanica.getInt("alturaMinima");
+		int alturaMaxima = jatraccionMecanica.getInt("alturaMaxima");
+		int pesoMaximo = jatraccionMecanica.getInt("pesoMaximo");
+		int pesoMinimo = jatraccionMecanica.getInt("pesoMinimo");
+		boolean riesgoAlto = jatraccionMecanica.getBoolean("riesgoAlto");
+		
+		AtraccionMecanica atraccion = new AtraccionMecanica(nombre, capacidadMaxima, empleadosMinimos, ubicacion,
+	            nivelExclusividad, alturaMinima, alturaMaxima, pesoMinimo, pesoMaximo, riesgoAlto);
+		atraccion.setClimasRestringidos(climasRestringidos);
+		atraccion.setOperadoresDia(operadoresDia);
+		atraccion.setOperadoresNoche(operadoresNoche);
+		atraccion.setRestriccionesSalud(restriccionesSalud);
+		atraccion.setEnServicio(enServicio);
+		atraccion.setCantidadDePpl(cantidadDePpl);
+		return atraccion;
+		}
+		
+
+	private HashMap<String, AtraccionCultural> cargarACulturales(JSONObject jaCulturales) throws Exception {
+		
+		HashMap<String, AtraccionCultural> aCulturales = new HashMap<String, AtraccionCultural>(); 
+		
+		//  extraido de: https://stackoverflow.com/questions/9151619/how-to-iterate-over-a-jsonobject  //
+
+		Iterator<String> keys = jaCulturales.keys();
+	
+		while (keys.hasNext()) {
+		String key = keys.next();
+		JSONObject jatraccionCultural = (JSONObject) jaCulturales.get(key);
+		AtraccionCultural atraccionCultural = cargarAtraccionCultural(jatraccionCultural);
+		aCulturales.put(atraccionCultural.getNombre(), atraccionCultural);
+		}
+
+		return aCulturales;
+		
+	}
+
+	private AtraccionCultural cargarAtraccionCultural(JSONObject jatraccionCultural) throws Exception {
+		
+		int capacidadMaxima = jatraccionCultural.getInt("capacidadMaxima");
+		int cantidadDePpl = jatraccionCultural.getInt("cantidadDePpl");
+		String ubicacion = jatraccionCultural.getString("ubicacion");
+		int nivelExclusividad = jatraccionCultural.getInt("nivelExclusividad");
+		
+		HashSet<String> climasRestringidos = new HashSet<String>();
+		
+		JSONArray jclimasRestringidos = jatraccionCultural.getJSONArray("climasRestringidos");
+		for(int i = 0;i<jclimasRestringidos.length();i++) {
+			
+			String clima = jclimasRestringidos.getString(i);
+			climasRestringidos.add(clima);
+			
+		}
+		
+		
+		HashSet<String> restriccionesSalud = new HashSet<String>();
+		
+		JSONArray jrestriccionesSalud = jatraccionCultural.getJSONArray("restriccionesSalud");
+		for(int i = 0;i<jrestriccionesSalud.length();i++) {
+			
+			String restriccion = jrestriccionesSalud.getString(i);
+			restriccionesSalud.add(restriccion);
+			
+		}
+		
+		
+		String nombre = jatraccionCultural.getString("nombre");
+		int empleadosMinimos = jatraccionCultural.getInt("empleadosMinimos");
+		boolean enServicio = jatraccionCultural.getBoolean("enServicio");
+		
+		
+		HashSet<String> operadoresDia = new HashSet<String>();
+		
+		JSONArray joperadoresDia = jatraccionCultural.getJSONArray("operadoresDia");
+		for(int i = 0;i<joperadoresDia.length();i++) {
+			
+			String operador = joperadoresDia.getString(i);
+			operadoresDia.add(operador);
+			
+		}
+		
+
+		HashSet<String> operadoresNoche = new HashSet<String>();
+		
+		JSONArray joperadoresNoche = jatraccionCultural.getJSONArray("operadoresNoche");
+		for(int i = 0;i<joperadoresNoche.length();i++) {
+			
+			String operador = joperadoresNoche.getString(i);
+			operadoresNoche.add(operador);
+			
+		}
+		
+		int edadMinima = jatraccionCultural.getInt("edadMinima");
+		boolean esInteractiva = jatraccionCultural.getBoolean("esInteractiva");
+		
+		
+		AtraccionCultural atraccion = new AtraccionCultural(nombre, capacidadMaxima, empleadosMinimos, ubicacion, nivelExclusividad, edadMinima, esInteractiva);
+		atraccion.setClimasRestringidos(climasRestringidos);
+		atraccion.setOperadoresDia(operadoresDia);
+		atraccion.setOperadoresNoche(operadoresNoche);
+		atraccion.setRestriccionesSalud(restriccionesSalud);
+		atraccion.setEnServicio(enServicio);
+		atraccion.setCantidadDePpl(cantidadDePpl);
+		
+		return atraccion;
+	}
+
+	private Taquilla cargarTaquilla(JSONObject jtaquilla) throws Exception {
+
 		
 		Taquilla taquilla = new Taquilla(jtaquilla.getString("ubicacion"));
 		Taquilla.setIDs(jtaquilla.getDouble("IDs"));
