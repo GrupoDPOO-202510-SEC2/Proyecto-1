@@ -11,6 +11,8 @@ public class Empleado extends Usuario{
 	public Empleado(String nombre, String login, String password, int altura, int peso, String lugarDeTrabajo) {
 		super(nombre, login, password, altura, peso);
 		this.lugarDeTrabajo = lugarDeTrabajo;
+		this.turnoDia = false;
+		this.turnoNoche = false;
 		this.disponible = estaDisponible();
 	}
 	
