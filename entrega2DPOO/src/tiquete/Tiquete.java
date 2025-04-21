@@ -12,6 +12,16 @@ public class Tiquete {
 		this.valido = true;
 		
 	}
+	
+
+	public void setValido(boolean valido) {
+		this.valido = valido;
+	}
+
+
+	public void tiquete(boolean valido) {
+		this.valido = valido;
+	}
 
 	public Double getIdTiquete() {
 		return idTiquete;

@@ -15,6 +15,18 @@ public class Usuario {
 	private HashMap<String, Integer> compras;
 	private Tiquete tiqueteEnUso;
 	private ArrayList<Double> tiquetesComprados;
+	public void setRestricciones(ArrayList<String> restricciones) {
+		this.restricciones = restricciones;
+	}
+
+	public void setCompras(HashMap<String, Integer> compras) {
+		this.compras = compras;
+	}
+
+	public void setTiquetesComprados(ArrayList<Double> tiquetesComprados) {
+		this.tiquetesComprados = tiquetesComprados;
+	}
+
 	public static Parque parque;
 	protected static final String DIURNO = "diurno";
 	protected static final String NOCTURNO = "nocturno";

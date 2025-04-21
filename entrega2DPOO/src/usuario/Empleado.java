@@ -14,6 +14,10 @@ public class Empleado extends Usuario{
 		this.disponible = estaDisponible();
 	}
 	
+	public void setDisponible(boolean disponible) {
+		this.disponible = disponible;
+	}
+
 	public String getLugarDeTrabajo() {
 		return lugarDeTrabajo;
 	}
