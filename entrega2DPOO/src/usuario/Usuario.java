@@ -9,13 +9,13 @@ public class Usuario {
 	private String nombre;
 	private String login;
 	private String password;
-	private float altura;
-	private float peso;
+	private int altura;
+	private int peso;
 	private ArrayList<String> restricciones;
 	private HashMap<String, Integer> compras;
 	private Tiquete tiqueteEnUso;
 	private ArrayList<Tiquete> tiquetesComprados;
-	protected static Parque parque;
+	public static Parque parque;
 	protected static final String DIURNO = "diurno";
     protected static final String NOCTURNO = "nocturno";
     protected static final int BASICO = 1;
@@ -23,13 +23,13 @@ public class Usuario {
     protected static final int ORO = 3;
     protected static final int DIAMANTE = 4;
 	
-	public Usuario(String nombre, String login, String password, float altura, float peso) {
+	public Usuario(String nombre, String login, String password, int d, int e) {
 		super();
 		this.nombre = nombre;
 		this.login = login;
 		this.password = password;
-		this.altura = altura;
-		this.peso = peso;
+		this.altura = d;
+		this.peso = e;
 		this.restricciones = new ArrayList<String>();
 		this.compras = new HashMap<String, Integer>();
 		this.tiqueteEnUso = null;
@@ -78,12 +78,12 @@ public class Usuario {
 	}
 
 
-	public float getAltura() {
+	public int getAltura() {
 		return altura;
 	}
 
 
-	public float getPeso() {
+	public int getPeso() {
 		return peso;
 	}
 	

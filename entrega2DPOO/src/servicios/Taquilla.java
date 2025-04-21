@@ -18,6 +18,10 @@ public class Taquilla{
 		return ubicacion;
 	}
 	
+	public Queue<PedidoTiquete> getPedidosTiquetes() {
+		return this.pedidosTiquetes;
+	}
+	
 	public void nuevaPeticion(PedidoTiquete pedido) {
 		pedidosTiquetes.add(pedido);
 	}

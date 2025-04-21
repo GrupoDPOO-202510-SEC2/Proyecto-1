@@ -23,17 +23,24 @@ public class PedidoTiquete{
 		this.fastPass = fastPass;
 		
 		if(tipo == "TiqueteExclusivo") {
-			atraccionParaIndividuales = "";
-			fechaInicioParaTemporales = "";
-			fechaFinParaTemporales = "";
+			this.atraccionParaIndividuales = "";
+			this.fechaInicioParaTemporales = "";
+			this.fechaFinParaTemporales = "";
 		}
 		else if(tipo == "TiqueteTemporada") {
-			atraccionParaIndividuales = "";
+			this.atraccionParaIndividuales = "";
 		}
 		else if(tipo == "TiqueteIndividual") {
-			exclusividad = 4;
-			fechaInicioParaTemporales = "";
-			fechaFinParaTemporales = "";
+			this.exclusividad = 4;
+			this.fechaInicioParaTemporales = "";
+			this.fechaFinParaTemporales = "";
+		}
+		
+		if(this.exclusividad > 4) {
+			this.exclusividad = 4;
+		}
+		else if(this.exclusividad < 1) {
+			this.exclusividad = 1;
 		}
 	}
 

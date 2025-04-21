@@ -1,15 +1,14 @@
 package usuario;
 
-import servicios.LugarDeServicio;
-import servicios.Producto;
+import servicios.*;
 
 public class Cajero extends Empleado {
 	
 	protected LugarDeServicio lugarServicio;
 	
-	public Cajero(String nombre, String login, String password, float altura, float peso, String rol,
+	public Cajero(String nombre, String login, String password, int altura, int peso,
 			String lugarDeTrabajo, LugarDeServicio lugarServicio) {
-		super(nombre, login, password, altura, peso, rol, lugarDeTrabajo);
+		super(nombre, login, password, altura, peso, lugarDeTrabajo);
 		this.lugarServicio = lugarServicio;
 	}
 	
@@ -18,10 +17,9 @@ public class Cajero extends Empleado {
 		boolean estaEnElInventario = parque.inventario.containsKey(nombreProducto);
 		if(estaEnElMenu && estaEnElInventario) {
 			Producto producto = parque.inventario.get(nombreProducto);
-			boolean cafeteriaYComestible = lugarServicio.getTipo().equals("cafeteria") && String.valueOf(producto.getClass()).equals("Comestible");
-			boolean tiendaYSouvenir = lugarServicio.getTipo().equals("tienda") && String.valueOf(producto.getClass()).equals("Souvenir");
-			
-			if((cafeteriaYComestible || tiendaYSouvenir) && (producto.getCantidad() >= cantidad)) {
+			boolean cafeteriaYComestible = lugarServicio.getTipo().equals("cafeteria") && producto.getClass().equals(Comestible.class);
+			boolean tiendaYSouvenir = lugarServicio.getTipo().equals("tienda") && producto.getClass().equals(Souvenir.class);
+			if((cafeteriaYComestible || tiendaYSouvenir) && (cantidad < producto.getCantidad())) {
 				for(int i=0; i<cantidad; i++) {
 					producto.vender();
 				}

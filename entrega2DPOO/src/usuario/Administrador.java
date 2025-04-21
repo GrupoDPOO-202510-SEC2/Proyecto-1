@@ -6,7 +6,7 @@ import atraccion.*;
 
 public class Administrador extends Usuario{
 
-	public Administrador(String nombre, String login, String password, float altura, float peso) {
+	public Administrador(String nombre, String login, String password, int altura, int peso) {
 		super(nombre, login, password, altura, peso);
 	}
 	
@@ -376,7 +376,7 @@ public class Administrador extends Usuario{
 	}
 
 	public String getRol(String loginEmpleado) {
-		return parque.empleados.get(loginEmpleado).getRol();
+		return String.valueOf(parque.empleados.get(loginEmpleado).getClass());
 	}
 	
 	

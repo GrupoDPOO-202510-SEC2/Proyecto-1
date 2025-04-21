@@ -27,17 +27,18 @@ public class TiqueteTemporada extends TiqueteExclusividad{
 	public boolean isValido() {
 		if(valido == true) {
 			LocalDate fechaHoy = LocalDate.now();
-			DateTimeFormatter formato = DateTimeFormatter.ofPattern("MM-dd");
+			DateTimeFormatter formato = DateTimeFormatter.ofPattern("YYYY-MM-dd");
 			String fechaHoyStr = fechaHoy.format(formato);
 			
 			LocalDate fechaHoyFormat = LocalDate.parse(fechaHoyStr);
 			
 			LocalDate fechaInicioLD = LocalDate.parse(fechaInicio);
 			LocalDate fechaFinLD = LocalDate.parse(fechaFin);
-			if((fechaHoyFormat.compareTo(fechaInicioLD) < 0) || (fechaHoyFormat.compareTo(fechaFinLD) < 0)) {
+			if((fechaHoyFormat.compareTo(fechaInicioLD) < 0) || (fechaHoyFormat.compareTo(fechaFinLD) > 0)) {
 				valido = false;
 			}
 		}
 		return valido;
+		
 	}
 }
