@@ -5,6 +5,8 @@ import usuario.Usuario;
 import control.Parque;
 import java.util.ArrayList;
 
+import atraccion.*;
+
 public class ConsolaAdministrador extends ConsolaBasica {
 
     private Parque parque;
@@ -101,7 +103,8 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     }
                     case 3:
                     {
-                        System.out.println(admin.getEspectaculo(pedirCadenaAlUsuario("Nombre:")));
+                    	Espectaculo espectaculo = admin.getEspectaculo(pedirCadenaAlUsuario("Nombre:"));
+                        System.out.println(espectaculo.getNombre()+", "+ espectaculo.getUbicacion()+", "+ espectaculo.getHorario());
                         break;
                     }
                     case 4:
@@ -360,6 +363,13 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     case 38:
                     {
                         continuar = false;
+                        
+                        try {
+							Persistencia.guardarParque(Usuario.parque);
+						} catch (Exception e) {
+							// TODO Auto-generated catch block
+							e.printStackTrace();
+						}
                         break;
                     }
                 }

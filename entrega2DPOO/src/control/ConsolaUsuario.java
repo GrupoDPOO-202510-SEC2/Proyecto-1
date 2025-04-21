@@ -10,6 +10,8 @@ import tiquete.Tiquete;
 
 import java.util.ArrayList;
 
+import control.Persistencia;
+
 public class ConsolaUsuario extends ConsolaBasica {
 
     private Parque parque;

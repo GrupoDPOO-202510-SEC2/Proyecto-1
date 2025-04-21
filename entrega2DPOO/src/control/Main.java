@@ -1,15 +1,21 @@
 package control;
 
 import usuario.Administrador;
+import usuario.Usuario;
+import control.Persistencia;
 
 public class Main extends ConsolaBasica {
 
-    public static void main(String[] args) {
+    public static void main(String[] args) throws  Exception {
         new Main().ejecutar();
     }
 
-    public void ejecutar() {
-        Parque parque = new Parque("Taquilla principal");
+    public void ejecutar() throws Exception {
+    	
+    	//Persistencia.cargarParque()
+    	
+        Parque parque = new Parque("Entrada");
+        Usuario.parque = parque;
         Administrador admin = new Administrador("Administrador", "sopa", "sopa", 180, 70);
         parque.usuarios.put("sopa", admin);
 

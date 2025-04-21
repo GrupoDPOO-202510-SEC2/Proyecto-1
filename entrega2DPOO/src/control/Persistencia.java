@@ -41,7 +41,7 @@ public class Persistencia {
 		guardarUsuarios(jparque,parque.usuarios);
 		
 		
-		PrintWriter pw = new PrintWriter( "../data/parque.json" );
+		PrintWriter pw = new PrintWriter( "C:\\Users\\aicar\\git\\repository2\\entrega2DPOO\\src\\data\\parque.json" );
         jparque.write(pw);
         pw.close( );
 	}
@@ -488,9 +488,9 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 //--------------------------------------------Cargar shit--------------------------------------------------------//
 	
 	
-	public Parque cargarParque() throws Exception {
+	public static Parque cargarParque() throws Exception {
 		
-		String contenido = new String(Files.readAllBytes(Paths.get("../data/parque.json")));
+		String contenido = new String(Files.readAllBytes(Paths.get("C:\\Users\\aicar\\git\\repository2\\entrega2DPOO\\src\\data\\parque.json")));
 		JSONObject jsonParque = new JSONObject(contenido);
 		Parque parque = new Parque("Entrada");
 		parque.taquilla = cargarTaquilla(jsonParque.getJSONObject("taquilla"));
@@ -511,7 +511,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 	}
 	
-	private HashMap<String, Usuario> cargarUsuarios(JSONObject jempleados, Parque parque) throws Exception {
+	private static HashMap<String, Usuario> cargarUsuarios(JSONObject jempleados, Parque parque) throws Exception {
 		
 		HashMap<String, Usuario> empleados = new HashMap<String, Usuario>(); 
 		
@@ -527,7 +527,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return empleados;
 	}
 
-	private Usuario cargarUsuario(JSONObject jproducto, Parque parque) throws Exception {
+	private static Usuario cargarUsuario(JSONObject jproducto, Parque parque) throws Exception {
 		
 		String nombre = jproducto.getString("nombre");
 		String login = jproducto.getString("login");
@@ -569,7 +569,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 	}
 
-	private HashMap<String, Empleado> cargarEmpleados(JSONObject jempleados, Parque parque) throws Exception {
+	private static HashMap<String, Empleado> cargarEmpleados(JSONObject jempleados, Parque parque) throws Exception {
 		// TODO Auto-generated method stub
 		
 		HashMap<String, Empleado> empleados = new HashMap<String, Empleado>(); 
@@ -586,7 +586,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return empleados;
 	}
 
-	private Empleado cargarEmpleado(JSONObject jproducto, Parque parque) throws Exception {
+	private static Empleado cargarEmpleado(JSONObject jproducto, Parque parque) throws Exception {
 			String tipo = jproducto.getString("tipo");
 			
 			if(tipo.equals("ServicioGeneral")) {
@@ -606,7 +606,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 	}
 
-	private Cocinero cargarCocinero(JSONObject jproducto,Parque parque) throws Exception {
+	private static Cocinero cargarCocinero(JSONObject jproducto,Parque parque) throws Exception {
 		 
 		
 		ArrayList<String> alimentosPreparables = new ArrayList<String>() ;
@@ -668,7 +668,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 	}
 
-	private OperadorAtraccion cargarOperador(JSONObject jproducto,Parque parque) throws Exception {
+	private static OperadorAtraccion cargarOperador(JSONObject jproducto,Parque parque) throws Exception {
 		
 		String nombre = jproducto.getString("nombre");
 		String login = jproducto.getString("login");
@@ -735,7 +735,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return operador;
 	}
 
-	private Empleado cargarBasico(JSONObject jproducto, Parque parque) throws Exception {
+	private static Empleado cargarBasico(JSONObject jproducto, Parque parque) throws Exception {
 		
 		String nombre = jproducto.getString("nombre");
 		String login = jproducto.getString("login");
@@ -787,7 +787,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 	}
 
-	private HashMap<String, Producto> cargarInventario(JSONObject jinventario) throws Exception {
+	private static HashMap<String, Producto> cargarInventario(JSONObject jinventario) throws Exception {
 		
 		HashMap<String, Producto> productos = new HashMap<String, Producto>(); 
 		
@@ -804,7 +804,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 	}
 	
 	
-	private Producto cargarProducto(JSONObject jproducto) throws JSONException {
+	private static Producto cargarProducto(JSONObject jproducto) throws JSONException {
 		
 		String nombre = jproducto.getString("nombre");
 		int cantidad = jproducto.getInt("cantidad");
@@ -817,7 +817,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		}
 	}
 
-	private HashMap<Double, Tiquete> cargarTiquetes(JSONObject jtiquetes) throws Exception, Exception {
+	private static HashMap<Double, Tiquete> cargarTiquetes(JSONObject jtiquetes) throws Exception, Exception {
 	
 	HashMap<Double, Tiquete> tiquetes = new HashMap<Double, Tiquete>(); 
 		
@@ -844,7 +844,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return tiquetes;
 	}
 	
-	private TiqueteTemporada cargarTemporada(JSONObject jtiquete) throws Exception {
+	private static TiqueteTemporada cargarTemporada(JSONObject jtiquete) throws Exception {
 		double idTiquete = jtiquete.getDouble("idTiquete");
 		boolean valido = jtiquete.getBoolean("valido");
 		boolean fastPass = jtiquete.getBoolean("fastPass");
@@ -858,7 +858,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return tiquete;
 	}
 
-	private TiqueteExclusividad cargarExclusivo(JSONObject jtiquete) throws Exception {
+	private static TiqueteExclusividad cargarExclusivo(JSONObject jtiquete) throws Exception {
 		
 		double idTiquete = jtiquete.getDouble("idTiquete");
 		boolean valido = jtiquete.getBoolean("valido");
@@ -870,7 +870,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return tiquete;
 	}
 
-	private Tiquete cargarTiquete(JSONObject jtiquete) throws Exception {
+	private static Tiquete cargarTiquete(JSONObject jtiquete) throws Exception {
 
 		double idTiquete = jtiquete.getDouble("idTiquete");
 		boolean valido = jtiquete.getBoolean("valido");
@@ -885,7 +885,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 
 	
 
-	private HashMap<String, Espectaculo> cargarEspectaculos(JSONObject jespectaculos) throws Exception {
+	private static HashMap<String, Espectaculo> cargarEspectaculos(JSONObject jespectaculos) throws Exception {
 		
 		HashMap<String, Espectaculo> espectaculos = new HashMap<String, Espectaculo>(); 
 		
@@ -901,7 +901,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return espectaculos;
 	}
 
-	private Espectaculo cargarEspectaculo(JSONObject jespectaculo) throws Exception {
+	private static Espectaculo cargarEspectaculo(JSONObject jespectaculo) throws Exception {
 		
 		
 		
@@ -918,7 +918,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return new Espectaculo(nombre, horario, ubicacion, fechaInicio, fechaFin,climasRestringidos);
 	}
 
-	private HashMap<String, Tienda> cargarMapaTiendas(JSONObject jaCafeterias) throws Exception {
+	private static HashMap<String, Tienda> cargarMapaTiendas(JSONObject jaCafeterias) throws Exception {
 		
 		HashMap<String, Tienda> mapaCafeterias = new HashMap<String, Tienda>(); 
 		JSONArray jmenu = jaCafeterias.getJSONArray("items");
@@ -943,7 +943,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return mapaCafeterias;
 	}
 
-	private Tienda cargarTienda(JSONObject jcafeteria) throws Exception {
+	private static Tienda cargarTienda(JSONObject jcafeteria) throws Exception {
 		
 		String nombre = jcafeteria.getString("nombre");
 		String ubicacion = jcafeteria.getString("ubicacion");
@@ -952,7 +952,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return new Tienda(nombre,ubicacion,tipo);
 	}
 
-	private HashMap<String, Cafeteria> cargarMapaCafeterias(JSONObject jaCafeterias) throws Exception {
+	private static HashMap<String, Cafeteria> cargarMapaCafeterias(JSONObject jaCafeterias) throws Exception {
 		
 		HashMap<String, Cafeteria> mapaCafeterias = new HashMap<String, Cafeteria>(); 
 		JSONArray jmenu = jaCafeterias.getJSONArray("menu");
@@ -982,7 +982,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 	
 	
 
-	private Cafeteria cargarCafeteria(JSONObject jcafeteria) throws Exception {
+	private static Cafeteria cargarCafeteria(JSONObject jcafeteria) throws Exception {
 		
 		String nombre = jcafeteria.getString("nombre");
 		String ubicacion = jcafeteria.getString("ubicacion");
@@ -991,7 +991,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return new Cafeteria(nombre,ubicacion,tipo);
 	}
 
-	private HashMap<String, AtraccionMecanica> cargarAMecanicas(JSONObject jaMecanicas) throws Exception {
+	private static HashMap<String, AtraccionMecanica> cargarAMecanicas(JSONObject jaMecanicas) throws Exception {
 		HashMap<String, AtraccionMecanica> aMecanica = new HashMap<String, AtraccionMecanica>(); 
 		
 		//  extraido de: https://stackoverflow.com/questions/9151619/how-to-iterate-over-a-jsonobject  //
@@ -1009,7 +1009,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 	}
 
-	private AtraccionMecanica cargarAtraccionMecanica(JSONObject jatraccionMecanica) throws Exception {
+	private static AtraccionMecanica cargarAtraccionMecanica(JSONObject jatraccionMecanica) throws Exception {
 		
 		int capacidadMaxima = jatraccionMecanica.getInt("capacidadMaxima");
 		int cantidadDePpl = jatraccionMecanica.getInt("cantidadDePpl");
@@ -1081,7 +1081,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		}
 		
 
-	private HashMap<String, AtraccionCultural> cargarACulturales(JSONObject jaCulturales) throws Exception {
+	private static HashMap<String, AtraccionCultural> cargarACulturales(JSONObject jaCulturales) throws Exception {
 		
 		HashMap<String, AtraccionCultural> aCulturales = new HashMap<String, AtraccionCultural>(); 
 		
@@ -1100,7 +1100,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 	}
 
-	private AtraccionCultural cargarAtraccionCultural(JSONObject jatraccionCultural) throws Exception {
+	private static AtraccionCultural cargarAtraccionCultural(JSONObject jatraccionCultural) throws Exception {
 		
 		int capacidadMaxima = jatraccionCultural.getInt("capacidadMaxima");
 		int cantidadDePpl = jatraccionCultural.getInt("cantidadDePpl");
@@ -1170,7 +1170,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return atraccion;
 	}
 
-	private Taquilla cargarTaquilla(JSONObject jtaquilla) throws Exception {
+	private static Taquilla cargarTaquilla(JSONObject jtaquilla) throws Exception {
 
 		
 		Taquilla taquilla = new Taquilla(jtaquilla.getString("ubicacion"));
@@ -1192,7 +1192,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		return taquilla;
 	}
 
-	private PedidoTiquete cargarPedido(JSONObject jpedido) throws Exception {
+	private static PedidoTiquete cargarPedido(JSONObject jpedido) throws Exception {
 		
 		PedidoTiquete pedido = new PedidoTiquete(jpedido.getString("loginUsuario"),jpedido.getString("tipo") ,jpedido.getString("atraccionParaIndividuales" ) 
 				, jpedido.getString("fechaInicioParaTemporales" ), jpedido.getString("fechaFinParaTemporales"), jpedido.getInt("exclusividad"), jpedido.getBoolean("fastPass") );
