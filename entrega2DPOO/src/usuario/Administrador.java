@@ -378,6 +378,7 @@ public class Administrador extends Usuario{
 	}
 
 	public String getRol(String loginEmpleado) {
+
 		return parque.empleados.get(loginEmpleado).getClass().getSimpleName();
 	}
 	
@@ -440,7 +441,7 @@ public class Administrador extends Usuario{
 	
 	
 	public boolean crearCajero(String nombre, String login, String password, int altura, int peso, String lugarDeTrabajo, String turno) {
-		Cajero cajero = new Cajero(nombre, login, password, altura, peso);
+		Cajero cajero = new Cajero(nombre, login, password, altura, peso, lugarDeTrabajo);
 		if (cajero.setLugarDeTrabajo(lugarDeTrabajo)) {
 			if (turno.equals(DIURNO)) {
 				cajero.setTurnoDia(true);

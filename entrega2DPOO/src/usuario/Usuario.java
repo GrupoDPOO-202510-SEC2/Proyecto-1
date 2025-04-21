@@ -23,13 +23,13 @@ public class Usuario {
     protected static final int ORO = 3;
     protected static final int DIAMANTE = 4;
 	
-	public Usuario(String nombre, String login, String password, int altura, int peso) {
-		super();
+
+	public Usuario(String nombre, String login, String password, int d, int e) {
 		this.nombre = nombre;
 		this.login = login;
 		this.password = password;
-		this.altura = altura;
-		this.peso = peso;
+		this.altura = d;
+		this.peso = e;
 		this.restricciones = new ArrayList<String>();
 		this.compras = new HashMap<String, Integer>();
 		this.tiqueteEnUso = null;
