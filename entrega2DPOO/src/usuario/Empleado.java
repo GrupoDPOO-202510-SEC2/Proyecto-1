@@ -7,7 +7,7 @@ public class Empleado extends Usuario{
 	protected boolean turnoDia;
 	protected boolean turnoNoche;
 	protected String lugarDeTrabajo;
-	protected boolean disponible; 
+	protected boolean disponible;
 	public Empleado(String nombre, String login, String password, int altura, int peso, String lugarDeTrabajo) {
 		super(nombre, login, password, altura, peso);
 		this.lugarDeTrabajo = lugarDeTrabajo;

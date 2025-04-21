@@ -5,9 +5,8 @@ import java.util.ArrayList;
 public class OperadorAtraccion extends Empleado{
 	
 	private ArrayList<String> capacitaciones;
-	private String lugarDeTrabajoNoche = null;
-	private String lugarDeTrabajoDia = null;
-	
+	private String lugarDeTrabajoNoche;
+	private String lugarDeTrabajoDia;
 	
 	public OperadorAtraccion(String nombre, String login, String password, int altura, int peso) {
 		super(nombre, login, password, altura, peso, null);
@@ -34,12 +33,10 @@ public class OperadorAtraccion extends Empleado{
 		this.lugarDeTrabajoDia = lugarDeTrabajoDia;
 		return true;
 	}
-
-	
 	
 	@Override
 	public String getLugarDeTrabajo() {
-		return lugarDeTrabajo+","+lugarDeTrabajoNoche;
+		return lugarDeTrabajoDia + ", " + lugarDeTrabajoNoche;
 	}
 	
 	@Override

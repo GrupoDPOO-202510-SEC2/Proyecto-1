@@ -11,6 +11,10 @@ public class Tienda extends LugarDeServicio{
 		items = new HashSet<String>();
 	}
 	
+	public void setItems(HashSet<String> itemsNuevo) {
+		Tienda.items = itemsNuevo;
+	}
+	
 	@Override
 	public boolean existeProducto(String nombreP) {
 		return items.contains(nombreP);

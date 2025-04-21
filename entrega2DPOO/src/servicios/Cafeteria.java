@@ -12,6 +12,10 @@ public class Cafeteria extends LugarDeServicio{
 		menu = new HashSet<String>();
 	}
 	
+	public void setMenu(HashSet<String> menuNuevo) {
+		Cafeteria.menu = menuNuevo;
+	}
+	
 	@Override
 	public boolean existeProducto(String nombreP) {
 		return menu.contains(nombreP);
