@@ -35,13 +35,8 @@ public class Usuario {
     protected static final int ORO = 3;
     protected static final int DIAMANTE = 4;
 	
-<<<<<<< HEAD
-	public Usuario(String nombre, String login, String password, int d, int e) {
-		super();
-=======
 
 	public Usuario(String nombre, String login, String password, int d, int e) {
->>>>>>> branch 'main' of https://github.com/GrupoDPOO-202510-SEC2/Proyecto-1.git
 		this.nombre = nombre;
 		this.login = login;
 		this.password = password;
