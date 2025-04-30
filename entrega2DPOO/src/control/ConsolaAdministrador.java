@@ -73,6 +73,12 @@ public class ConsolaAdministrador extends ConsolaBasica {
             "Ver items",
             "Gestionar comidas del menú",
             "Gestionar items de tienda",
+            "Crear cajero atracción",
+            "Crear cajero taquilla",
+            "Crear cocinero",
+            "Añadir comida a cocinero",
+            "Crear operador atracción",
+            "Crear servicio general",
             "Salir"
         };
 
@@ -399,6 +405,82 @@ public class ConsolaAdministrador extends ConsolaBasica {
                         break;
                     }
                     case 38:
+                    {
+                    	admin.crearCajeroAtraccion(
+                    	        pedirCadenaAlUsuario("Nombre:"),
+                    	        pedirCadenaAlUsuario("Login:"),
+                    	        pedirCadenaAlUsuario("Password:"),
+                    	        pedirEnteroAlUsuario("Altura:"),
+                    	        pedirEnteroAlUsuario("Peso:"),
+                    	        pedirCadenaAlUsuario("Lugar de trabajo:"),
+                    	        pedirCadenaAlUsuario("Turno (DIURNO/NOCTURNO):")
+                    	    );
+                    	System.out.println("Se hizo correctmente");
+                    	break;
+                    }
+                    case 39: 
+                    {
+                        admin.crearCajeroTaquilla(
+                            pedirCadenaAlUsuario("Nombre:"),
+                            pedirCadenaAlUsuario("Login:"),
+                            pedirCadenaAlUsuario("Password:"),
+                            pedirEnteroAlUsuario("Altura:"),
+                            pedirEnteroAlUsuario("Peso:"),
+                            pedirCadenaAlUsuario("Turno (DIURNO/NOCTURNO):")
+                        );
+                        System.out.println("Se hizo correctamente");
+                        break;
+                    }
+                    case 40: 
+                    {
+                        admin.crearCocinero(
+                            pedirCadenaAlUsuario("Nombre:"),
+                            pedirCadenaAlUsuario("Login:"),
+                            pedirCadenaAlUsuario("Password:"),
+                            pedirEnteroAlUsuario("Altura:"),
+                            pedirEnteroAlUsuario("Peso:"),
+                            pedirCadenaAlUsuario("Turno (DIURNO/NOCTURNO):"),
+                            pedirCadenaAlUsuario("Lugar de trabajo:")
+                        );
+                        System.out.println("Se hizo correctamente");
+                        break;
+                    }
+                    case 41:
+                    {
+                        admin.addComidaCocinero(
+                            pedirCadenaAlUsuario("Login del cocinero:"),
+                            pedirCadenaAlUsuario("Nombre de la comida:")
+                        );
+                        System.out.println("Se hizo correctamente");
+                        break;
+                    }
+                    case 42: {
+                        admin.crearOperadorAtraccion(
+                            pedirCadenaAlUsuario("Nombre:"),
+                            pedirCadenaAlUsuario("Login:"),
+                            pedirCadenaAlUsuario("Password:"),
+                            pedirEnteroAlUsuario("Altura:"),
+                            pedirEnteroAlUsuario("Peso:")
+                        );
+                        System.out.println("Se hizo correctamente");
+                        break;
+                    }
+                    case 43:
+                    {
+                        admin.crearServicioGeneral(
+                            pedirCadenaAlUsuario("Nombre:"),
+                            pedirCadenaAlUsuario("Login:"),
+                            pedirCadenaAlUsuario("Password:"),
+                            pedirEnteroAlUsuario("Altura:"),
+                            pedirEnteroAlUsuario("Peso:"),
+                            pedirCadenaAlUsuario("Lugar de trabajo:"),
+                            pedirCadenaAlUsuario("Turno (DIURNO/NOCTURNO):")
+                        );
+                        System.out.println("Se hizo correctamente");
+                        break;
+                    }
+
+                    case 44:
                     {
                         continuar = false;
                         
