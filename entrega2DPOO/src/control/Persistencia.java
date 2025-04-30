@@ -306,6 +306,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 	
 		JSONArray jitems= new JSONArray();
 		
+		if(Tienda.items != null) {
 		for(String item: Tienda.items) {
 			
 			jitems.put(item);
@@ -313,6 +314,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		}
 		
 		jtienda.put("items", jitems);
+		}
 	}
 	private static void guardarMenu(JSONObject jcafeteria) throws Exception {
 		
@@ -320,10 +322,11 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 		JSONArray jmenu = new JSONArray();
 		
-		for(String comestible: Cafeteria.menu) {
+		if(Cafeteria.menu != null) {
+			for(String comestible: Cafeteria.menu) {
 			
 			jmenu.put(comestible);
-			
+			}
 		}
 		
 		jcafeteria.put("menu", jmenu);
@@ -342,6 +345,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		// TODO Auto-generated method stub
 		
 		JSONObject jatraccionesMecanicas= new JSONObject();
+		if(aMecanicas.values() != null) {
 		for (AtraccionMecanica atraccionMecanica: aMecanicas.values()) {
 			JSONObject jatraccionMecanica= new JSONObject();
 			guardarAMecanica(jatraccionMecanica,atraccionMecanica);
@@ -350,7 +354,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 		jparque.put("aMecanicas", jatraccionesMecanicas);
 		
-	}
+	}}
 	private static void guardarAMecanica(JSONObject jatraccion, AtraccionMecanica atraccion) throws Exception {
 		
 		// TODO Auto-generated method stub
@@ -361,15 +365,19 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		jatraccion.put("nivelExclusividad", atraccion.getNivelExclusividad());
 		
 		JSONArray jclimasRestringidos = new JSONArray();
+		
+		
+		if(atraccion.getClimasRestringidos() != null) {
 		for(String clima: atraccion.getClimasRestringidos()) {
 			jclimasRestringidos.put(clima);
-		}
+		}}
 		jatraccion.put("climasRestringidos", jclimasRestringidos);
 		
 		JSONArray jrestriccionesSalud = new JSONArray();
+		if(atraccion.getRestriccionesSalud() != null) {
 		for(String restriccion: atraccion.getRestriccionesSalud()) {
 			jrestriccionesSalud.put(restriccion);
-		}
+		}}
 		jatraccion.put("restriccionesSalud", jrestriccionesSalud);
 		
 		jatraccion.put("nombre", atraccion.getNombre());
@@ -377,15 +385,17 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		jatraccion.put("enServicio", atraccion.isEnServicio());
 		
 		JSONArray joperadoresDia = new JSONArray();
+		if(atraccion.getOperadoresDia() != null) {
 		for(String operador: atraccion.getOperadoresDia()) {
 			joperadoresDia.put(operador);
-		}
+		}}
 		jatraccion.put("operadoresDia", joperadoresDia);
 		
 		JSONArray joperadoresNoche = new JSONArray();
+		if(atraccion.getOperadoresNoche() != null) {{
 		for(String operador: atraccion.getOperadoresNoche()) {
 			joperadoresNoche.put(operador);
-		}
+		}}
 		jatraccion.put("operadoresNoche", joperadoresNoche);
 		
 		jatraccion.put("alturaMinima", atraccion.getAlturaMinima());
@@ -400,11 +410,12 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		// TODO Auto-generated method stub
 		
 		JSONObject jatraccionesCulturales = new JSONObject();
+		if(true) {{
 		for (AtraccionCultural atraccionCultural: aCulturales.values()) {
 			JSONObject jatraccionCultural = new JSONObject();
 			guardarACultural(jatraccionCultural,atraccionCultural);
 			jatraccionesCulturales.put(atraccionCultural.getNombre(), jatraccionCultural);
-		}
+		}}
 		
 		jparque.put("aCulturales", jatraccionesCulturales);
 	}
@@ -419,15 +430,17 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		jatraccion.put("nivelExclusividad", atraccion.getNivelExclusividad());
 		
 		JSONArray jclimasRestringidos = new JSONArray();
+		if(true) {{
 		for(String clima: atraccion.getClimasRestringidos()) {
 			jclimasRestringidos.put(clima);
-		}
+		}}
 		jatraccion.put("climasRestringidos", jclimasRestringidos);
 		
 		JSONArray jrestriccionesSalud = new JSONArray();
+		if(true) {{
 		for(String restriccion: atraccion.getRestriccionesSalud()) {
 			jrestriccionesSalud.put(restriccion);
-		}
+		}}
 		jatraccion.put("restriccionesSalud", jrestriccionesSalud);
 		
 		jatraccion.put("nombre", atraccion.getNombre());
@@ -435,15 +448,17 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		jatraccion.put("enServicio", atraccion.isEnServicio());
 		
 		JSONArray joperadoresDia = new JSONArray();
+		if(true) {{
 		for(String operador: atraccion.getOperadoresDia()) {
 			joperadoresDia.put(operador);
-		}
+		}}
 		jatraccion.put("operadoresDia", joperadoresDia);
 		
 		JSONArray joperadoresNoche = new JSONArray();
+		if(true) {{
 		for(String operador: atraccion.getOperadoresNoche()) {
 			joperadoresNoche.put(operador);
-		}
+		}}
 		jatraccion.put("operadoresNoche", joperadoresNoche);
 		
 		jatraccion.put("edadMinima", atraccion.getEdadMinima());
@@ -461,12 +476,12 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		jtaquilla.put("IDs", Taquilla.getIDs());
 		JSONArray jpedidos = new JSONArray();
 		
-		
+		if(true) {{
 		for(PedidoTiquete pedido:taquilla.getPedidosTiquetes()) {
 			JSONObject jpedido = new JSONObject();
 			guardarPedido(jpedido,pedido);
 			jpedidos.put(jpedido);
-			}
+			}}
 		
 		jtaquilla.put("pedidosTiquetes", jpedidos);
 		jparque.put("taquilla", jtaquilla);
