@@ -33,8 +33,10 @@ public abstract class Atraccion {
         this.empleadosMinimos = empleadosMinimos;
         this.ubicacion = ubicacion;
         this.nivelExclusividad = nivelExclusividad;
-        this.climasRestringidos = new HashSet<>();
-        this.restriccionesSalud = new HashSet<>();
+        this.climasRestringidos = new HashSet<String>();
+        this.restriccionesSalud = new HashSet<String>();
+        this.operadoresDia = new HashSet<String>();
+        this.operadoresNoche = new HashSet<String>();
     }
     
     public void setClimasRestringidos(HashSet<String> climasRestringidos) {

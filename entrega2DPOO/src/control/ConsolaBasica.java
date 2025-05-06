@@ -20,7 +20,7 @@ public abstract class ConsolaBasica
     {
         try
         {
-            System.out.print( mensaje + ": " );
+            System.out.print( mensaje + " ");
             BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
             String input = reader.readLine( );
             return input;
@@ -69,7 +69,7 @@ public abstract class ConsolaBasica
         {
             try
             {
-                System.out.print( mensaje + ": " );
+                System.out.print( mensaje + " " );
                 BufferedReader reader = new BufferedReader( new InputStreamReader( System.in ) );
                 String input = reader.readLine( );
                 int numero = Integer.parseInt( input );
@@ -172,7 +172,7 @@ public abstract class ConsolaBasica
         {
             System.out.println( " " + i + ". " + opciones[ i - 1 ] );
         }
-        String opcion = pedirCadenaAlUsuario( "Escoja la opción deseada" );
+        String opcion = pedirCadenaAlUsuario( "Escoja la opción deseada \n" );
         try
         {
             int opcionSeleccionada = Integer.parseInt( opcion );

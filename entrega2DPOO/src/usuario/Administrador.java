@@ -15,36 +15,54 @@ public class Administrador extends Usuario{
 	
 	//-------------------------ESPECTACULOS--------------------------//
 	
-	public void crearEspectaculo(String nombre, String horario, String ubicacion) {
+	public boolean crearEspectaculo(String nombre, String horario, String ubicacion) {
 		parque.espectaculos.put(nombre,new Espectaculo(nombre, horario, ubicacion, new HashSet<String>()));
+		return true;
 	}
 	
-	public void cambiarFechaEspectaculo(String nombre, String fechai, String fechaf) {
+	public boolean cambiarFechaEspectaculo(String nombre, String fechai, String fechaf) {
 		
-		Espectaculo espectaculo = parque.espectaculos.get(nombre);
+		if (parque.espectaculos.containsKey(nombre)) {
+			Espectaculo espectaculo = parque.espectaculos.get(nombre);
 		espectaculo.setFechaInicio(fechai);
-		espectaculo.setFechaInicio(fechaf);
+		espectaculo.setFechaFin(fechaf);
 		
 		parque.espectaculos.put(nombre, espectaculo);
+		return true;
+		}
+		
+		return false;
+		
 		
 	}
 	
 	public Espectaculo getEspectaculo(String nombre) {
-		return parque.espectaculos.get(nombre);
+		if(parque.espectaculos.containsKey(nombre)) {
+			return parque.espectaculos.get(nombre);
+		}
+		return null;
 	}
 	
 	public boolean agregarClimaRestringidoE(String nombre,String clima) {
-		Espectaculo espectaculo = parque.espectaculos.get(nombre);
-		boolean retorno =  espectaculo.addClimaRestringido(clima);
-		parque.espectaculos.put(nombre, espectaculo);
-		return retorno;
+		if(parque.espectaculos.containsKey(nombre)) {
+			Espectaculo espectaculo = parque.espectaculos.get(nombre);
+			boolean retorno =  espectaculo.addClimaRestringido(clima);
+			parque.espectaculos.put(nombre, espectaculo);
+			return retorno;
+		}
+		return false;
+		
 	}
 	
 	public boolean eliminarClimaRestringidoE(String nombre,String clima) {
-		Espectaculo espectaculo = parque.espectaculos.get(nombre);
-		boolean retorno =  espectaculo.deleteClimaRestringido(clima);
-		parque.espectaculos.put(nombre, espectaculo);
-		return retorno;
+		
+		if(parque.espectaculos.containsKey(nombre)) {
+			Espectaculo espectaculo = parque.espectaculos.get(nombre);
+			boolean retorno = espectaculo.deleteClimaRestringido(clima);
+			parque.espectaculos.put(nombre, espectaculo);
+			return retorno;
+		}
+		return false;
 	}
 	
 	
@@ -159,18 +177,19 @@ public class Administrador extends Usuario{
 			retorno = atraccion.addOperador((OperadorAtraccion) parque.empleados.get(loginOperador), turno);
 			parque.aMecanicas.put(nombreAtraccion, atraccion);
 			OperadorAtraccion operador = (OperadorAtraccion) parque.empleados.get(loginOperador);
-			if (turno.equals(DIURNO)) {
-				operador.setTurnoDia(true);
-				operador.setLugarDeTrabajoDia(nombreAtraccion);
-			}else {
-				operador.setTurnoNoche(true);
-				operador.setLugarDeTrabajoNoche(nombreAtraccion);
+			if(retorno) {
+				if (turno.equals(DIURNO)) {
+					operador.setTurnoDia(true);
+					operador.setLugarDeTrabajoDia(nombreAtraccion);
+				}else {
+					operador.setTurnoNoche(true);
+					operador.setLugarDeTrabajoNoche(nombreAtraccion);
+				}
+				parque.empleados.put(loginOperador, operador);
 			}
-			parque.empleados.put(loginOperador, operador);
-			
 			
 		}
-		if (parque.aCulturales.containsKey(nombreAtraccion)) {
+		else if (parque.aCulturales.containsKey(nombreAtraccion)) {
 			AtraccionCultural atraccion = parque.aCulturales.get(nombreAtraccion);
 			retorno = atraccion.addOperador((OperadorAtraccion) parque.empleados.get(loginOperador), turno);
 			parque.aCulturales.put(nombreAtraccion, atraccion);
@@ -510,6 +529,7 @@ public class Administrador extends Usuario{
 	
 	public boolean addComidaCocinero(String loginCocinero, String comia) {
 		Cocinero cocinero = (Cocinero) parque.empleados.get(loginCocinero);
+		
 		cocinero.addAlimentoPreparable(comia);
 		parque.empleados.put(loginCocinero,cocinero); 
 		return true;

@@ -15,7 +15,7 @@ public class Main extends ConsolaBasica {
     	//Persistencia.cargarParque()
     	
         Parque parque = new Parque("Entrada");
-        Usuario.parque = parque;
+        Usuario.parque = Persistencia.cargarParque();
         Administrador admin = new Administrador("Administrador", "sopa", "sopa", 180, 70);
         parque.usuarios.put("sopa", admin);
 
@@ -23,6 +23,7 @@ public class Main extends ConsolaBasica {
         {
             parque.usuarios = new java.util.HashMap<>();
         }
+        
 
         String[] opciones = {
             "Consola de Usuario",

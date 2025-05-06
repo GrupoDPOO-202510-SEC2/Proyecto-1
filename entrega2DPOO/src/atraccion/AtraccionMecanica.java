@@ -24,6 +24,7 @@ public class AtraccionMecanica extends Atraccion{
 	
 	
 	public boolean addOperador(OperadorAtraccion operador, String turno) {
+		
 		if (turno.equals(DIURNO) && !operador.getTurnoDia()){
 			if(operador.getCapacitaciones().contains(this.nombre) || !this.riesgoAlto ) {
 			this.operadoresDia.add(operador.getLogin());

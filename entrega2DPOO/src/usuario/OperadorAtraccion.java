@@ -27,13 +27,22 @@ public class OperadorAtraccion extends Empleado{
 
 	public boolean setLugarDeTrabajoNoche(String lugarDeTrabajoNoche) {
 		this.lugarDeTrabajoNoche = lugarDeTrabajoNoche;
+		this.setTurnoNoche(true);
 		return true;
 	}
 	public boolean setLugarDeTrabajoDia(String lugarDeTrabajoDia) {
 		this.lugarDeTrabajoDia = lugarDeTrabajoDia;
+		this.setTurnoDia(true);
 		return true;
 	}
 	
+	
+	public void setCapacitaciones(ArrayList<String> capacitaciones) {
+		this.capacitaciones = capacitaciones;
+	}
+
+
+
 	@Override
 	public String getLugarDeTrabajo() {
 		return lugarDeTrabajoDia + ", " + lugarDeTrabajoNoche;
