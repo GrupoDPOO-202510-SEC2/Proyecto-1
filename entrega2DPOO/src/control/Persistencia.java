@@ -29,7 +29,7 @@ public class Persistencia {
 	public static void guardarParque(Parque parque) throws Exception {
 		
 
-		PrintWriter pw = new PrintWriter( "C:\\Users\\aicar\\git\\repository2\\entrega2DPOO\\src\\data\\parque.json" );
+		PrintWriter pw = new PrintWriter( "src/data/parque.json" );
         
 		JSONObject jparque = new JSONObject();
 		guardarTaquilla(jparque, parque.getTaquilla());
@@ -505,7 +505,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 	
 	public static Parque cargarParque() throws Exception {
 		
-		String contenido = new String(Files.readAllBytes(Paths.get("C:\\Users\\aicar\\git\\repository2\\entrega2DPOO\\src\\data\\parque.json")));
+		String contenido = new String(Files.readAllBytes(Paths.get("src/data/parque.json")));
 		JSONObject jsonParque = new JSONObject(contenido);
 		Parque parque = new Parque("Entrada");
 		parque.taquilla = cargarTaquilla(jsonParque.getJSONObject("taquilla"));
