@@ -46,5 +46,12 @@ public class Main extends ConsolaBasica {
         {
             System.out.println("Opción no válida.");
         }
+
+        try {
+			Persistencia.guardarParque(Usuario.parque);
+		} catch (Exception e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
     }
 }

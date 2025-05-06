@@ -521,13 +521,6 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     case 44:
                     {
                         continuar = false;
-                        
-                        try {
-							Persistencia.guardarParque(Usuario.parque);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
                         System.out.println("Se hizo correctmente");
                         break;
                     }

@@ -547,7 +547,7 @@ public class Administrador extends Usuario{
 		ServicioGeneral empleado = new ServicioGeneral(nombre, login, password, altura, peso, lugarDeTrabajo);
 		empleado.setLugarDeTrabajo(lugarDeTrabajo);
 		if (turno.equals(DIURNO)) {
-			empleado.setTurnoDia(true);
+			empleado.setTurnoDia(true); 
 			parque.empleados.put(login, empleado);
 			return true;
 		}if (turno.equals(NOCTURNO)) {

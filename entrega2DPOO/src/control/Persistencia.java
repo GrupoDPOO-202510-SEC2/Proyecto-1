@@ -1098,7 +1098,6 @@ private static Cajero cargarCajero(JSONObject jproducto, Parque parque) throws E
 		HashMap<String, Tienda> mapaCafeterias = new HashMap<String, Tienda>(); 
 		JSONArray jmenu = jaCafeterias.getJSONArray("items");
 		HashSet<String> menu = new HashSet<String>();
-		
 		for(int i = 0;i<jmenu.length();i++) {
 			
 			String comia= jmenu.getString(i);
@@ -1110,11 +1109,12 @@ private static Cajero cargarCajero(JSONObject jproducto, Parque parque) throws E
 		keys.next();
 		while (keys.hasNext()) {
 			String key = keys.next();
-			JSONObject jcafeteria= (JSONObject) jaCafeterias.get(key);
-			Tienda cafeteria = cargarTienda(jcafeteria);
-			mapaCafeterias.put(cafeteria.getNombre(), cafeteria);
+			if(!key.equals("items")) {
+				JSONObject jcafeteria= (JSONObject) jaCafeterias.get(key);
+				Tienda cafeteria = cargarTienda(jcafeteria);
+				mapaCafeterias.put(cafeteria.getNombre(), cafeteria);
 			}
-		
+		}
 		return mapaCafeterias;
 	}
 
@@ -1132,26 +1132,25 @@ private static Cajero cargarCajero(JSONObject jproducto, Parque parque) throws E
 		HashMap<String, Cafeteria> mapaCafeterias = new HashMap<String, Cafeteria>(); 
 		JSONArray jmenu = jaCafeterias.getJSONArray("menu");
 		HashSet<String> menu = new HashSet<String>();
-		
 		for(int i = 0;i<jmenu.length();i++) {
 			
 			String comia= jmenu.getString(i);
+
+			System.out.print(comia);
 			menu.add(comia);
 		}
 		Cafeteria.menu = menu;
+
 		
-		
-		
-		Iterator<String> keys = jaCafeterias.keys();
+		Iterator<String> keys = jaCafeterias.keys();		
 		while (keys.hasNext()) {
 			String key = keys.next();
-
-			if(!key.equals( "menu")) {
+			if(!key.equals("menu")) {
 			JSONObject jcafeteria= (JSONObject) jaCafeterias.get(key);
 			Cafeteria cafeteria = cargarCafeteria(jcafeteria);
 			mapaCafeterias.put(cafeteria.getNombre(), cafeteria);
 			}
-			}
+		}
 		
 		return mapaCafeterias;
 	}
