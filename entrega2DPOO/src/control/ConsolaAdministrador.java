@@ -1,6 +1,7 @@
 package control;
 
 import usuario.Administrador;
+import usuario.OperadorAtraccion;
 import usuario.Usuario;
 import control.Parque;
 import java.util.ArrayList;
@@ -224,6 +225,10 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     {
                     	boolean seHizo = false;
                         String login = pedirCadenaAlUsuario("Login operador:");
+                        if((OperadorAtraccion) Usuario.parque.empleados.get(login) == null) {
+	                        System.out.println("No se hizo correctamente");
+	                        break;
+                        }
                         String turno = pedirCadenaAlUsuario("Turno (diurno/nocturno):");
                         String atr = pedirCadenaAlUsuario("Atracción:");
                         if (pedirConfirmacionAlUsuario("¿Agregar?"))

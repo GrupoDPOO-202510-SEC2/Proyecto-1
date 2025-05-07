@@ -93,10 +93,9 @@
             "restricciones": [],
             "password": "operador",
             "compras": {},
-            "lugarDeTrabajo": "teatro, barco",
+            "lugarDeTrabajo": "teatro, null",
             "altura": 180,
             "lugarDeTrabajoDia": "teatro",
-            "lugarDeTrabajoNoche": "barco",
             "disponible": false
         }
     },
@@ -118,7 +117,7 @@
         "climasRestringidos": [],
         "empleadosMinimos": 4,
         "pesoMaximo": 160,
-        "operadoresNoche": ["operador"],
+        "operadoresNoche": [],
         "capacidadMaxima": 30,
         "nombre": "barco",
         "nivelExclusividad": 2,

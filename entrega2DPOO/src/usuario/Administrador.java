@@ -213,7 +213,7 @@ public class Administrador extends Usuario{
 		
 		if(parque.aMecanicas.containsKey(nombreAtraccion)) {
 			AtraccionMecanica atraccion = parque.aMecanicas.get(nombreAtraccion);
-			retorno = atraccion.deleteOperador(loginOperador, getLogin());
+			retorno = atraccion.deleteOperador(loginOperador, turno);
 			parque.aMecanicas.put(nombreAtraccion, atraccion);
 			OperadorAtraccion operador = (OperadorAtraccion) parque.empleados.get(loginOperador);
 			if (turno.equals(DIURNO)) {
@@ -221,7 +221,7 @@ public class Administrador extends Usuario{
 				operador.setLugarDeTrabajoDia(null);
 			}else {
 				operador.setTurnoNoche(true);
-				operador.setLugarDeTrabajoNoche(nombreAtraccion);
+				operador.setLugarDeTrabajoNoche(null);
 			}
 			parque.empleados.put(loginOperador, operador);
 		}
