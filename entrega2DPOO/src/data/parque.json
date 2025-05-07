@@ -37,6 +37,14 @@
             "nombre": "espectaculo",
             "fechaFin": "null"
         },
+        "ets": {
+            "ubicacion": "entrada",
+            "climasRestringidos": ["sol"],
+            "horario": "dia",
+            "fechaInicio": "null",
+            "nombre": "ets",
+            "fechaFin": "null"
+        },
         "sopa": {
             "ubicacion": "sopa",
             "climasRestringidos": [],
