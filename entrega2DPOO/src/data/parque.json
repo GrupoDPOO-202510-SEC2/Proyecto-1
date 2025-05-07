@@ -1,0 +1,134 @@
+{
+    "mapaTiendas": {"items": ["gorra tematica"]},
+    "taquilla": {
+        "ubicacion": "Entrada",
+        "IDs": 1.0E7,
+        "pedidosTiquetes": []
+    },
+    "mapaCafeterias": {
+        "menu": ["sopa"],
+        "cafeteria": {
+            "ubicacion": "cafeteria",
+            "tipo": "cafeteria",
+            "nombre": "cafeteria"
+        }
+    },
+    "aCulturales": {"teatro": {
+        "operadoresDia": ["operador"],
+        "ubicacion": "norte",
+        "climasRestringidos": [],
+        "esInteractiva": false,
+        "empleadosMinimos": 20,
+        "operadoresNoche": [],
+        "capacidadMaxima": 150,
+        "nombre": "teatro",
+        "nivelExclusividad": 2,
+        "enServicio": false,
+        "restriccionesSalud": [],
+        "cantidadDePpl": 0,
+        "edadMinima": 5
+    }},
+    "espectaculos": {
+        "espectaculo": {
+            "ubicacion": "sopa",
+            "climasRestringidos": [],
+            "horario": "sopa",
+            "fechaInicio": "null",
+            "nombre": "espectaculo",
+            "fechaFin": "null"
+        },
+        "sopa": {
+            "ubicacion": "sopa",
+            "climasRestringidos": [],
+            "horario": "sopa",
+            "fechaInicio": "junio",
+            "nombre": "sopa",
+            "fechaFin": "julio"
+        }
+    },
+    "empleados": {
+        "cocinero": {
+            "turnoDia": false,
+            "tipo": "Cocinero",
+            "peso": 300,
+            "tiquetesComprados": [],
+            "turnoNoche": false,
+            "tiqueteEnUso": 0,
+            "login": "cocinero",
+            "nombre": "cocinero",
+            "restricciones": [],
+            "password": "cocinero",
+            "compras": {},
+            "lugarDeTrabajo": "cafeteria",
+            "altura": 180,
+            "alimentosPreparables": ["sopa"],
+            "disponible": false
+        },
+        "servicio general": {
+            "turnoDia": false,
+            "tipo": "Servicio",
+            "peso": 70,
+            "tiquetesComprados": [],
+            "turnoNoche": false,
+            "tiqueteEnUso": 0,
+            "login": "servicio general",
+            "nombre": "servicio general",
+            "restricciones": [],
+            "password": "servicio general",
+            "compras": {},
+            "lugarDeTrabajo": "servicio",
+            "altura": 170,
+            "disponible": false
+        },
+        "operador": {
+            "turnoDia": false,
+            "tipo": "Operador",
+            "peso": 60,
+            "tiquetesComprados": [],
+            "capacitaciones": ["barco"],
+            "turnoNoche": false,
+            "tiqueteEnUso": 0,
+            "login": "operador",
+            "nombre": "operador",
+            "restricciones": [],
+            "password": "operador",
+            "compras": {},
+            "lugarDeTrabajo": "teatro, barco",
+            "altura": 180,
+            "lugarDeTrabajoDia": "teatro",
+            "lugarDeTrabajoNoche": "barco",
+            "disponible": false
+        }
+    },
+    "tiquetes": {},
+    "usuarios": {"Administrador": {
+        "restricciones": [],
+        "password": "sopa",
+        "compras": {},
+        "altura": 180,
+        "peso": 70,
+        "tiquetesComprados": [],
+        "tiqueteEnUso": 0,
+        "login": "sopa",
+        "nombre": "Administrador"
+    }},
+    "aMecanicas": {"barco": {
+        "operadoresDia": [],
+        "ubicacion": "sur",
+        "climasRestringidos": [],
+        "empleadosMinimos": 4,
+        "pesoMaximo": 160,
+        "operadoresNoche": ["operador"],
+        "capacidadMaxima": 30,
+        "nombre": "barco",
+        "nivelExclusividad": 2,
+        "enServicio": false,
+        "restriccionesSalud": [],
+        "riesgoAlto": true,
+        "cantidadDePpl": 0,
+        "pesoMinimo": 40,
+        "alturaMaxima": 200,
+        "alturaMinima": 140
+    }},
+    "inventario": {}
+}

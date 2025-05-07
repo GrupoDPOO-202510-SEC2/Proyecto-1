@@ -9,10 +9,9 @@ public class Cafeteria extends LugarDeServicio{
 	public Cafeteria(String nombre, String ubicacion, String tipo) {
 		super(nombre, ubicacion, tipo);
 		this.tipo = "cafeteria";
-		menu = new HashSet<String>();
 	}
 	
-	public void setMenu(HashSet<String> menuNuevo) {
+	public static void setMenu(HashSet<String> menuNuevo) {
 		Cafeteria.menu = menuNuevo;
 	}
 	

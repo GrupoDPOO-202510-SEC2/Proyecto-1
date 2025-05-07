@@ -39,7 +39,7 @@ public class ConsolaAdministrador extends ConsolaBasica {
             "Crear espectáculo",
             "Cambiar fecha de espectáculo",
             "Ver espectáculo",
-            "Gestionar climas restringidos de espectáculo",
+            "Agregar o Eliminar climas restringidos de espectáculo",
             "Crear atracción mecánica",
             "Crear atracción cultural",
             "Ver atracción",
@@ -79,14 +79,15 @@ public class ConsolaAdministrador extends ConsolaBasica {
             "Añadir comida a cocinero",
             "Crear operador atracción",
             "Crear servicio general",
-            "Salir"
+            "Salir \n" 
         };
 
         boolean continuar = true;
         while (continuar)
             {
-                int opcion = mostrarMenu("Menú Administrador", opciones);
 
+           		pedirCadenaAlUsuario("Presiona enter para continuar...");
+                int opcion = mostrarMenu("Menú Administrador", opciones);
                 switch (opcion)
                 {
                     case 1:
@@ -101,34 +102,48 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     }
                     case 2:
                     {
-                        admin.cambiarFechaEspectaculo(
-                            pedirCadenaAlUsuario("Nombre:"),
-                            pedirCadenaAlUsuario("Fecha inicio:"),
-                            pedirCadenaAlUsuario("Fecha fin:")
+                        boolean seHizo = admin.cambiarFechaEspectaculo(
+	                            pedirCadenaAlUsuario("Nombre del espectaculo:"),
+	                            pedirCadenaAlUsuario("Fecha inicio:"),
+	                            pedirCadenaAlUsuario("Fecha fin:")
                         );
-                        System.out.println("Se hizo correctmente");
+                        if (seHizo) {
+                        	System.out.println("Se hizo correctmente");
+                            break;
+                        }
+                        System.out.println("Espectaculo no encontrado");
                         break;
                     }
                     case 3:
                     {
                     	Espectaculo espectaculo = admin.getEspectaculo(pedirCadenaAlUsuario("Nombre:"));
-                        System.out.println("Nombre: "+espectaculo.getNombre()+", "+"Ubicacion: "+ espectaculo.getUbicacion()+", "+"Horario: " +espectaculo.getHorario());
-                        System.out.println("Se hizo correctmente");
-                        break;
+                    	if (espectaculo != null) {
+	                        System.out.println("-Nombre del espectaculo: "+espectaculo.getNombre()+" \n"+"-Ubicacion: "+ espectaculo.getUbicacion()+" \n"+"-Horario: " +espectaculo.getHorario() +" \n-Fecha de Inicio: "+espectaculo.getFechaInicio()+"\n-Fecha Final: "+espectaculo.getFechaFin());
+	                        System.out.println("Se hizo correctmente");
+	                        break;
+                    	}
+                    	System.out.println("Espectaculo no encontrado");
+                    	break;
                     }
                     case 4:
                     {
+                    	boolean seHizo = false;
                         String nombre = pedirCadenaAlUsuario("Nombre espectáculo:");
                         String clima = pedirCadenaAlUsuario("Clima:");
                         if (pedirConfirmacionAlUsuario("¿Agregar clima?"))
                         {
-                            admin.agregarClimaRestringidoE(nombre, clima);
+                        	seHizo = admin.agregarClimaRestringidoE(nombre, clima);
                         }
-                        else
+                        else if ((pedirConfirmacionAlUsuario("¿Eliminar clima?")))
                         {
-                            admin.eliminarClimaRestringidoE(nombre, clima);
+                        	seHizo = admin.eliminarClimaRestringidoE(nombre, clima);
                         }
-                        System.out.println("Se hizo correctmente");
+                        
+                        if(seHizo) {
+	                        System.out.println("Se hizo correctmente");
+	                        break;
+                        }
+                        System.out.println("No se hizo la operacion");
                         break;
                     }
                     case 5:
@@ -139,10 +154,10 @@ public class ConsolaAdministrador extends ConsolaBasica {
                             pedirEnteroAlUsuario("Empleados mínimos:"),
                             pedirCadenaAlUsuario("Ubicación:"),
                             pedirEnteroAlUsuario("Exclusividad:"),
-                            pedirEnteroAlUsuario("Altura máxima:"),
-                            pedirEnteroAlUsuario("Altura mínima:"),
-                            pedirEnteroAlUsuario("Peso mínimo:"),
-                            pedirEnteroAlUsuario("Peso máximo:"),
+                            pedirEnteroAlUsuario("Altura máxima (en centimetros):"),
+                            pedirEnteroAlUsuario("Altura mínima (en centimetros):"),
+                            pedirEnteroAlUsuario("Peso mínimo (en kilogramos):"),
+                            pedirEnteroAlUsuario("Peso máximo (en kilogramos):"),
                             pedirConfirmacionAlUsuario("¿Riesgo alto?")
                         );
                         System.out.println("Se hizo correctmente");
@@ -151,7 +166,7 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     case 6:
                     {
                         admin.crearAtraccionCultural(
-                            pedirCadenaAlUsuario("Nombre:"),
+                            pedirCadenaAlUsuario("Nombre"),
                             pedirEnteroAlUsuario("Capacidad:"),
                             pedirEnteroAlUsuario("Empleados mínimos:"),
                             pedirCadenaAlUsuario("Ubicación:"),
@@ -164,57 +179,68 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     }
                     case 7:
                     {
-                    	Atraccion atraccion = admin.getAtraccion(pedirCadenaAlUsuario("Nombre:"));
-                        System.out.println("Nombre: "+ atraccion.getNombre()+ ", "+"Ubicacion: "+atraccion.getUbicacion()+", "+"Empleados minimos: "+atraccion.getEmpleadosMinimos()+", "+"Nivel Exclusividad: "+atraccion.getNivelExclusividad()+", "+"Capcidad Máxima: "+atraccion.getCapacidadMaxima());
-                        System.out.println("Se hizo correctmente");
+                    	Atraccion atraccion = admin.getAtraccion(pedirCadenaAlUsuario("Nombre"));
+                    	if(atraccion != null) {
+                    		System.out.println("Nombre "+ atraccion.getNombre()+ ", "+"Ubicacion: "+atraccion.getUbicacion()+", "+"Empleados minimos: "+atraccion.getEmpleadosMinimos()+", "+"Nivel Exclusividad: "+atraccion.getNivelExclusividad()+", "+"Capcidad Máxima: "+atraccion.getCapacidadMaxima());
+	                        System.out.println("Se hizo correctmente");
+	                        break;
+                    	}
+                    	System.out.println("No se encontro la atraccion");
                         break;
+                        
                     }
                     case 8:
                     {
-                        admin.setCapacidadMaxima(pedirCadenaAlUsuario("Nombre:"), pedirEnteroAlUsuario("Capacidad máxima:"));
+                        admin.setCapacidadMaxima(pedirCadenaAlUsuario("Nombre"), pedirEnteroAlUsuario("Capacidad máxima:"));
                         System.out.println("Se hizo correctmente");
                         break;
                     }
                     case 9:
                     {
-                        admin.setEmpleadosMinimos(pedirCadenaAlUsuario("Nombre:"), pedirEnteroAlUsuario("Empleados mínimos:"));
+                        admin.setEmpleadosMinimos(pedirCadenaAlUsuario("Nombre"), pedirEnteroAlUsuario("Empleados mínimos:"));
                         System.out.println("Se hizo correctmente");
                         break;
                     }
                     case 10:
                     {
-                        admin.setEnServicio(pedirCadenaAlUsuario("Nombre:"), pedirConfirmacionAlUsuario("¿Está en servicio?"));
+                        admin.setEnServicio(pedirCadenaAlUsuario("Nombre"), pedirConfirmacionAlUsuario("¿Está en servicio?"));
                         System.out.println("Se hizo correctmente");
                         break;
                     }
                     case 11:
                     {
-                        admin.setExclusividad(pedirCadenaAlUsuario("Nombre:"), pedirEnteroAlUsuario("Exclusividad:"));
+                        admin.setExclusividad(pedirCadenaAlUsuario("Nombre"), pedirEnteroAlUsuario("Exclusividad:"));
                         System.out.println("Se hizo correctmente");
                         break;
                     }
                     case 12:
                     {
-                        int[] op = admin.getOperadoresAtraccion(pedirCadenaAlUsuario("Nombre:"));
+                        int[] op = admin.getOperadoresAtraccion(pedirCadenaAlUsuario("Nombre"));
                         System.out.println("Día: " + op[0] + ", Noche: " + op[1]);
                         System.out.println("Se hizo correctmente");
                         break;
                     }
                     case 13:
                     {
+                    	boolean seHizo = false;
                         String login = pedirCadenaAlUsuario("Login operador:");
-                        String turno = pedirCadenaAlUsuario("Turno (DIURNO/NOCTURNO):");
+                        String turno = pedirCadenaAlUsuario("Turno (diurno/nocturno):");
                         String atr = pedirCadenaAlUsuario("Atracción:");
                         if (pedirConfirmacionAlUsuario("¿Agregar?"))
                         {
-                            admin.addOperadorAAtraccion(login, turno, atr);
+                            seHizo = admin.addOperadorAAtraccion(login, turno, atr);
                         }
                         else
                         {
-                            admin.deleteOperadorAAtraccion(login, turno, atr);
+                        	seHizo = admin.deleteOperadorAAtraccion(login, turno, atr);
                         }
-                        System.out.println("Se hizo correctmente");
-                        break;
+                        
+                        if (seHizo) {
+	                        System.out.println("Se hizo correctmente");
+	                        break;
+                    	}
+	                    System.out.println("Hubo un error en los datos ingresados");
+	                    break;
                     }
                     case 14:
                     {
@@ -334,22 +360,22 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     }
                     case 30:
                     {
-                        admin.setTurnoDia(pedirConfirmacionAlUsuario("¿Turno día?"), pedirCadenaAlUsuario("Login:"));
+                        admin.setTurnoDia(pedirConfirmacionAlUsuario("¿Ponerle turno diurno?"), pedirCadenaAlUsuario("Login:"));
                         System.out.println("Se hizo correctmente");
                         break;
                     }
                     case 31:
                     {
-                        admin.setTurnoNoche(pedirConfirmacionAlUsuario("¿Turno noche?"), pedirCadenaAlUsuario("Login:"));
+                        admin.setTurnoNoche(pedirConfirmacionAlUsuario("¿ponerle un turno nocturno?"), pedirCadenaAlUsuario("Login:"));
                         System.out.println("Se hizo correctmente");
                         break;
                     }
                     case 32:
                     {
                         admin.crearCafeteria(
-                            pedirCadenaAlUsuario("Nombre:"),
+                            pedirCadenaAlUsuario("Nombre"),
                             pedirCadenaAlUsuario("Ubicación:"),
-                            pedirCadenaAlUsuario("Tipo:")
+                            ""
                         );
                         System.out.println("Se hizo correctmente");
                         break;
@@ -357,9 +383,9 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     case 33:
                     {
                         admin.crearTienda(
-                            pedirCadenaAlUsuario("Nombre:"),
+                            pedirCadenaAlUsuario("Nombre"),
                             pedirCadenaAlUsuario("Ubicación:"),
-                            pedirCadenaAlUsuario("Tipo:")
+                            ""
                         );
                         System.out.println("Se hizo correctmente");
                         break;
@@ -383,9 +409,12 @@ public class ConsolaAdministrador extends ConsolaBasica {
                         {
                             admin.addComia(comida);
                         }
-                        else
+                        else if (pedirConfirmacionAlUsuario("¿Eliminar?"))
                         {
                             admin.removeComia(comida);
+                        }else {
+                        	System.out.println("No se realizo ningun cambio");
+                            break;
                         }
                         System.out.println("Se hizo correctmente");
                         break;
@@ -397,9 +426,12 @@ public class ConsolaAdministrador extends ConsolaBasica {
                         {
                             admin.additem(item);
                         }
-                        else
+                        else if (pedirConfirmacionAlUsuario("¿Eliminar?"))
                         {
                             admin.removeitem(item);
+                        }else {
+                        	System.out.println("No se realizo ningun cambio");
+                            break;
                         }
                         System.out.println("Se hizo correctmente");
                         break;
@@ -407,7 +439,7 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     case 38:
                     {
                     	admin.crearCajeroAtraccion(
-                    	        pedirCadenaAlUsuario("Nombre:"),
+                    	        pedirCadenaAlUsuario("Nombre"),
                     	        pedirCadenaAlUsuario("Login:"),
                     	        pedirCadenaAlUsuario("Password:"),
                     	        pedirEnteroAlUsuario("Altura:"),
@@ -421,7 +453,7 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     case 39: 
                     {
                         admin.crearCajeroTaquilla(
-                            pedirCadenaAlUsuario("Nombre:"),
+                            pedirCadenaAlUsuario("Nombre"),
                             pedirCadenaAlUsuario("Login:"),
                             pedirCadenaAlUsuario("Password:"),
                             pedirEnteroAlUsuario("Altura:"),
@@ -433,8 +465,8 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     }
                     case 40: 
                     {
-                        admin.crearCocinero(
-                            pedirCadenaAlUsuario("Nombre:"),
+                        boolean seHizo = admin.crearCocinero(
+                            pedirCadenaAlUsuario("Nombre"),
                             pedirCadenaAlUsuario("Login:"),
                             pedirCadenaAlUsuario("Password:"),
                             pedirEnteroAlUsuario("Altura:"),
@@ -442,13 +474,19 @@ public class ConsolaAdministrador extends ConsolaBasica {
                             pedirCadenaAlUsuario("Turno (DIURNO/NOCTURNO):"),
                             pedirCadenaAlUsuario("Lugar de trabajo:")
                         );
-                        System.out.println("Se hizo correctamente");
+                        if(seHizo) {
+	                        System.out.println("Se hizo correctamente");
+	                        break;
+                        }
+
+                        System.out.println("no se hizo correctamente");
                         break;
                     }
                     case 41:
                     {
+                    	String login = pedirCadenaAlUsuario("Login del cocinero:");
                         admin.addComidaCocinero(
-                            pedirCadenaAlUsuario("Login del cocinero:"),
+                            login,
                             pedirCadenaAlUsuario("Nombre de la comida:")
                         );
                         System.out.println("Se hizo correctamente");
@@ -456,7 +494,7 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     }
                     case 42: {
                         admin.crearOperadorAtraccion(
-                            pedirCadenaAlUsuario("Nombre:"),
+                            pedirCadenaAlUsuario("Nombre"),
                             pedirCadenaAlUsuario("Login:"),
                             pedirCadenaAlUsuario("Password:"),
                             pedirEnteroAlUsuario("Altura:"),
@@ -468,7 +506,7 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     case 43:
                     {
                         admin.crearServicioGeneral(
-                            pedirCadenaAlUsuario("Nombre:"),
+                            pedirCadenaAlUsuario("Nombre"),
                             pedirCadenaAlUsuario("Login:"),
                             pedirCadenaAlUsuario("Password:"),
                             pedirEnteroAlUsuario("Altura:"),
@@ -483,13 +521,6 @@ public class ConsolaAdministrador extends ConsolaBasica {
                     case 44:
                     {
                         continuar = false;
-                        
-                        try {
-							Persistencia.guardarParque(Usuario.parque);
-						} catch (Exception e) {
-							// TODO Auto-generated catch block
-							e.printStackTrace();
-						}
                         System.out.println("Se hizo correctmente");
                         break;
                     }

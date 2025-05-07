@@ -35,6 +35,7 @@ public class Parque {
 		this.empleados = new HashMap<String, Empleado>();
 		this.usuarios = new HashMap<String, Usuario>();
 		this.taquilla = new Taquilla(ubicacionTaquilla);
+		tiquetes.put((double) 0, null);
 	}
 		
 	public AtraccionCultural getAtraccionCultural(String nombreAtraccion) {

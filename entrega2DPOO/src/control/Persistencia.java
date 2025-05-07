@@ -28,6 +28,9 @@ public class Persistencia {
 
 	public static void guardarParque(Parque parque) throws Exception {
 		
+
+		PrintWriter pw = new PrintWriter( "src/data/parque.json" );
+        
 		JSONObject jparque = new JSONObject();
 		guardarTaquilla(jparque, parque.getTaquilla());
 		guardarACulturales(jparque,parque.aCulturales);
@@ -39,17 +42,21 @@ public class Persistencia {
 		guardarInventario(jparque,parque.inventario);
 		guardarEmpleados(jparque,parque.empleados);
 		guardarUsuarios(jparque,parque.usuarios);
+
+		String jsonString = jparque.toString(4); 
+		pw.write(jsonString);
 		
-		
-		PrintWriter pw = new PrintWriter( "C:\\Users\\aicar\\git\\repository2\\entrega2DPOO\\src\\data\\parque.json" );
-        jparque.write(pw);
         pw.close( );
 	}
 	
-	private static void guardarUsuarios(JSONObject jparque, HashMap<String, Usuario> usuarios) {
-		
-		
-		
+	private static void guardarUsuarios(JSONObject jparque, HashMap<String, Usuario> usuarios) throws Exception {
+		JSONObject jusuarios = new JSONObject();
+		for (Usuario usuario: usuarios.values()) {
+			JSONObject jusuario = new JSONObject();
+			guardarUsuario(jusuario, usuario);
+			jusuarios.put(usuario.getNombre(), jusuario);
+		}
+		jparque.put("usuarios", jusuarios);
 	}
 
 	private static void guardarEmpleados(JSONObject jparque, HashMap<String, Empleado> empleados) throws Exception {
@@ -89,7 +96,7 @@ public class Persistencia {
 			
 			jempleados.put(empleado.getNombre(), jempleado);
 		}
-		jparque.put("inventario", jempleados);
+		jparque.put("empleados", jempleados);
 	}
 
 	private static void guardarUsuario(JSONObject jusuario, Usuario usuario) throws Exception {
@@ -99,7 +106,11 @@ public class Persistencia {
 		jusuario.put("password", usuario.getPassword());
 		jusuario.put("altura", usuario.getAltura());
 		jusuario.put("peso", usuario.getPeso());
+		if(usuario.getTiqueteEnUso() != null) {
 		jusuario.put("tiqueteEnUso", usuario.getTiqueteEnUso().getIdTiquete());
+		}else {
+			jusuario.put("tiqueteEnUso",0);
+		}
 
 		JSONArray jrestricciones = new JSONArray();
 		for (String restriccion: usuario.getRestricciones()) {
@@ -120,7 +131,7 @@ public class Persistencia {
 		for (double codigo: usuario.getTiquetesComprados()) {
 			jtiquetes.put(codigo);
 		}
-		jusuario.put("tiquetes", jtiquetes);
+		jusuario.put("tiquetesComprados", jtiquetes);
 		
 
 	}
@@ -192,28 +203,28 @@ public class Persistencia {
 		// TODO Auto-generated method stub
 		
 		JSONObject jtiquetes = new JSONObject();
-		ArrayList<Tiquete> tiquetesA = (ArrayList<Tiquete>) tiquetes.values();
-		for (int i = 0; i> tiquetes.size(); i++) {
+		
+		
+		for (Tiquete tiquete:tiquetes.values()) {
 			JSONObject jtiquete = new JSONObject();
-			Tiquete tiquete = tiquetesA.get(i);
 			jtiquete.put("tipo", "Tiquete");
 			
 			
-			if(tiquetesA.get(i) instanceof TiqueteExclusividad ) {
-				TiqueteExclusividad exclusivo = (TiqueteExclusividad) tiquetesA.get(i); 
+			if(tiquete instanceof TiqueteExclusividad ) {
+				TiqueteExclusividad exclusivo = (TiqueteExclusividad) tiquete; 
 				jtiquete.put("exclusividad", exclusivo.getExclusividad());
 				jtiquete.put("tipo", "Exclusivo");
-			}else if(tiquetesA.get(i) instanceof TiqueteTemporada ) {
-				TiqueteTemporada temporada = (TiqueteTemporada) tiquetesA.get(i); 
+			}else if(tiquete instanceof TiqueteTemporada ) {
+				TiqueteTemporada temporada = (TiqueteTemporada) tiquete; 
 				jtiquete.put("tipo", "Temporada");
 				jtiquete.put("exclusividad", temporada.getExclusividad());
 				jtiquete.put("fechaInicio", temporada.getFechaInicio());
 				jtiquete.put("fechaFin", temporada.getFechaFin());
 			}
-			
+			if(tiquete != null) {
 			guardarTiquete(jtiquete, tiquete);
 			jtiquetes.put(Double.toString(tiquete.getIdTiquete()), jtiquete);
-			
+			}
 		}
 		
 		jparque.put("tiquetes", jtiquetes);
@@ -252,8 +263,8 @@ public class Persistencia {
 		jespectaculo.put("nombre", espectaculo.getNombre());
 		jespectaculo.put("horario", espectaculo.getHorario());
 		jespectaculo.put("ubicacion", espectaculo.getUbicacion());
-		jespectaculo.put("fechaInicio", espectaculo.getFechaInicio());
-		jespectaculo.put("fechaFin", espectaculo.getFechaFin());
+		jespectaculo.put("fechaInicio", ""+espectaculo.getFechaInicio());
+		jespectaculo.put("fechaFin", ""+espectaculo.getFechaFin());
 		JSONArray jclimas= new JSONArray();
 		
 		
@@ -311,10 +322,10 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 			
 			jitems.put(item);
 			
+			}
 		}
 		
 		jtienda.put("items", jitems);
-		}
 	}
 	private static void guardarMenu(JSONObject jcafeteria) throws Exception {
 		
@@ -366,18 +377,15 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 		JSONArray jclimasRestringidos = new JSONArray();
 		
-		
-		if(atraccion.getClimasRestringidos() != null) {
 		for(String clima: atraccion.getClimasRestringidos()) {
 			jclimasRestringidos.put(clima);
-		}}
+		}
 		jatraccion.put("climasRestringidos", jclimasRestringidos);
 		
 		JSONArray jrestriccionesSalud = new JSONArray();
-		if(atraccion.getRestriccionesSalud() != null) {
 		for(String restriccion: atraccion.getRestriccionesSalud()) {
 			jrestriccionesSalud.put(restriccion);
-		}}
+		}
 		jatraccion.put("restriccionesSalud", jrestriccionesSalud);
 		
 		jatraccion.put("nombre", atraccion.getNombre());
@@ -385,17 +393,15 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		jatraccion.put("enServicio", atraccion.isEnServicio());
 		
 		JSONArray joperadoresDia = new JSONArray();
-		if(atraccion.getOperadoresDia() != null) {
 		for(String operador: atraccion.getOperadoresDia()) {
 			joperadoresDia.put(operador);
-		}}
+		}
 		jatraccion.put("operadoresDia", joperadoresDia);
 		
 		JSONArray joperadoresNoche = new JSONArray();
-		if(atraccion.getOperadoresNoche() != null) {{
 		for(String operador: atraccion.getOperadoresNoche()) {
 			joperadoresNoche.put(operador);
-		}}
+		}
 		jatraccion.put("operadoresNoche", joperadoresNoche);
 		
 		jatraccion.put("alturaMinima", atraccion.getAlturaMinima());
@@ -410,12 +416,11 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		// TODO Auto-generated method stub
 		
 		JSONObject jatraccionesCulturales = new JSONObject();
-		if(true) {{
 		for (AtraccionCultural atraccionCultural: aCulturales.values()) {
 			JSONObject jatraccionCultural = new JSONObject();
 			guardarACultural(jatraccionCultural,atraccionCultural);
 			jatraccionesCulturales.put(atraccionCultural.getNombre(), jatraccionCultural);
-		}}
+		}
 		
 		jparque.put("aCulturales", jatraccionesCulturales);
 	}
@@ -430,17 +435,15 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		jatraccion.put("nivelExclusividad", atraccion.getNivelExclusividad());
 		
 		JSONArray jclimasRestringidos = new JSONArray();
-		if(true) {{
 		for(String clima: atraccion.getClimasRestringidos()) {
 			jclimasRestringidos.put(clima);
-		}}
+		}
 		jatraccion.put("climasRestringidos", jclimasRestringidos);
 		
 		JSONArray jrestriccionesSalud = new JSONArray();
-		if(true) {{
 		for(String restriccion: atraccion.getRestriccionesSalud()) {
 			jrestriccionesSalud.put(restriccion);
-		}}
+		}
 		jatraccion.put("restriccionesSalud", jrestriccionesSalud);
 		
 		jatraccion.put("nombre", atraccion.getNombre());
@@ -448,17 +451,15 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		jatraccion.put("enServicio", atraccion.isEnServicio());
 		
 		JSONArray joperadoresDia = new JSONArray();
-		if(true) {{
 		for(String operador: atraccion.getOperadoresDia()) {
 			joperadoresDia.put(operador);
-		}}
+		}
 		jatraccion.put("operadoresDia", joperadoresDia);
 		
 		JSONArray joperadoresNoche = new JSONArray();
-		if(true) {{
 		for(String operador: atraccion.getOperadoresNoche()) {
 			joperadoresNoche.put(operador);
-		}}
+		}
 		jatraccion.put("operadoresNoche", joperadoresNoche);
 		
 		jatraccion.put("edadMinima", atraccion.getEdadMinima());
@@ -476,12 +477,11 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		jtaquilla.put("IDs", Taquilla.getIDs());
 		JSONArray jpedidos = new JSONArray();
 		
-		if(true) {{
 		for(PedidoTiquete pedido:taquilla.getPedidosTiquetes()) {
 			JSONObject jpedido = new JSONObject();
 			guardarPedido(jpedido,pedido);
 			jpedidos.put(jpedido);
-			}}
+			}
 		
 		jtaquilla.put("pedidosTiquetes", jpedidos);
 		jparque.put("taquilla", jtaquilla);
@@ -505,7 +505,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 	
 	public static Parque cargarParque() throws Exception {
 		
-		String contenido = new String(Files.readAllBytes(Paths.get("C:\\Users\\aicar\\git\\repository2\\entrega2DPOO\\src\\data\\parque.json")));
+		String contenido = new String(Files.readAllBytes(Paths.get("src/data/parque.json")));
 		JSONObject jsonParque = new JSONObject(contenido);
 		Parque parque = new Parque("Entrada");
 		parque.taquilla = cargarTaquilla(jsonParque.getJSONObject("taquilla"));
@@ -514,6 +514,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		parque.mapaCafeterias= cargarMapaCafeterias(jsonParque.getJSONObject("mapaCafeterias"));
 		parque.mapaTiendas = cargarMapaTiendas(jsonParque.getJSONObject("mapaTiendas"));
 		parque.espectaculos = cargarEspectaculos(jsonParque.getJSONObject("espectaculos"));
+		Usuario.parque = parque;
 		parque.tiquetes = cargarTiquetes(jsonParque.getJSONObject("tiquetes"));
 		parque.inventario = cargarInventario(jsonParque.getJSONObject("inventario"));
 		parque.empleados = cargarEmpleados(jsonParque.getJSONObject("empleados"), parque);
@@ -549,7 +550,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		String password = jproducto.getString("password");
 		int altura = jproducto.getInt("altura");
 		int peso = jproducto.getInt("peso");
-		Tiquete tiqueteEnUso = parque.tiquetes.get(jproducto.getString("tiqueteEnUso"));
+		Tiquete tiqueteEnUso = parque.tiquetes.get(jproducto.getDouble("tiqueteEnUso"));
 		
 		ArrayList<String> restricciones = new ArrayList<String>();
 		JSONArray jrestricciones = jproducto.getJSONArray("restricciones");
@@ -604,14 +605,14 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 	private static Empleado cargarEmpleado(JSONObject jproducto, Parque parque) throws Exception {
 			String tipo = jproducto.getString("tipo");
 			
-			if(tipo.equals("ServicioGeneral")) {
-				return (ServicioGeneral) cargarBasico(jproducto,parque);
+			if(tipo.equals("Servicio")) {
+				return (ServicioGeneral) cargarServicio(jproducto,parque);
 			}if(tipo.equals("Cajero")) {
-				return (Cajero) cargarBasico(jproducto,parque);
+				return (Cajero) cargarCajero(jproducto,parque);
 			}if(tipo.equals("CajeroTaquilla")) {
-				return (CajeroTaquilla) cargarBasico(jproducto,parque);
+				return (CajeroTaquilla) cargarCajeroTaquilla(jproducto,parque);
 			}if(tipo.equals("CajeroAtraccion")) {
-				return (CajeroAtraccion) cargarBasico(jproducto,parque);
+				return (CajeroAtraccion) cargarCajeroAtraccion(jproducto,parque);
 			}if(tipo.equals("Operador")) {
 				return (OperadorAtraccion) cargarOperador(jproducto,parque);
 			}else {
@@ -636,7 +637,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		String password = jproducto.getString("password");
 		int altura = jproducto.getInt("altura");
 		int peso = jproducto.getInt("peso");
-		Tiquete tiqueteEnUso = parque.tiquetes.get(jproducto.getString("tiqueteEnUso"));
+		Tiquete tiqueteEnUso = parque.tiquetes.get(jproducto.getDouble("tiqueteEnUso"));
 		
 		ArrayList<String> restricciones = new ArrayList<String>();
 		JSONArray jrestricciones1 = jproducto.getJSONArray("restricciones");
@@ -690,7 +691,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		String password = jproducto.getString("password");
 		int altura = jproducto.getInt("altura");
 		int peso = jproducto.getInt("peso");
-		Tiquete tiqueteEnUso = parque.tiquetes.get(jproducto.getString("tiqueteEnUso"));
+		Tiquete tiqueteEnUso = parque.tiquetes.get(jproducto.getDouble("tiqueteEnUso"));
 		
 		ArrayList<String> restricciones = new ArrayList<String>();
 		JSONArray jrestricciones = jproducto.getJSONArray("restricciones");
@@ -731,33 +732,35 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 			capacitaciones.add(id);
 		}
 		
-		String lugarDeTrabajoNoche = jproducto.getString("lugarDeTrabajoNoche");
-		String lugarDeTrabajoDia = jproducto.getString("lugarDeTrabajoDia");
+		String[] lugaresDeTrabajo = jproducto.getString("lugarDeTrabajo").split(", ");
 		
 		OperadorAtraccion operador = new OperadorAtraccion(nombre, login, password, altura, peso);
 
 		operador.setCompras(compras);
 		operador.setDisponible(disponible);
-		operador.setLugarDeTrabajo(lugarDeTrabajoDia);
-		operador.setLugarDeTrabajoNoche(lugarDeTrabajoNoche);
+		operador.setLugarDeTrabajoDia(lugaresDeTrabajo[0]);
+		operador.setLugarDeTrabajoNoche(lugaresDeTrabajo[1]);
 		operador.setLugarDeTrabajo(lugarDeTrabajo);
 		operador.setRestricciones(restricciones);
 		operador.setTiqueteEnUso(tiqueteEnUso);
 		operador.setTiquetesComprados(tiquetesComprados);
 		operador.setTurnoDia(turnoDia);
 		operador.setTurnoNoche(turnoNoche);
+		operador.setCapacitaciones(capacitaciones);
 		
 		return operador;
 	}
 
-	private static Empleado cargarBasico(JSONObject jproducto, Parque parque) throws Exception {
+	//basico
+	
+	private static ServicioGeneral cargarServicio(JSONObject jproducto, Parque parque) throws Exception {
 		
 		String nombre = jproducto.getString("nombre");
 		String login = jproducto.getString("login");
 		String password = jproducto.getString("password");
 		int altura = jproducto.getInt("altura");
 		int peso = jproducto.getInt("peso");
-		Tiquete tiqueteEnUso = parque.tiquetes.get(jproducto.getString("tiqueteEnUso"));
+		Tiquete tiqueteEnUso = parque.tiquetes.get(jproducto.getDouble("tiqueteEnUso"));
 		
 		ArrayList<String> restricciones = new ArrayList<String>();
 		JSONArray jrestricciones = jproducto.getJSONArray("restricciones");
@@ -788,7 +791,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		String lugarDeTrabajo = jproducto.getString("lugarDeTrabajo");
 		boolean disponible = jproducto.getBoolean("disponible"); 
 		
-		Empleado empleado = new Empleado(nombre, login, password, altura, peso, lugarDeTrabajo);
+		ServicioGeneral empleado = new ServicioGeneral(nombre, login, password, altura, peso, lugarDeTrabajo);
 		
 		empleado.setCompras(compras);
 		empleado.setTiquetesComprados(tiquetesComprados);
@@ -801,6 +804,163 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 		
 	}
+	
+private static CajeroTaquilla cargarCajeroTaquilla(JSONObject jproducto, Parque parque) throws Exception {
+		
+		String nombre = jproducto.getString("nombre");
+		String login = jproducto.getString("login");
+		String password = jproducto.getString("password");
+		int altura = jproducto.getInt("altura");
+		int peso = jproducto.getInt("peso");
+		Tiquete tiqueteEnUso = parque.tiquetes.get(jproducto.getDouble("tiqueteEnUso"));
+		
+		ArrayList<String> restricciones = new ArrayList<String>();
+		JSONArray jrestricciones = jproducto.getJSONArray("restricciones");
+		for(int i = 0;i<jrestricciones.length();i++) {
+			
+			String restriccion = jrestricciones.getString(i);
+			restricciones.add(restriccion);
+		}
+		
+		HashMap<String, Integer> compras = new HashMap<String, Integer>();
+		Iterator<String> keys = jproducto.getJSONObject("compras").keys();
+		while (keys.hasNext()) {
+			String key = keys.next();
+			int compra = jproducto.getInt(key);
+			compras.put(key, compra); 
+			}
+		
+		ArrayList<Double> tiquetesComprados = new ArrayList<Double>();
+		JSONArray jcomprados = jproducto.getJSONArray("tiquetesComprados");
+		for(int i = 0;i<jcomprados.length();i++) {
+			Double id = jrestricciones.getDouble(i);
+			tiquetesComprados.add(id);
+		}
+		
+		
+		boolean turnoDia = jproducto.getBoolean("turnoDia");
+		boolean turnoNoche = jproducto.getBoolean("turnoNoche");
+		String lugarDeTrabajo = jproducto.getString("lugarDeTrabajo");
+		boolean disponible = jproducto.getBoolean("disponible"); 
+		
+		CajeroTaquilla empleado = new CajeroTaquilla(nombre, login, password, altura, peso, lugarDeTrabajo);
+		
+		empleado.setCompras(compras);
+		empleado.setTiquetesComprados(tiquetesComprados);
+		empleado.setRestricciones(restricciones);
+		empleado.setTurnoDia(turnoDia);
+		empleado.setTurnoNoche(turnoNoche);
+		empleado.setDisponible(disponible);
+		
+		return empleado;
+		
+		
+	}
+	
+private static Cajero cargarCajero(JSONObject jproducto, Parque parque) throws Exception {
+	
+	String nombre = jproducto.getString("nombre");
+	String login = jproducto.getString("login");
+	String password = jproducto.getString("password");
+	int altura = jproducto.getInt("altura");
+	int peso = jproducto.getInt("peso");
+	Tiquete tiqueteEnUso = parque.tiquetes.get(jproducto.getDouble("tiqueteEnUso"));
+	
+	ArrayList<String> restricciones = new ArrayList<String>();
+	JSONArray jrestricciones = jproducto.getJSONArray("restricciones");
+	for(int i = 0;i<jrestricciones.length();i++) {
+		
+		String restriccion = jrestricciones.getString(i);
+		restricciones.add(restriccion);
+	}
+	
+	HashMap<String, Integer> compras = new HashMap<String, Integer>();
+	Iterator<String> keys = jproducto.getJSONObject("compras").keys();
+	while (keys.hasNext()) {
+		String key = keys.next();
+		int compra = jproducto.getInt(key);
+		compras.put(key, compra); 
+		}
+	
+	ArrayList<Double> tiquetesComprados = new ArrayList<Double>();
+	JSONArray jcomprados = jproducto.getJSONArray("tiquetesComprados");
+	for(int i = 0;i<jcomprados.length();i++) {
+		Double id = jrestricciones.getDouble(i);
+		tiquetesComprados.add(id);
+	}
+	
+	
+	boolean turnoDia = jproducto.getBoolean("turnoDia");
+	boolean turnoNoche = jproducto.getBoolean("turnoNoche");
+	String lugarDeTrabajo = jproducto.getString("lugarDeTrabajo");
+	boolean disponible = jproducto.getBoolean("disponible"); 
+	
+	Cajero empleado = new Cajero(nombre, login, password, altura, peso, lugarDeTrabajo);
+	
+	empleado.setCompras(compras);
+	empleado.setTiquetesComprados(tiquetesComprados);
+	empleado.setRestricciones(restricciones);
+	empleado.setTurnoDia(turnoDia);
+	empleado.setTurnoNoche(turnoNoche);
+	empleado.setDisponible(disponible);
+	
+	return empleado;
+	
+	
+}
+
+	private static CajeroAtraccion cargarCajeroAtraccion(JSONObject jproducto, Parque parque) throws Exception {
+	
+	String nombre = jproducto.getString("nombre");
+	String login = jproducto.getString("login");
+	String password = jproducto.getString("password");
+	int altura = jproducto.getInt("altura");
+	int peso = jproducto.getInt("peso");
+	Tiquete tiqueteEnUso = parque.tiquetes.get(jproducto.getDouble("tiqueteEnUso"));
+	
+	ArrayList<String> restricciones = new ArrayList<String>();
+	JSONArray jrestricciones = jproducto.getJSONArray("restricciones");
+	for(int i = 0;i<jrestricciones.length();i++) {
+		
+		String restriccion = jrestricciones.getString(i);
+		restricciones.add(restriccion);
+	}
+	
+	HashMap<String, Integer> compras = new HashMap<String, Integer>();
+	Iterator<String> keys = jproducto.getJSONObject("compras").keys();
+	while (keys.hasNext()) {
+		String key = keys.next();
+		int compra = jproducto.getInt(key);
+		compras.put(key, compra); 
+		}
+	
+	ArrayList<Double> tiquetesComprados = new ArrayList<Double>();
+	JSONArray jcomprados = jproducto.getJSONArray("tiquetesComprados");
+	for(int i = 0;i<jcomprados.length();i++) {
+		Double id = jrestricciones.getDouble(i);
+		tiquetesComprados.add(id);
+	}
+	
+	
+	boolean turnoDia = jproducto.getBoolean("turnoDia");
+	boolean turnoNoche = jproducto.getBoolean("turnoNoche");
+	String lugarDeTrabajo = jproducto.getString("lugarDeTrabajo");
+	boolean disponible = jproducto.getBoolean("disponible"); 
+	
+	CajeroAtraccion empleado = new CajeroAtraccion(nombre, login, password, altura, peso, lugarDeTrabajo);
+	
+	empleado.setCompras(compras);
+	empleado.setTiquetesComprados(tiquetesComprados);
+	empleado.setRestricciones(restricciones);
+	empleado.setTurnoDia(turnoDia);
+	empleado.setTurnoNoche(turnoNoche);
+	empleado.setDisponible(disponible);
+	
+	return empleado;
+	
+	
+}
+	
 
 	private static HashMap<String, Producto> cargarInventario(JSONObject jinventario) throws Exception {
 		
@@ -938,7 +1098,6 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		HashMap<String, Tienda> mapaCafeterias = new HashMap<String, Tienda>(); 
 		JSONArray jmenu = jaCafeterias.getJSONArray("items");
 		HashSet<String> menu = new HashSet<String>();
-		
 		for(int i = 0;i<jmenu.length();i++) {
 			
 			String comia= jmenu.getString(i);
@@ -947,14 +1106,15 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		Tienda.items = menu;
 		
 		Iterator<String> keys = jaCafeterias.keys();
-		
+		keys.next();
 		while (keys.hasNext()) {
 			String key = keys.next();
-			JSONObject jcafeteria= (JSONObject) jaCafeterias.get(key);
-			Tienda cafeteria = cargarTienda(jcafeteria);
-			mapaCafeterias.put(cafeteria.getNombre(), cafeteria);
+			if(!key.equals("items")) {
+				JSONObject jcafeteria= (JSONObject) jaCafeterias.get(key);
+				Tienda cafeteria = cargarTienda(jcafeteria);
+				mapaCafeterias.put(cafeteria.getNombre(), cafeteria);
 			}
-		
+		}
 		return mapaCafeterias;
 	}
 
@@ -972,24 +1132,25 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		HashMap<String, Cafeteria> mapaCafeterias = new HashMap<String, Cafeteria>(); 
 		JSONArray jmenu = jaCafeterias.getJSONArray("menu");
 		HashSet<String> menu = new HashSet<String>();
-		
 		for(int i = 0;i<jmenu.length();i++) {
 			
 			String comia= jmenu.getString(i);
+
+			System.out.print(comia);
 			menu.add(comia);
 		}
 		Cafeteria.menu = menu;
+
 		
-		
-		
-		Iterator<String> keys = jaCafeterias.keys();
-		
+		Iterator<String> keys = jaCafeterias.keys();		
 		while (keys.hasNext()) {
 			String key = keys.next();
+			if(!key.equals("menu")) {
 			JSONObject jcafeteria= (JSONObject) jaCafeterias.get(key);
 			Cafeteria cafeteria = cargarCafeteria(jcafeteria);
 			mapaCafeterias.put(cafeteria.getNombre(), cafeteria);
 			}
+		}
 		
 		return mapaCafeterias;
 	}
