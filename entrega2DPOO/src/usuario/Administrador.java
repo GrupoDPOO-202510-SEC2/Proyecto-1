@@ -23,7 +23,7 @@ public class Administrador extends Usuario{
 		
 		Espectaculo espectaculo = parque.espectaculos.get(nombre);
 		espectaculo.setFechaInicio(fechai);
-		espectaculo.setFechaInicio(fechaf);
+		espectaculo.setFechaFin(fechaf);
 		
 		parque.espectaculos.put(nombre, espectaculo);
 		
