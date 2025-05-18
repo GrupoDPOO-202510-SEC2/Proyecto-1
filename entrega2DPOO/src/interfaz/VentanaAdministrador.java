@@ -419,80 +419,405 @@ public class VentanaAdministrador {
                     	panelCentralAtracciones.repaint();
                         break;
                     case 6:
-                        JPanel pModExcl = new JPanel();
-                        pModExcl.add(new JLabel("Formulario: Modificar exclusividad"));
-                        panelCentralAtracciones.add(pModExcl);
+                    	JPanel panelModExcl = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelModExcl.add(new JLabel("Nombre:"));
+                        JTextField tfNombreEx = new JTextField();
+                        panelModExcl.add(tfNombreEx);
+
+                        panelModExcl.add(new JLabel("Exclusividad:"));
+                        JTextField tfExcl = new JTextField();
+                        panelModExcl.add(tfExcl);
+
+                        JButton btnModExcl = new JButton("Modificar exclusividad");
+                        panelModExcl.add(btnModExcl, BorderLayout.SOUTH);
+
+                        btnModExcl.addActionListener(evt -> {
+                            String nombre = tfNombreEx.getText();
+                            int exclusividad = Integer.parseInt(tfExcl.getText());
+                            Administrador.setExclusividad(nombre, exclusividad);
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Se modificó la exclusividad correctamente",JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelModExcl);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
                     case 7:
-                        JPanel pVerOp = new JPanel();
-                        pVerOp.add(new JLabel("Pantalla: Ver operadores de atracción"));
-                        panelCentralAtracciones.add(pVerOp);
+                    	JPanel panelVerOperadores = new JPanel(new GridLayout(0, 1, 5, 5));
+                        panelVerOperadores.add(new JLabel("Nombre de la atracción:"));
+                        JTextField tfNombreOp = new JTextField();
+                        panelVerOperadores.add(tfNombreOp);
+
+                        JButton btnVerOp = new JButton("Ver operadores");
+                        panelVerOperadores.add(btnVerOp, BorderLayout.SOUTH);
+
+                        btnVerOp.addActionListener(evt -> {
+                            String nombre = tfNombreOp.getText();
+                            int[] op = Administrador.getOperadoresAtraccion(nombre);
+                            panelVerOperadores.add(new JLabel("Día: " + op[0]));
+                            panelVerOperadores.add(new JLabel("Noche: " + op[1]));
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelVerOperadores);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
                     case 8:
-                        JPanel pGestOp = new JPanel();
-                        pGestOp.add(new JLabel("Pantalla: Gestionar operadores"));
-                        panelCentralAtracciones.add(pGestOp);
+                    	JPanel panelGestOp = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelGestOp.add(new JLabel("Login operador:"));
+                        JTextField tfLoginOp = new JTextField();
+                        panelGestOp.add(tfLoginOp);
+
+                        panelGestOp.add(new JLabel("Turno (diurno/nocturno):"));
+                        JTextField tfTurnoOp = new JTextField();
+                        panelGestOp.add(tfTurnoOp);
+
+                        panelGestOp.add(new JLabel("Atracción:"));
+                        JTextField tfAtraccion = new JTextField();
+                        panelGestOp.add(tfAtraccion);
+
+                        JButton btnAgregarOp = new JButton("Agregar");
+                        panelGestOp.add(btnAgregarOp, BorderLayout.SOUTH);
+                        JButton btnEliminarOp = new JButton("Eliminar");
+                        panelGestOp.add(btnEliminarOp, BorderLayout.SOUTH);
+
+                        btnAgregarOp.addActionListener(evt -> {
+                            Administrador.addOperadorAAtraccion(
+                                tfLoginOp.getText(),
+                                tfTurnoOp.getText(),
+                                tfAtraccion.getText()
+                            );
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Se agregó el operador",JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        btnEliminarOp.addActionListener(evt -> {
+                            Administrador.deleteOperadorAAtraccion(
+                                tfLoginOp.getText(),
+                                tfTurnoOp.getText(),
+                                tfAtraccion.getText()
+                            );
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa","Éxito",JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelGestOp);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
                     case 9:
-                        JPanel pResSalud = new JPanel();
-                        pResSalud.add(new JLabel("Pantalla: Gestionar restricciones de salud"));
-                        panelCentralAtracciones.add(pResSalud);
+                    	JPanel panelResSalud = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelResSalud.add(new JLabel("Atracción:"));
+                        JTextField tfAtr = new JTextField();
+                        panelResSalud.add(tfAtr);
+
+                        panelResSalud.add(new JLabel("Restricción salud:"));
+                        JTextField tfRes = new JTextField();
+                        panelResSalud.add(tfRes);
+
+                        JButton btnAgregarRes = new JButton("Agregar");
+                        panelResSalud.add(btnAgregarRes, BorderLayout.SOUTH);
+                        JButton btnEliminarRes = new JButton("Eliminar");
+                        panelResSalud.add(btnEliminarRes, BorderLayout.SOUTH);
+
+                        btnAgregarRes.addActionListener(evt -> {
+                            Administrador.addRestriccionSalud(tfAtr.getText(), tfRes.getText());
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        btnEliminarRes.addActionListener(evt -> {
+                            Administrador.removeRestriccionSalud(tfAtr.getText(), tfRes.getText());
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelResSalud);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
                     case 10:
-                        JPanel pClimasAtr = new JPanel();
-                        pClimasAtr.add(new JLabel("Pantalla: Gestionar climas restringidos de atracción"));
-                        panelCentralAtracciones.add(pClimasAtr);
+                    	JPanel panelClimasAtr = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelClimasAtr.add(new JLabel("Atracción:"));
+                        JTextField tfAtr1 = new JTextField();
+                        panelClimasAtr.add(tfAtr1);
+
+                        panelClimasAtr.add(new JLabel("Clima:"));
+                        JTextField tfClima = new JTextField();
+                        panelClimasAtr.add(tfClima);
+
+                        JButton btnAgregarClima = new JButton("Agregar");
+                        panelClimasAtr.add(btnAgregarClima, BorderLayout.SOUTH);
+                        JButton btnEliminarClima = new JButton("Eliminar");
+                        panelClimasAtr.add(btnEliminarClima, BorderLayout.SOUTH);
+
+                        btnAgregarClima.addActionListener(evt -> {
+                            Administrador.addClimasRestringidos(tfAtr1.getText(), tfClima.getText());
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        });
+                        btnEliminarClima.addActionListener(evt -> {
+                            Administrador.removeClimasRestringidos(tfAtr1.getText(), tfClima.getText());
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelClimasAtr);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
                     case 11:
-                        JPanel pAltPes = new JPanel();
-                        pAltPes.add(new JLabel("Pantalla: Ver alturas y pesos"));
-                        panelCentralAtracciones.add(pAltPes);
+                    	JPanel panelAltPes = new JPanel(new GridLayout(0, 1, 5, 5));
+                        panelAltPes.add(new JLabel("Nombre de la atracción:"));
+                        JTextField tfNombreAP = new JTextField();
+                        panelAltPes.add(tfNombreAP);
+                        JButton btnVerAltPes = new JButton("Ver");
+                        panelAltPes.add(btnVerAltPes, BorderLayout.SOUTH);
+
+                        btnVerAltPes.addActionListener(evt -> {
+                            int[] datos = Administrador.getAlturasPesos(tfNombreAP.getText());
+                            panelAltPes.add(new JLabel("AltMax: " + datos[0]));
+                            panelAltPes.add(new JLabel("AltMin: " + datos[1]));
+                            panelAltPes.add(new JLabel("PesMax: " + datos[2]));
+                            panelAltPes.add(new JLabel("PesMin: " + datos[3]));
+                            panelAltPes.revalidate();
+                            panelAltPes.repaint();
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelAltPes);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
                     case 12:
-                        JPanel pModAltMax = new JPanel();
-                        pModAltMax.add(new JLabel("Formulario: Modificar altura máxima"));
-                        panelCentralAtracciones.add(pModAltMax);
+                    	JPanel panelModAltMax = new JPanel(new GridLayout(0, 2, 5, 5));
+
+                        panelModAltMax.add(new JLabel("Atracción:"));
+                        JTextField tfAtrModAlt = new JTextField();
+                        panelModAltMax.add(tfAtrModAlt);
+                        
+                        panelModAltMax.add(new JLabel("Altura máxima (cm):"));
+                        JTextField tfAltMax1 = new JTextField();
+                        panelModAltMax.add(tfAltMax1);
+
+                        JButton btnModAltMax = new JButton("Modificar");
+                        panelModAltMax.add(btnModAltMax, BorderLayout.SOUTH);
+
+                        btnModAltMax.addActionListener(evt -> {
+                            int nuevaAltura = Integer.parseInt(tfAltMax1.getText());
+                            String nombreAtr = tfAtrModAlt.getText();
+                            Administrador.setAlturaMaxima(nuevaAltura, nombreAtr);
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelModAltMax);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
                     case 13:
-                        JPanel pModAltMin = new JPanel();
-                        pModAltMin.add(new JLabel("Formulario: Modificar altura mínima"));
-                        panelCentralAtracciones.add(pModAltMin);
+                        JPanel panelModAltMin = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelModAltMin.add(new JLabel("Atracción:"));
+                        JTextField tfAtrModAltMin = new JTextField();
+                        panelModAltMin.add(tfAtrModAltMin);
+                        
+                        panelModAltMin.add(new JLabel("Altura mín (cm):"));
+                        JTextField tfAltMin1 = new JTextField();
+                        panelModAltMin.add(tfAltMin1);
+                        
+                        JButton btnModAltMin = new JButton("Modificar altura mínima");
+                        panelModAltMin.add(btnModAltMin, BorderLayout.SOUTH);
+
+                        btnModAltMin.addActionListener(evt -> {
+                            Administrador.setAlturaMinima(
+                                Integer.parseInt(tfAltMin1.getText()),
+                                tfAtrModAltMin.getText()
+                            );
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelModAltMin);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
+
                     case 14:
-                        JPanel pModPesoMax = new JPanel();
-                        pModPesoMax.add(new JLabel("Formulario: Modificar peso máximo"));
-                        panelCentralAtracciones.add(pModPesoMax);
+                        JPanel panelModPesMax = new JPanel(new GridLayout(0, 2, 5, 5));
+
+                        panelModPesMax.add(new JLabel("Atracción:"));
+                        JTextField tfAtrModPesMax = new JTextField();
+                        panelModPesMax.add(tfAtrModPesMax);
+
+                        panelModPesMax.add(new JLabel("Peso máx (kg):"));
+                        JTextField tfPesMax1 = new JTextField();
+                        panelModPesMax.add(tfPesMax1);
+
+                        JButton btnModPesMax = new JButton("Modificar peso máximo");
+                        panelModPesMax.add(btnModPesMax, BorderLayout.SOUTH);
+
+                        btnModPesMax.addActionListener(evt -> {
+                            Administrador.setPesoMaximo(
+                                Integer.parseInt(tfPesMax1.getText()),
+                                tfAtrModPesMax.getText()
+                            );
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelModPesMax);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
+
                     case 15:
-                        JPanel pModPesoMin = new JPanel();
-                        pModPesoMin.add(new JLabel("Formulario: Modificar peso mínimo"));
-                        panelCentralAtracciones.add(pModPesoMin);
+                        JPanel panelModPesMin = new JPanel(new GridLayout(0, 2, 5, 5));
+
+                        panelModPesMin.add(new JLabel("Atracción:"));
+                        JTextField tfAtrModPesMin = new JTextField();
+                        panelModPesMin.add(tfAtrModPesMin);
+
+                        panelModPesMin.add(new JLabel("Peso mín (kg):"));
+                        JTextField tfPesMin1 = new JTextField();
+                        panelModPesMin.add(tfPesMin1);
+
+                        JButton btnModPesMin = new JButton("Modificar peso mínimo");
+                        panelModPesMin.add(btnModPesMin, BorderLayout.SOUTH);
+
+                        btnModPesMin.addActionListener(evt -> {
+                            Administrador.setPesoMinimo(
+                                Integer.parseInt(tfPesMin1.getText()),
+                                tfAtrModPesMin.getText()
+                            );
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelModPesMin);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
-                    case 16:
-                        JPanel pModRiesgo = new JPanel();
-                        pModRiesgo.add(new JLabel("Formulario: Modificar riesgo alto"));
-                        panelCentralAtracciones.add(pModRiesgo);
+                    case 16:  // Modificar riesgo alto
+                        JPanel panelModRiesgo = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelModRiesgo.add(new JLabel("Atraccion:"));
+                        JTextField tfAtrRiesgo = new JTextField();
+                        panelModRiesgo.add(tfAtrRiesgo);
+
+                        panelModRiesgo.add(new JLabel("¿Riesgo alto?:"));
+                        JCheckBox chkRiesgo = new JCheckBox();
+                        panelModRiesgo.add(chkRiesgo);
+
+                        JButton btnModRiesgo = new JButton("Modificar riesgo alto");
+                        panelModRiesgo.add(btnModRiesgo, BorderLayout.SOUTH);
+
+                        btnModRiesgo.addActionListener(evt -> {
+                            Administrador.setRiesgoAlto(chkRiesgo.isSelected(), tfAtrRiesgo.getText());
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelModRiesgo);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
-                    case 17:
-                        JPanel pVerEdadMin = new JPanel();
-                        pVerEdadMin.add(new JLabel("Pantalla: Ver edad mínima"));
-                        panelCentralAtracciones.add(pVerEdadMin);
+
+                    case 17:  // Ver edad mínima
+                        JPanel panelVerEdad = new JPanel(new GridLayout(0, 1, 5, 5));
+                        panelVerEdad.add(new JLabel("Atraccion:"));
+                        JTextField tfAtrVerEdad = new JTextField();
+                        panelVerEdad.add(tfAtrVerEdad);
+
+                        JButton btnVerEdad = new JButton("Ver edad mínima");
+                        panelVerEdad.add(btnVerEdad, BorderLayout.SOUTH);
+
+                        btnVerEdad.addActionListener(evt -> {
+                            int edadMin = Administrador.getEdadMinima(tfAtrVerEdad.getText());
+                            panelVerEdad.add(new JLabel("Edad mínima: " + edadMin));
+                            panelVerEdad.revalidate();
+                            panelVerEdad.repaint();
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelVerEdad);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
-                    case 18:
-                        JPanel pVerInteract = new JPanel();
-                        pVerInteract.add(new JLabel("Pantalla: Ver si es interactiva"));
-                        panelCentralAtracciones.add(pVerInteract);
+
+                    case 18:  // Ver si es interactiva
+                        JPanel panelVerInteract = new JPanel(new GridLayout(0, 1, 5, 5));
+                        panelVerInteract.add(new JLabel("Atraccion:"));
+                        JTextField tfAtrVerInt = new JTextField();
+                        panelVerInteract.add(tfAtrVerInt);
+
+                        JButton btnVerInt = new JButton("Ver interactividad");
+                        panelVerInteract.add(btnVerInt, BorderLayout.SOUTH);
+
+                        btnVerInt.addActionListener(evt -> {
+                            boolean interact = Administrador.isEsInteractiva(tfAtrVerInt.getText());
+                            panelVerInteract.add(new JLabel("Es interactiva: " + interact));
+                            panelVerInteract.revalidate();
+                            panelVerInteract.repaint();
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelVerInteract);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
-                    case 19:
-                        JPanel pModEdadMin = new JPanel();
-                        pModEdadMin.add(new JLabel("Formulario: Modificar edad mínima"));
-                        panelCentralAtracciones.add(pModEdadMin);
+
+                    case 19:  // Modificar edad mínima
+                        JPanel panelModEdadMin = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelModEdadMin.add(new JLabel("Atraccion:"));
+                        JTextField tfAtrModEdad = new JTextField();
+                        panelModEdadMin.add(tfAtrModEdad);
+
+                        panelModEdadMin.add(new JLabel("Edad mínima:"));
+                        JTextField tfNuevaEdad = new JTextField();
+                        panelModEdadMin.add(tfNuevaEdad);
+
+                        JButton btnModEdadMin = new JButton("Modificar edad mínima");
+                        panelModEdadMin.add(btnModEdadMin, BorderLayout.SOUTH);
+
+                        btnModEdadMin.addActionListener(evt -> {
+                            Administrador.setEdadMinima(
+                                Integer.parseInt(tfNuevaEdad.getText()),
+                                tfAtrModEdad.getText()
+                            );
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelModEdadMin);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
-                    case 20:
-                        JPanel pModInteract = new JPanel();
-                        pModInteract.add(new JLabel("Formulario: Modificar interactividad"));
-                        panelCentralAtracciones.add(pModInteract);
+
+                    case 20:  // Modificar interactividad
+                        JPanel panelModInteract = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelModInteract.add(new JLabel("Atraccion:"));
+                        JTextField tfAtrModInt = new JTextField();
+                        panelModInteract.add(tfAtrModInt);
+
+                        panelModInteract.add(new JLabel("¿Es interactiva?:"));
+                        JCheckBox chkInteract = new JCheckBox();
+                        panelModInteract.add(chkInteract);
+
+                        JButton btnModInteract = new JButton("Modificar interactividad");
+                        panelModInteract.add(btnModInteract, BorderLayout.SOUTH);
+
+                        btnModInteract.addActionListener(evt -> {
+                            Administrador.setEsInteractiva(
+                                chkInteract.isSelected(),
+                                tfAtrModInt.getText()
+                            );
+                            JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                        });
+
+                        panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelModInteract);
+                        panelCentralAtracciones.revalidate();
+                        panelCentralAtracciones.repaint();
                         break;
+
                     default:
                         panelCentralAtracciones.add(new JLabel("Opción no implementada"));
                 }
