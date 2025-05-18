@@ -1135,8 +1135,6 @@ private static Cajero cargarCajero(JSONObject jproducto, Parque parque) throws E
 		for(int i = 0;i<jmenu.length();i++) {
 			
 			String comia= jmenu.getString(i);
-
-			System.out.print(comia);
 			menu.add(comia);
 		}
 		Cafeteria.menu = menu;

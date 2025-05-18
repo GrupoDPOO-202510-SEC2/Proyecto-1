@@ -3,6 +3,7 @@ package control;
 import usuario.Administrador;
 import usuario.Usuario;
 import control.Persistencia;
+import interfaz.Ventana;
 
 public class Main extends ConsolaBasica {
 
@@ -14,17 +15,14 @@ public class Main extends ConsolaBasica {
     	
     	//Persistencia.cargarParque()
     	
-        Parque parque = new Parque("Entrada");
         Usuario.parque = Persistencia.cargarParque();
         Administrador admin = new Administrador("Administrador", "sopa", "sopa", 180, 70);
-        parque.usuarios.put("sopa", admin);
-
-        if (parque.usuarios == null)
-        {
-            parque.usuarios = new java.util.HashMap<>();
-        }
+        Usuario.parque.usuarios.put("sopa", admin);
         
-
+        new Ventana();
+        
+        
+        String a =  """
         String[] opciones = {
             "Consola de Usuario",
             "Consola de Administrador"
@@ -34,24 +32,18 @@ public class Main extends ConsolaBasica {
 
         if (opcion == 1)
         {
-            ConsolaUsuario consolaUsuario = new ConsolaUsuario(parque);
+            ConsolaUsuario consolaUsuario = new ConsolaUsuario(Usuario.parque);
             consolaUsuario.iniciar();
         }
         else if (opcion == 2)
         {
-            ConsolaAdministrador consolaAdmin = new ConsolaAdministrador(parque);
+            ConsolaAdministrador consolaAdmin = new ConsolaAdministrador(Usuario.parque);
             consolaAdmin.iniciar();
         }
         else
         {
             System.out.println("Opción no válida.");
         }
-
-        try {
-			Persistencia.guardarParque(Usuario.parque);
-		} catch (Exception e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
+        		""";     
     }
 }

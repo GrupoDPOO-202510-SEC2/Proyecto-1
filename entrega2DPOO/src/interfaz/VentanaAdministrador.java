@@ -56,9 +56,7 @@ public class VentanaAdministrador {
                             String nombre   = tfNombre.getText();
                             String horario  = tfHorario.getText();
                             String ubicacion= tfUbicacion.getText();
-         
-                            Administrador admin = new Administrador("Administrador", "sopa", "sopa", 180, 70);
-							admin.crearEspectaculo(nombre, horario, ubicacion);
+							Administrador.crearEspectaculo(nombre, horario, ubicacion);
                         });
                     	
                     	panelCentralEspectaculos.removeAll();
@@ -69,7 +67,10 @@ public class VentanaAdministrador {
                     case 1:
                         JPanel pCambiarFecha = new JPanel();
                         pCambiarFecha.add(new JLabel("Pantalla: Cambiar fecha de espectáculo"));
+                        panelCentralEspectaculos.removeAll();
                         panelCentralEspectaculos.add(pCambiarFecha);
+                    	panelCentralEspectaculos.revalidate();
+                    	panelCentralEspectaculos.repaint();
                         break;
                     case 2:
                         JPanel pVerEsp = new JPanel();
@@ -375,7 +376,7 @@ public class VentanaAdministrador {
 
         // ——— Frame principal ———
         JFrame ventana = new JFrame("Ventana Administrador");
-        ventana.setDefaultCloseOperation(JFrame.EXIT_ON_CLOSE);
+        ventana.setDefaultCloseOperation(JFrame.DISPOSE_ON_CLOSE);
         ventana.add(tabbedpane);
         ventana.setSize(1000, 800);
         ventana.setLocationRelativeTo(null);

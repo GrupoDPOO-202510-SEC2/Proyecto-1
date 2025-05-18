@@ -37,6 +37,14 @@
             "nombre": "espectaculo",
             "fechaFin": "null"
         },
+        "pruebaa": {
+            "ubicacion": "prueba",
+            "climasRestringidos": [],
+            "horario": "prueba",
+            "fechaInicio": "null",
+            "nombre": "pruebaa",
+            "fechaFin": "null"
+        },
         "ets": {
             "ubicacion": "entrada",
             "climasRestringidos": ["sol"],
@@ -104,21 +112,35 @@
             "lugarDeTrabajo": "teatro, null",
             "altura": 180,
             "lugarDeTrabajoDia": "teatro",
+            "lugarDeTrabajoNoche": "null",
             "disponible": false
         }
     },
     "tiquetes": {},
-    "usuarios": {"Administrador": {
-        "restricciones": [],
-        "password": "sopa",
-        "compras": {},
-        "altura": 180,
-        "peso": 70,
-        "tiquetesComprados": [],
-        "tiqueteEnUso": 0,
-        "login": "sopa",
-        "nombre": "Administrador"
-    }},
+    "usuarios": {
+        "Administrador": {
+            "restricciones": [],
+            "password": "sopa",
+            "compras": {},
+            "altura": 180,
+            "peso": 70,
+            "tiquetesComprados": [],
+            "tiqueteEnUso": 0,
+            "login": "sopa",
+            "nombre": "Administrador"
+        },
+        "juan": {
+            "restricciones": [],
+            "password": "",
+            "compras": {},
+            "altura": 3,
+            "peso": 3,
+            "tiquetesComprados": [],
+            "tiqueteEnUso": 0,
+            "login": "juan",
+            "nombre": "juan"
+        }
+    },
     "aMecanicas": {"barco": {
         "operadoresDia": [],
         "ubicacion": "sur",

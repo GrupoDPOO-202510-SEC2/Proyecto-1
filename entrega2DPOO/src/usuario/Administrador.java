@@ -15,12 +15,12 @@ public class Administrador extends Usuario{
 	
 	//-------------------------ESPECTACULOS--------------------------//
 	
-	public boolean crearEspectaculo(String nombre, String horario, String ubicacion) {
+	public static boolean crearEspectaculo(String nombre, String horario, String ubicacion) {
 		parque.espectaculos.put(nombre,new Espectaculo(nombre, horario, ubicacion, new HashSet<String>()));
 		return true;
 	}
 	
-	public boolean cambiarFechaEspectaculo(String nombre, String fechai, String fechaf) {
+	public static boolean cambiarFechaEspectaculo(String nombre, String fechai, String fechaf) {
 		
 		if (parque.espectaculos.containsKey(nombre)) {
 			Espectaculo espectaculo = parque.espectaculos.get(nombre);
@@ -36,14 +36,14 @@ public class Administrador extends Usuario{
 		
 	}
 	
-	public Espectaculo getEspectaculo(String nombre) {
+	public static Espectaculo getEspectaculo(String nombre) {
 		if(parque.espectaculos.containsKey(nombre)) {
 			return parque.espectaculos.get(nombre);
 		}
 		return null;
 	}
 	
-	public boolean agregarClimaRestringidoE(String nombre,String clima) {
+	public static boolean agregarClimaRestringidoE(String nombre,String clima) {
 		if(parque.espectaculos.containsKey(nombre)) {
 			Espectaculo espectaculo = parque.espectaculos.get(nombre);
 			boolean retorno =  espectaculo.addClimaRestringido(clima);
@@ -54,7 +54,7 @@ public class Administrador extends Usuario{
 		
 	}
 	
-	public boolean eliminarClimaRestringidoE(String nombre,String clima) {
+	public static boolean eliminarClimaRestringidoE(String nombre,String clima) {
 		
 		if(parque.espectaculos.containsKey(nombre)) {
 			Espectaculo espectaculo = parque.espectaculos.get(nombre);
@@ -72,18 +72,18 @@ public class Administrador extends Usuario{
 
 	
 	
-	public boolean crearAtraccionMecanica(String nombre, int capacidad, int empleadosMin, String ubicacion, int exclusividad, int alturaMax, int alturaMin, int pesoMin, int pesoMax, boolean riesgoAlto){
+	public static boolean crearAtraccionMecanica(String nombre, int capacidad, int empleadosMin, String ubicacion, int exclusividad, int alturaMax, int alturaMin, int pesoMin, int pesoMax, boolean riesgoAlto){
 	
 		parque.aMecanicas.put(nombre, new AtraccionMecanica(nombre, capacidad, empleadosMin, ubicacion, exclusividad, alturaMin, alturaMax, pesoMin, pesoMax, riesgoAlto));
 		return parque.aMecanicas.containsKey(nombre);
 	}
 	
-	public boolean crearAtraccionCultural(String nombre, int capacidadMaxima, int empleadosMinimos, String ubicacion, int nivelExclusividad, int edadMinima, boolean esInteractiva) {
+	public static boolean crearAtraccionCultural(String nombre, int capacidadMaxima, int empleadosMinimos, String ubicacion, int nivelExclusividad, int edadMinima, boolean esInteractiva) {
 		parque.aCulturales.put(nombre, new AtraccionCultural(nombre, capacidadMaxima, empleadosMinimos, ubicacion, nivelExclusividad, edadMinima, esInteractiva));
 		return parque.aCulturales.containsKey(nombre);
 	}
 	
-	public Atraccion getAtraccion(String nombre) {
+	public static Atraccion getAtraccion(String nombre) {
 		
 		if(parque.aMecanicas.containsKey(nombre)) {
 			return parque.aMecanicas.get(nombre);
@@ -94,7 +94,7 @@ public class Administrador extends Usuario{
 		return null;	
 	}
 	
-	public void setCapacidadMaxima(String nombre, int cantidad) {
+	public static void setCapacidadMaxima(String nombre, int cantidad) {
 		
 		if(parque.aMecanicas.containsKey(nombre)) {
 			AtraccionMecanica atraccion = parque.aMecanicas.get(nombre);
@@ -108,7 +108,7 @@ public class Administrador extends Usuario{
 		}
 	}
 	
-	public void setEmpleadosMinimos(String nombre, int cantidad) {
+	public static void setEmpleadosMinimos(String nombre, int cantidad) {
 		
 		if(parque.aMecanicas.containsKey(nombre)) {
 			AtraccionMecanica atraccion = parque.aMecanicas.get(nombre);
@@ -122,7 +122,7 @@ public class Administrador extends Usuario{
 		}
 	}
 	
-	public void setEnServicio(String nombre, boolean enServicio) {
+	public static void setEnServicio(String nombre, boolean enServicio) {
 		
 		if(parque.aMecanicas.containsKey(nombre)) {
 			AtraccionMecanica atraccion = parque.aMecanicas.get(nombre);
@@ -136,7 +136,7 @@ public class Administrador extends Usuario{
 		}
 	}
 	
-	public void setExclusividad(String nombre, int exclusividad) {
+	public static void setExclusividad(String nombre, int exclusividad) {
 		
 		if(parque.aMecanicas.containsKey(nombre)) {
 			AtraccionMecanica atraccion = parque.aMecanicas.get(nombre);
@@ -150,7 +150,7 @@ public class Administrador extends Usuario{
 		}
 	}
 	
-	public int[] getOperadoresAtraccion(String nombre) {
+	public static int[] getOperadoresAtraccion(String nombre) {
 		int[] retorno = new int[2];
 		
 		if(parque.aMecanicas.containsKey(nombre)) {
@@ -168,7 +168,7 @@ public class Administrador extends Usuario{
 		return retorno;
 	}
 	
-	public boolean addOperadorAAtraccion(String loginOperador, String turno, String nombreAtraccion) {
+	public static boolean addOperadorAAtraccion(String loginOperador, String turno, String nombreAtraccion) {
 		
 		boolean retorno = false;
 		
@@ -207,7 +207,7 @@ public class Administrador extends Usuario{
 	}
 	
 	
-	public boolean deleteOperadorAAtraccion(String loginOperador, String turno, String nombreAtraccion) {
+	public static boolean deleteOperadorAAtraccion(String loginOperador, String turno, String nombreAtraccion) {
 		
 		boolean retorno = false;
 		
@@ -220,22 +220,22 @@ public class Administrador extends Usuario{
 				operador.setTurnoDia(false);
 				operador.setLugarDeTrabajoDia(null);
 			}else {
-				operador.setTurnoNoche(true);
+				operador.setTurnoNoche(false);
 				operador.setLugarDeTrabajoNoche(null);
 			}
 			parque.empleados.put(loginOperador, operador);
 		}
 		if (parque.aCulturales.containsKey(nombreAtraccion)) {
 			AtraccionCultural atraccion = parque.aCulturales.get(nombreAtraccion);
-			retorno = atraccion.deleteOperador(loginOperador, getLogin());
+			retorno = atraccion.deleteOperador(loginOperador, turno);
 			parque.aCulturales.put(nombreAtraccion, atraccion);
 			OperadorAtraccion operador = (OperadorAtraccion) parque.empleados.get(loginOperador);
 			if (turno.equals(DIURNO)) {
 				operador.setTurnoDia(false);
 				operador.setLugarDeTrabajoDia(null);
 			}else {
-				operador.setTurnoNoche(true);
-				operador.setLugarDeTrabajoNoche(nombreAtraccion);
+				operador.setTurnoNoche(false);
+				operador.setLugarDeTrabajoNoche(null);
 			}
 			parque.empleados.put(loginOperador, operador);
 			
@@ -243,7 +243,7 @@ public class Administrador extends Usuario{
 		return retorno;
 	}
 	
-	public boolean addRestriccionSalud(String nombreAtraccion, String restriccion) {
+	public static boolean addRestriccionSalud(String nombreAtraccion, String restriccion) {
 		boolean retorno = false;
 		
 		if(parque.aMecanicas.containsKey(nombreAtraccion)) {
@@ -259,7 +259,7 @@ public class Administrador extends Usuario{
 		return retorno;
 	}
 	
-	public boolean removeRestriccionSalud(String nombreAtraccion, String restriccion) {
+	public static boolean removeRestriccionSalud(String nombreAtraccion, String restriccion) {
 		boolean retorno = false;
 		
 		if(parque.aMecanicas.containsKey(nombreAtraccion)) {
@@ -275,7 +275,7 @@ public class Administrador extends Usuario{
 		return retorno;
 	}
 	
-	public HashSet<String> getClimasRestringidos(String nombreAtraccion) {
+	public static HashSet<String> getClimasRestringidos(String nombreAtraccion) {
 		
 		if(parque.aMecanicas.containsKey(nombreAtraccion)) {
 			AtraccionMecanica atraccion = parque.aMecanicas.get(nombreAtraccion);
@@ -289,7 +289,7 @@ public class Administrador extends Usuario{
 		return null;
 	}
 	
-	public boolean addClimasRestringidos(String nombreAtraccion, String climaRestringido) {
+	public static boolean addClimasRestringidos(String nombreAtraccion, String climaRestringido) {
 		boolean retorno = false;
 		
 		if(parque.aMecanicas.containsKey(nombreAtraccion)) {
@@ -305,7 +305,7 @@ public class Administrador extends Usuario{
 		return retorno;
 	}
 	
-	public boolean removeClimasRestringidos(String nombreAtraccion, String climaRestringido) {
+	public static boolean removeClimasRestringidos(String nombreAtraccion, String climaRestringido) {
 		boolean retorno = false;
 		
 		if(parque.aMecanicas.containsKey(nombreAtraccion)) {
@@ -323,36 +323,36 @@ public class Administrador extends Usuario{
 	
 	//------------------------ATRACCIONES MECANICAS---------------------------//
 	
-	public int[] getAlturasPesos(String nombreAtraccion) {
+	public static int[] getAlturasPesos(String nombreAtraccion) {
 		AtraccionMecanica atraccion = parque.aMecanicas.get(nombreAtraccion);
 		return new int[] {atraccion.getAlturaMaxima(),atraccion.getAlturaMinima(),atraccion.getPesoMaximo(),atraccion.getPesoMinimo()};
 	}
 	
-	public void setAlturaMaxima(int alturaMaxima,String nombreAtraccion) {
+	public static void setAlturaMaxima(int alturaMaxima,String nombreAtraccion) {
 		AtraccionMecanica atraccion = parque.aMecanicas.get(nombreAtraccion);
 		atraccion.setAlturaMaxima(alturaMaxima);
 		parque.aMecanicas.put(nombreAtraccion, atraccion);
 	}
 	
-	public void setAlturaMinima(int alturaMinima,String nombreAtraccion) {
+	public static void setAlturaMinima(int alturaMinima,String nombreAtraccion) {
 		AtraccionMecanica atraccion = parque.aMecanicas.get(nombreAtraccion);
 		atraccion.setAlturaMinima(alturaMinima);
 		parque.aMecanicas.put(nombreAtraccion, atraccion);
 	}
 
-	public void setPesoMaximo(int pesoMaximo,String nombreAtraccion) {
+	public static void setPesoMaximo(int pesoMaximo,String nombreAtraccion) {
 		AtraccionMecanica atraccion = parque.aMecanicas.get(nombreAtraccion);
 		atraccion.setPesoMaximo(pesoMaximo);
 		parque.aMecanicas.put(nombreAtraccion, atraccion);
 	}
 	
-	public void setPesoMinimo(int pesoMinimo,String nombreAtraccion) {
+	public static void setPesoMinimo(int pesoMinimo,String nombreAtraccion) {
 		AtraccionMecanica atraccion = parque.aMecanicas.get(nombreAtraccion);
 		atraccion.setPesoMinimo(pesoMinimo);
 		parque.aMecanicas.put(nombreAtraccion, atraccion);
 	}
 	
-	public void setRiesgoAlto(boolean riesgoAlto, String nombreAtraccion) {
+	public static void setRiesgoAlto(boolean riesgoAlto, String nombreAtraccion) {
 		AtraccionMecanica atraccion = parque.aMecanicas.get(nombreAtraccion);
 		atraccion.setRiesgoAlto(riesgoAlto);
 		parque.aMecanicas.put(nombreAtraccion, atraccion);
@@ -360,23 +360,23 @@ public class Administrador extends Usuario{
 	
 	//-----------------------ATRACCIONES CULTURALES----------------------------//
 	
-	public int getEdadMinima(String nombreAtraccion) {
+	public static int getEdadMinima(String nombreAtraccion) {
 		AtraccionCultural atraccion = parque.aCulturales.get(nombreAtraccion);
 		return atraccion.getEdadMinima();
 	}
 
-	public boolean isEsInteractiva(String nombreAtraccion) {
+	public static boolean isEsInteractiva(String nombreAtraccion) {
 		AtraccionCultural atraccion = parque.aCulturales.get(nombreAtraccion);
 		return atraccion.isEsInteractiva();
 	}
 	
-	public void setEdadMinima(int edadMinima, String nombreAtraccion) {
+	public static void setEdadMinima(int edadMinima, String nombreAtraccion) {
 		AtraccionCultural atraccion = parque.aCulturales.get(nombreAtraccion);
 		atraccion.setEdadMinima(edadMinima);
 		parque.aCulturales.put(nombreAtraccion, atraccion);
 	}
 
-	public void setEsInteractiva(boolean esInteractiva, String nombreAtraccion) {
+	public static void setEsInteractiva(boolean esInteractiva, String nombreAtraccion) {
 		AtraccionCultural atraccion = parque.aCulturales.get(nombreAtraccion);
 		atraccion.setEsInteractiva(esInteractiva);
 		parque.aCulturales.put(nombreAtraccion, atraccion);
@@ -384,36 +384,36 @@ public class Administrador extends Usuario{
 	
 	//--------------------------EMPLEADOS---------------------------//
 	
-	public String getLugarDeTrabajo(String loginEmpleado) {
+	public static String getLugarDeTrabajo(String loginEmpleado) {
 		
 		return parque.empleados.get(loginEmpleado).getLugarDeTrabajo();
 	}
 
-	public boolean setLugarDeTrabajo(String lugarDeTrabajo, String loginEmpleado) {
+	public static boolean setLugarDeTrabajo(String lugarDeTrabajo, String loginEmpleado) {
 		Empleado empleado = parque.empleados.get(loginEmpleado);
 		boolean retorno = empleado.setLugarDeTrabajo(lugarDeTrabajo);
 		parque.empleados.put(loginEmpleado, empleado);
 		return retorno;
 	}
 
-	public String getRol(String loginEmpleado) {
+	public static String getRol(String loginEmpleado) {
 
 		return parque.empleados.get(loginEmpleado).getClass().getSimpleName();
 	}
 	
 	
-	public boolean[] getTurnos(String loginEmpleado) {
+	public static boolean[] getTurnos(String loginEmpleado) {
 		return new boolean[] {parque.empleados.get(loginEmpleado).getTurnoDia(),parque.empleados.get(loginEmpleado).getTurnoNoche()};
 	}
 	
-	public boolean setTurnoDia(boolean turnoDia, String loginEmpleado) {
+	public static boolean setTurnoDia(boolean turnoDia, String loginEmpleado) {
 		Empleado empleado = parque.empleados.get(loginEmpleado);
 		boolean retorno = empleado.setTurnoDia(turnoDia);
 		parque.empleados.put(loginEmpleado, empleado);
 		return retorno;
 	}
 	
-	public boolean setTurnoNoche(boolean turnoNoche, String loginEmpleado) {
+	public static boolean setTurnoNoche(boolean turnoNoche, String loginEmpleado) {
 		Empleado empleado = parque.empleados.get(loginEmpleado);
 		boolean retorno = empleado.setTurnoNoche(turnoNoche);
 		parque.empleados.put(loginEmpleado, empleado);
@@ -422,36 +422,36 @@ public class Administrador extends Usuario{
 	
 	//--------------------------LUGAR DE SERVICIO----------------------------------//
 	
-	public void crearCafeteria(String nombre, String ubicacion, String tipo) {
+	public static void crearCafeteria(String nombre, String ubicacion, String tipo) {
 		parque.mapaCafeterias.put(nombre, new Cafeteria(nombre, ubicacion, tipo));
 	}
 	
-	public void crearTienda(String nombre, String ubicacion, String tipo) {
+	public static void crearTienda(String nombre, String ubicacion, String tipo) {
 		parque.mapaTiendas.put(nombre, new Tienda(nombre, ubicacion, tipo));
 	}
 
-	public HashSet<String> getMenu() {
+	public static HashSet<String> getMenu() {
 		return Cafeteria.menu;
 	}
 	
-	public HashSet<String> getItems() {
+	public static HashSet<String> getItems() {
 		return Tienda.items;
 	}
 	
-	public boolean addComia(String comia) {
+	public static boolean addComia(String comia) {
 		return Cafeteria.menu.add(comia);
 	}
 	
-	public boolean removeComia(String comia) {
+	public static boolean removeComia(String comia) {
 		return Cafeteria.menu.remove(comia);
 	}
 
 	
-	public boolean additem(String item) {
+	public static boolean additem(String item) {
 		return Tienda.items.add(item);
 	}
 	
-	public boolean removeitem(String item) {
+	public static boolean removeitem(String item) {
 		return Tienda.items.remove(item);
 	}
 	
@@ -459,7 +459,7 @@ public class Administrador extends Usuario{
 	//---------------------------------------EMPLEADOS 2.0--------------------------------------------------//
 	
 	
-	public boolean crearCajero(String nombre, String login, String password, int altura, int peso, String lugarDeTrabajo, String turno) {
+	public static boolean crearCajero(String nombre, String login, String password, int altura, int peso, String lugarDeTrabajo, String turno) {
 		Cajero cajero = new Cajero(nombre, login, password, altura, peso, lugarDeTrabajo);
 		if (cajero.setLugarDeTrabajo(lugarDeTrabajo)) {
 			if (turno.equals(DIURNO)) {
@@ -475,7 +475,7 @@ public class Administrador extends Usuario{
 	return false;
 	}
 	
-	public boolean crearCajeroAtraccion(String nombre, String login, String password, int altura, int peso,
+	public static boolean crearCajeroAtraccion(String nombre, String login, String password, int altura, int peso,
 			String lugarDeTrabajo,String turno) {
 		CajeroAtraccion cajero = new CajeroAtraccion(nombre,login,password,altura,peso,null);
 		if(cajero.setLugarDeTrabajo(lugarDeTrabajo)) {
@@ -493,7 +493,7 @@ public class Administrador extends Usuario{
 		
 	}
 	
-	public boolean crearCajeroTaquilla(String nombre, String login, String password, int altura, int peso,
+	public static boolean crearCajeroTaquilla(String nombre, String login, String password, int altura, int peso,
 		String turno) {
 		CajeroTaquilla cajero = new CajeroTaquilla(nombre,login,password,altura,peso,"Taquilla");
 		if (turno.equals(DIURNO)) {
@@ -508,7 +508,7 @@ public class Administrador extends Usuario{
 		return false;
 	}
 	
-	public boolean crearCocinero(String nombre, String login, String password, int altura, int peso,
+	public static boolean crearCocinero(String nombre, String login, String password, int altura, int peso,
 			String turno, String lugarDeTrabajo) {
 		
 		Cocinero cocinero = new Cocinero(nombre,login,password,altura,peso, null,new ArrayList<String>());
@@ -527,7 +527,7 @@ public class Administrador extends Usuario{
 		return false;
 	}
 	
-	public boolean addComidaCocinero(String loginCocinero, String comia) {
+	public static boolean addComidaCocinero(String loginCocinero, String comia) {
 		Cocinero cocinero = (Cocinero) parque.empleados.get(loginCocinero);
 		
 		cocinero.addAlimentoPreparable(comia);
@@ -536,13 +536,13 @@ public class Administrador extends Usuario{
 	}
 	
 	
-	public boolean crearOperadorAtraccion(String nombre, String login, String password, int altura, int peso) {
+	public static boolean crearOperadorAtraccion(String nombre, String login, String password, int altura, int peso) {
 		OperadorAtraccion operador = new OperadorAtraccion(nombre, login, password, altura, peso);
 		parque.empleados.put(login,operador);
 		return true;
 	}
 	
-	public boolean crearServicioGeneral(String nombre, String login, String password, int altura, int peso
+	public static boolean crearServicioGeneral(String nombre, String login, String password, int altura, int peso
 			, String lugarDeTrabajo, String turno) {
 		ServicioGeneral empleado = new ServicioGeneral(nombre, login, password, altura, peso, lugarDeTrabajo);
 		empleado.setLugarDeTrabajo(lugarDeTrabajo);
