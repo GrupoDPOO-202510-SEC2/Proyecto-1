@@ -5,6 +5,7 @@ import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.*;
 
+import atraccion.Atraccion;
 import atraccion.Espectaculo;
 import usuario.Administrador;
 
@@ -321,24 +322,101 @@ public class VentanaAdministrador {
                     	panelCentralAtracciones.repaint();
                         break;
                     case 2:
-                        JPanel pVerAtr = new JPanel();
-                        pVerAtr.add(new JLabel("Pantalla: Ver atracción"));
-                        panelCentralAtracciones.add(pVerAtr);
+                    	JPanel panelVerAtr = new JPanel(new GridLayout(0, 1, 5, 5));
+                        panelVerAtr.add(new JLabel("Nombre: "));
+                        JTextField tfNombre2 = new JTextField();
+                        panelVerAtr.add(tfNombre2);
+                        JButton btnCrear2 = new JButton("Ver");
+                    	panelVerAtr.add(btnCrear2, BorderLayout.SOUTH);
+                    	
+                    	btnCrear2.addActionListener(evt -> {
+                    		String nombreA = tfNombre2.getText();
+                            Atraccion atr = Administrador.getAtraccion(nombreA);
+							panelVerAtr.add(new JLabel("Nombre: "+ atr.getNombre()));
+	                        panelVerAtr.add(new JLabel("Ubicación: "+ atr.getUbicacion()));
+	                        panelVerAtr.add(new JLabel("Empleados Minimos: "+ atr.getEmpleadosMinimos()));
+	                        panelVerAtr.add(new JLabel("Nivel Exclusividad: "+ atr.getNivelExclusividad()));
+	                        panelVerAtr.add(new JLabel("Capcidad Máxima: "+ atr.getCapacidadMaxima()));
+							});
+                    	panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelVerAtr);
+                    	panelCentralAtracciones.revalidate();
+                    	panelCentralAtracciones.repaint();
                         break;
                     case 3:
-                        JPanel pModCap = new JPanel();
-                        pModCap.add(new JLabel("Formulario: Modificar capacidad máxima"));
-                        panelCentralAtracciones.add(pModCap);
+                        JPanel panelModCap = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelModCap.add(new JLabel("Nombre: "));
+                        JTextField tfNombreCap = new JTextField();
+                        panelModCap.add(tfNombreCap);
+                    	
+                    	panelModCap.add(new JLabel("Capacidad: "));
+                        JTextField tfCapacidad1 = new JTextField();
+                        panelModCap.add(tfCapacidad1);
+                        
+                        JButton btnModificar = new JButton("Modificar");
+                    	panelModCap.add(btnModificar, BorderLayout.SOUTH);
+                    	
+                        btnModificar.addActionListener(evt -> {
+                    		String nombreCap = tfNombreCap.getText();
+                            String capacidadc = tfCapacidad1.getText();
+                            int capacidad = Integer.parseInt(capacidadc);
+                            Administrador.setCapacidadMaxima(nombreCap, capacidad);
+							JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se modificó correctamente la capacidad máxima", JOptionPane.INFORMATION_MESSAGE);
+
+							});
+                    	panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelModCap);
+                    	panelCentralAtracciones.revalidate();
+                    	panelCentralAtracciones.repaint();
                         break;
                     case 4:
-                        JPanel pModEmp = new JPanel();
-                        pModEmp.add(new JLabel("Formulario: Modificar empleados mínimos"));
-                        panelCentralAtracciones.add(pModEmp);
+                    	JPanel panelModEmp = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelModEmp.add(new JLabel("Nombre: "));
+                        JTextField tfNombreEmp = new JTextField();
+                        panelModEmp.add(tfNombreEmp);
+                    	
+                    	panelModEmp.add(new JLabel("Numero de Empleados: "));
+                        JTextField tfnEmp = new JTextField();
+                        panelModEmp.add(tfnEmp);
+                        
+                        JButton btnModificar1 = new JButton("Modificar");
+                    	panelModEmp.add(btnModificar1, BorderLayout.SOUTH);
+                    	
+                        btnModificar1.addActionListener(evt -> {
+                    		String nombreEmp = tfNombreEmp.getText();
+                            String nEmps = tfnEmp.getText();
+                            int nEmp = Integer.parseInt(nEmps);
+                            Administrador.setEmpleadosMinimos(nombreEmp, nEmp);
+                            JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se modificó correctamente los empleados mínimos", JOptionPane.INFORMATION_MESSAGE);
+							});
+                    	panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelModEmp);
+                    	panelCentralAtracciones.revalidate();
+                    	panelCentralAtracciones.repaint();
                         break;
                     case 5:
-                        JPanel pModEstado = new JPanel();
-                        pModEstado.add(new JLabel("Formulario: Modificar estado de servicio"));
-                        panelCentralAtracciones.add(pModEstado);
+                        JPanel panelModEstado = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelModEstado.add(new JLabel("Nombre: "));
+                        JTextField tfNombreEst = new JTextField();
+                        panelModEstado.add(tfNombreEst);
+                        
+                        panelModEstado.add(new JLabel("¿Está en servicio?"));
+                        JCheckBox cbestado = new JCheckBox();
+                        panelModEstado.add(cbestado);
+                        
+                        JButton btnModificar2 = new JButton("Modificar");
+                    	panelModEstado.add(btnModificar2, BorderLayout.SOUTH);
+                        
+                        btnModificar2.addActionListener(evt -> {
+                    		String nombreEmp = tfNombreEst.getText();
+                            boolean ees = cbestado.isSelected();
+                            Administrador.setEnServicio(nombreEmp, ees);
+                            JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se modificó correctamente los empleados mínimos", JOptionPane.INFORMATION_MESSAGE);
+							});
+                    	panelCentralAtracciones.removeAll();
+                        panelCentralAtracciones.add(panelModEstado);
+                    	panelCentralAtracciones.revalidate();
+                    	panelCentralAtracciones.repaint();
                         break;
                     case 6:
                         JPanel pModExcl = new JPanel();
