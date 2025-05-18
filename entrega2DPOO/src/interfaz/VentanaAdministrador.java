@@ -4,6 +4,8 @@ import java.awt.GridLayout;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.*;
+
+import atraccion.Espectaculo;
 import usuario.Administrador;
 
 public class VentanaAdministrador {
@@ -66,22 +68,88 @@ public class VentanaAdministrador {
                     	panelCentralEspectaculos.repaint();
                         break;
                     case 1:
-                        JPanel pCambiarFecha = new JPanel();
-                        pCambiarFecha.add(new JLabel("Pantalla: Cambiar fecha de espectáculo"));
+                        JPanel panelCambiarFecha = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelCambiarFecha.add(new JLabel("Nombre: "));
+                        JTextField tfNombre1 = new JTextField();
+                        panelCambiarFecha.add(tfNombre1);
+                    	
+                    	panelCambiarFecha.add(new JLabel("Fecha Inicial: "));
+                        JTextField tfFechai = new JTextField();
+                        panelCambiarFecha.add(tfFechai);
+                    	
+                    	panelCambiarFecha.add(new JLabel("Fecha Final: "));
+                        JTextField tfFechaf = new JTextField();
+                        panelCambiarFecha.add(tfFechaf);
+                    	
+                    	JButton btnCrear1 = new JButton("Crear espectáculo");
+                    	panelCambiarFecha.add(btnCrear1, BorderLayout.SOUTH);
+                    	
+                    	btnCrear1.addActionListener(evt -> {
+                            String nombre1   = tfNombre1.getText();
+                            String fechai  = tfFechai.getText();
+                            String fechaf= tfFechaf.getText();
+							Administrador.cambiarFechaEspectaculo(nombre1, fechai, fechaf);
+							JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se cambió Correctamente la fecha", JOptionPane.INFORMATION_MESSAGE);
+							});
+                    	
                         panelCentralEspectaculos.removeAll();
-                        panelCentralEspectaculos.add(pCambiarFecha);
+                        panelCentralEspectaculos.add(panelCambiarFecha);
                     	panelCentralEspectaculos.revalidate();
                     	panelCentralEspectaculos.repaint();
                         break;
                     case 2:
-                        JPanel pVerEsp = new JPanel();
-                        pVerEsp.add(new JLabel("Pantalla: Ver espectáculo"));
-                        panelCentralEspectaculos.add(pVerEsp);
+                        JPanel panelVerEsp = new JPanel(new GridLayout(0, 1, 5, 5));
+                        panelVerEsp.add(new JLabel("Nombre: "));
+                        JTextField tfNombre2 = new JTextField();
+                        panelVerEsp.add(tfNombre2);
+                        JButton btnCrear2 = new JButton("Ver");
+                    	panelVerEsp.add(btnCrear2, BorderLayout.SOUTH);
+                    	
+                    	btnCrear2.addActionListener(evt -> {
+                    		String nombre2 = tfNombre2.getText();
+                            Espectaculo esp = Administrador.getEspectaculo(nombre2);
+							panelVerEsp.add(new JLabel("Nombre: "+ esp.getNombre()));
+	                        panelVerEsp.add(new JLabel("Ubicación: "+ esp.getUbicacion()));
+	                        panelVerEsp.add(new JLabel("Horario: "+ esp.getHorario()));
+	                        panelVerEsp.add(new JLabel("Fecha Inicio: "+ esp.getFechaInicio()));
+	                        panelVerEsp.add(new JLabel("Fecha Fin: "+ esp.getFechaFin()));
+							});
+                    	panelCentralEspectaculos.removeAll();
+                        panelCentralEspectaculos.add(panelVerEsp);
+                    	panelCentralEspectaculos.revalidate();
+                    	panelCentralEspectaculos.repaint();
                         break;
                     case 3:
-                        JPanel pClimas = new JPanel();
-                        pClimas.add(new JLabel("Pantalla: Gestionar climas restringidos"));
-                        panelCentralEspectaculos.add(pClimas);
+                        JPanel panelClimas = new JPanel(new GridLayout(0, 2, 5, 5));
+                        panelClimas.add(new JLabel("Nombre: "));
+                        JTextField tfNombre3 = new JTextField();
+                        panelClimas.add(tfNombre3);
+                    	
+                    	panelClimas.add(new JLabel("Clima: "));
+                        JTextField tfClima = new JTextField();
+                        panelClimas.add(tfClima);
+                        JButton btnagregar = new JButton("Agregar");
+                    	panelClimas.add(btnagregar, BorderLayout.SOUTH);
+                    	JButton btneliminar = new JButton("Eliminar");
+                    	panelClimas.add(btneliminar, BorderLayout.SOUTH);
+                    	
+                    	btnagregar.addActionListener(evt -> {
+                            String nombre3   = tfNombre3.getText();
+                            String clima  = tfClima.getText();
+							Administrador.agregarClimaRestringidoE(nombre3, clima);
+							JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se agregó correctamente el clima", JOptionPane.INFORMATION_MESSAGE);
+							});
+                    	btneliminar.addActionListener(evt -> {
+                            String nombre3   = tfNombre3.getText();
+                            String clima  = tfClima.getText();
+							Administrador.eliminarClimaRestringidoE(nombre3, clima);
+							JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se eliminó correctamente el clima", JOptionPane.INFORMATION_MESSAGE);
+							});
+                    	
+                    	panelCentralEspectaculos.removeAll();
+                        panelCentralEspectaculos.add(panelClimas);
+                    	panelCentralEspectaculos.revalidate();
+                    	panelCentralEspectaculos.repaint();
                         break;
                     default:
                         panelCentralEspectaculos.add(new JLabel("Opción no implementada"));
