@@ -199,9 +199,64 @@ public class VentanaAdministrador {
                 panelCentralAtracciones.removeAll();
                 switch (lista2.getSelectedIndex()) {
                     case 0:
-                        JPanel pCrearAtr = new JPanel();
-                        pCrearAtr.add(new JLabel("Formulario: Crear atracción cultural"));
-                        panelCentralAtracciones.add(pCrearAtr);
+                    	JPanel panelCrearAtraccionC = new JPanel(new GridLayout(0, 2, 5, 5)); 
+                    	panelCrearAtraccionC.add(new JLabel("Nombre: "));
+                    	JTextField tfNombreAC = new JTextField();
+                    	panelCrearAtraccionC.add(tfNombreAC);
+
+                    	panelCrearAtraccionC.add(new JLabel("Capacidad: "));
+                    	JTextField tfCapacidad = new JTextField();
+                    	panelCrearAtraccionC.add(tfCapacidad);
+
+                    	panelCrearAtraccionC.add(new JLabel("Empleados Mínimos: "));
+                    	JTextField tfEminimos = new JTextField();
+                    	panelCrearAtraccionC.add(tfEminimos);
+                    	
+                    	panelCrearAtraccionC.add(new JLabel("Ubicación: "));
+                    	JTextField tfUbicacionAC = new JTextField();
+                    	panelCrearAtraccionC.add(tfUbicacionAC);
+                    	
+                    	panelCrearAtraccionC.add(new JLabel("Exclusividad: "));
+                    	JTextField tfExclusividad = new JTextField();
+                    	panelCrearAtraccionC.add(tfExclusividad);
+                    	
+                    	panelCrearAtraccionC.add(new JLabel("Edad mínima: "));
+                    	JTextField tfEdMin = new JTextField();
+                    	panelCrearAtraccionC.add(tfEdMin);
+                    	
+                    	panelCrearAtraccionC.add(new JLabel("¿Es Interactiva?: "));
+                    	JTextField tfEI = new JTextField();
+                    	panelCrearAtraccionC.add(tfEI);
+                    	
+                    	JButton btnCrearAC = new JButton("Crear Atracción Cultural");
+                    	panelCrearAtraccionC.add(btnCrearAC, BorderLayout.SOUTH);
+                        
+                        btnCrearAC.addActionListener(evt -> {
+                            String nombre   = tfNombreAC.getText();
+                            String capacidads = tfCapacidad.getText();
+                            int capacidad = Integer.parseInt(capacidads);
+                            String emins = tfEminimos.getText();
+                            int emin  = Integer.parseInt(emins);
+                            String ubicacion = tfUbicacionAC.getText();
+                            String exclusividads = tfExclusividad.getText();
+                            int exclusividad = Integer.parseInt(exclusividads);
+                            String edmins = tfEdMin.getText();
+                            int edmin = Integer.parseInt(edmins);
+                            String eis = tfEI.getText().trim().toLowerCase();
+                            boolean ei = false;
+                            if (eis.equals("si") || eis.equals("sí") || eis.equals("true")) {
+                                ei = true;
+                            } else if (eis.equals("no") || eis.equals("false")) {
+                                ei = false;
+                            }
+							Administrador.crearAtraccionCultural(nombre, capacidad, emin, ubicacion, exclusividad, edmin, ei);
+							JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se creo correctamente la Atracción Cultural", JOptionPane.INFORMATION_MESSAGE);
+							});
+                    	
+                    	panelCentralAtracciones.removeAll();
+                    	panelCentralAtracciones.add(panelCrearAtraccionC);
+                    	panelCentralAtracciones.revalidate();
+                    	panelCentralAtracciones.repaint();
                         break;
                     case 1:
                         JPanel pVerAtr = new JPanel();
