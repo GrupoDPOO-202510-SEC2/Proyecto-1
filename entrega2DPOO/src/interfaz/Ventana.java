@@ -15,6 +15,9 @@ public class Ventana extends JFrame {
 
     private JPanel panelInicial;
     private JPanel panelAdmin;
+    private JPanel panelUsuario;
+    private JPanel panelUsuarioLogin;
+    private JPanel panelUsuarioRegister;  
     private CardLayout cardLayout;
 
     public Ventana() {
@@ -23,6 +26,10 @@ public class Ventana extends JFrame {
 
         panelInicial = new JPanel(new GridBagLayout());
         panelAdmin = new JPanel(new GridBagLayout());
+        panelUsuario = new JPanel(new GridBagLayout());
+        panelUsuarioLogin = new JPanel(new GridBagLayout());
+        panelUsuarioRegister = new JPanel(new GridBagLayout());
+        
 
         GridBagConstraints espacioFields = new GridBagConstraints();
         espacioFields.gridx = 0;
@@ -48,7 +55,7 @@ public class Ventana extends JFrame {
         botonUsuario.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
-                cardLayout.show(getContentPane(), "Panel Usuario");
+                cardLayout.show(getContentPane(), "Panel Menu Usuario");
             }
         });
 
@@ -66,14 +73,14 @@ public class Ventana extends JFrame {
 //---------------------------------Login admin---------------------------------------//
       
         panelAdmin.add(new JLabel("Login:"), espacioLables);
-        JTextField tfLogin = new JTextField();
-        tfLogin.setColumns(20);
-        panelAdmin.add(tfLogin, espacioFields);
+        JTextField tfALogin = new JTextField();
+        tfALogin.setColumns(20);
+        panelAdmin.add(tfALogin, espacioFields);
 
         panelAdmin.add(new JLabel("Contraseña:"), espacioLables);
-        JTextField tfContrsena = new JTextField(100);
-        tfContrsena.setColumns(20);
-        panelAdmin.add(tfContrsena, espacioFields);
+        JTextField tfAContrsena = new JTextField(100);
+        tfAContrsena.setColumns(20);
+        panelAdmin.add(tfAContrsena, espacioFields);
 
         JButton iniciarSesion = new JButton("Iniciar sesión");
         panelAdmin.add(iniciarSesion, espacioFields);
@@ -81,16 +88,152 @@ public class Ventana extends JFrame {
         iniciarSesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	String login = tfALogin.getText();
+            	String contrasena = tfAContrsena.getText();
             	
+            	if (login.equals("sopa") && contrasena.equals("sopa")) {
+	                new VentanaAdministrador();
+	                cardLayout.show(getContentPane(), "Panel Inicial");
+	                tfALogin.setText("");
+	                tfAContrsena.setText("");
+            	}else {
+            		JOptionPane.showMessageDialog(null, "Error de Autenticacion", "Contraseña o usuario incorrecta", JOptionPane.INFORMATION_MESSAGE);
+            	}
             	
-                new VentanaAdministrador();
-                cardLayout.show(getContentPane(), "Panel Inicial");
+            }
+        });
+        
+//---------------------------------menu usuario---------------------------------------//
+
+        
+        JButton botonUsuarioLogin = new JButton("Inicir Sesion");
+        botonUsuarioLogin.setPreferredSize(new Dimension(150, 30));
+        
+        JButton botonUsuarioSignIn = new JButton("Registrame");
+        botonUsuarioSignIn.setPreferredSize(new Dimension(150, 30));
+
+        botonUsuarioLogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(getContentPane(), "Panel Usuario login");
             }
         });
 
+        botonUsuarioSignIn.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+                cardLayout.show(getContentPane(), "Panel Usuario register");
+            }
+        });
+
+        panelUsuario.add(botonUsuarioLogin, espacioFields);
+        panelUsuario.add(botonUsuarioSignIn, espacioFields);
+        
+//---------------------------------menu usuario login---------------------------------------//
+       
+        
+        panelUsuarioLogin.add(new JLabel("Login:"), espacioLables);
+        JTextField tfULoginLogin = new JTextField();
+        tfULoginLogin.setColumns(20);
+        panelUsuarioLogin.add(tfULoginLogin, espacioFields);
+
+        panelUsuarioLogin.add(new JLabel("Contraseña:"), espacioLables);
+        JTextField tfUContrsenaLogin = new JTextField(100);
+        tfUContrsenaLogin.setColumns(20);
+        panelUsuarioLogin.add(tfUContrsenaLogin, espacioFields);
+
+        JButton iniciarSesionULogin = new JButton("Iniciar sesión");
+        panelUsuarioLogin.add(iniciarSesionULogin, espacioFields);
+
+        iniciarSesionULogin.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	String login = tfULoginLogin.getText();
+            	String contrasena = tfUContrsenaLogin.getText();
+            	if(Usuario.parque.usuarios.containsKey(login)) {
+            		Usuario usuario = Usuario.parque.usuarios.get(login);
+            		if ( usuario.getPassword().equals(contrasena)) {
+            			//abrir interfaz de usuario
+            		}
+            	}else {
+            		JOptionPane.showMessageDialog(null, "Error de Autenticacion", "Contraseña o usuario incorrecta", JOptionPane.INFORMATION_MESSAGE);
+            	}
+            	
+            }
+        });
+        
+//---------------------------------menu usuario register---------------------------------------//
+        
+        
+        
+        
+        
+        
+        panelUsuarioRegister.add(new JLabel("Nombre:"), espacioLables);
+        JTextField tfUNombreRegister = new JTextField(100);
+        tfUNombreRegister.setColumns(20);
+        panelUsuarioRegister.add(tfUNombreRegister, espacioFields);
+        
+        panelUsuarioRegister.add(new JLabel("Login:"), espacioLables);
+        JTextField tfULoginRegister = new JTextField();
+        tfULoginRegister.setColumns(20);
+        panelUsuarioRegister.add(tfULoginRegister, espacioFields);
+
+        panelUsuarioRegister.add(new JLabel("Contraseña:"), espacioLables);
+        JTextField tfUContrsenaRegister = new JTextField(100);
+        tfUContrsenaRegister.setColumns(20);
+        panelUsuarioRegister.add(tfUContrsenaRegister, espacioFields);
+        
+        panelUsuarioRegister.add(new JLabel("Altura (cm):"), espacioLables);
+        JTextField tfUAlturaRegister = new JTextField(100);
+        tfUAlturaRegister.setColumns(20);
+        panelUsuarioRegister.add(tfUAlturaRegister, espacioFields);
+        
+        panelUsuarioRegister.add(new JLabel("Peso (kg):"), espacioLables);
+        JTextField tfUPesoRegister = new JTextField(100);
+        tfUPesoRegister.setColumns(20);
+        panelUsuarioRegister.add(tfUPesoRegister, espacioFields);
+        
+        
+
+        JButton iniciarSesionURegister = new JButton("Registrarme");
+        panelUsuarioRegister.add(iniciarSesionURegister, espacioFields);
+
+        iniciarSesionURegister.addActionListener(new ActionListener() {
+            @Override
+            public void actionPerformed(ActionEvent e) {
+            	String login = tfULoginRegister.getText();
+            	String contrasena = tfUContrsenaRegister.getText();
+            	String nombre = tfUNombreRegister.getText();
+            	String peso = tfUPesoRegister.getText();
+            	String altura = tfUAlturaRegister.getText();
+            	
+            	if(Usuario.parque.usuarios.containsKey(login)) {
+            		JOptionPane.showMessageDialog(null, "Este login ya existe", "Error de Autenticacion", JOptionPane.INFORMATION_MESSAGE);
+            	}else {
+            		if (isInteger(peso) && isInteger(altura)) {
+            			Usuario usuario = new Usuario(nombre, login, contrasena, Integer.parseInt(altura), Integer.parseInt(peso));
+            			Usuario.parque.usuarios.put(login, usuario);
+            			JOptionPane.showMessageDialog(null, "Se creo correctamente su usuario", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
+            			//abrir interfaz de usuario
+            		}else {
+            			JOptionPane.showMessageDialog(null, "La altura y el peso tienen que ser enteros", "Error de Formato", JOptionPane.INFORMATION_MESSAGE);
+            		}
+            		
+            	}
+            }
+        });
+        
+        
+        
+        
         add(panelInicial, "Panel Inicial");
         add(panelAdmin, "Panel Admin");
-
+        add(panelUsuario, "Panel Menu Usuario");
+        add(panelUsuarioLogin, "Panel Usuario login");
+        add(panelUsuarioRegister, "Panel Usuario register");
+        
+        setResizable(false);
         setSize(400, 700);
         setVisible(true);
         setLocationRelativeTo(null);
@@ -122,6 +265,17 @@ public class Ventana extends JFrame {
         });
         
     }
+    
+    
+    private static boolean isInteger(String str) {
+        try {
+            Integer.parseInt(str);
+            return true;
+        } catch (NumberFormatException e) {
+            return false;
+        }
+    }
+
 
 }
 
