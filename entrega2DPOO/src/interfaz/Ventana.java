@@ -153,7 +153,7 @@ public class Ventana extends JFrame {
             	if(Usuario.parque.usuarios.containsKey(login)) {
             		Usuario usuario = Usuario.parque.usuarios.get(login);
             		if ( usuario.getPassword().equals(contrasena)) {
-            			//abrir interfaz de usuario
+            			new VentanaUsuario(usuario);
             		}
             	}else {
             		JOptionPane.showMessageDialog(null, "Error de Autenticacion", "Contraseña o usuario incorrecta", JOptionPane.INFORMATION_MESSAGE);
@@ -215,7 +215,7 @@ public class Ventana extends JFrame {
             			Usuario usuario = new Usuario(nombre, login, contrasena, Integer.parseInt(altura), Integer.parseInt(peso));
             			Usuario.parque.usuarios.put(login, usuario);
             			JOptionPane.showMessageDialog(null, "Se creo correctamente su usuario", "Operacion Exitosa", JOptionPane.INFORMATION_MESSAGE);
-            			//abrir interfaz de usuario
+            			new VentanaUsuario(usuario);
             		}else {
             			JOptionPane.showMessageDialog(null, "La altura y el peso tienen que ser enteros", "Error de Formato", JOptionPane.INFORMATION_MESSAGE);
             		}
