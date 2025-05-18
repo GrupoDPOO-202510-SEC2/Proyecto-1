@@ -81,6 +81,8 @@ public class Ventana extends JFrame {
         iniciarSesion.addActionListener(new ActionListener() {
             @Override
             public void actionPerformed(ActionEvent e) {
+            	
+            	
                 new VentanaAdministrador();
                 cardLayout.show(getContentPane(), "Panel Inicial");
             }

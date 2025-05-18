@@ -57,7 +57,8 @@ public class VentanaAdministrador {
                             String horario  = tfHorario.getText();
                             String ubicacion= tfUbicacion.getText();
 							Administrador.crearEspectaculo(nombre, horario, ubicacion);
-                        });
+							JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se creo correctamente el espectaculo", JOptionPane.INFORMATION_MESSAGE);
+							});
                     	
                     	panelCentralEspectaculos.removeAll();
                     	panelCentralEspectaculos.add(panelCrearEspectaculo);
