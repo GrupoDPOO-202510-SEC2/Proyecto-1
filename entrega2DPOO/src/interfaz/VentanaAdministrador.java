@@ -163,26 +163,27 @@ public class VentanaAdministrador {
 
         // ——— Pestaña Atracciones ———
         String[] metodos2 = {
-            "1. Crear atracción cultural",
-            "2. Ver atracción",
-            "3. Modificar capacidad máxima",
-            "4. Modificar empleados mínimos",
-            "5. Modificar estado de servicio",
-            "6. Modificar exclusividad",
-            "7. Ver operadores de atracción",
-            "8. Gestionar operadores",
-            "9. Gestionar restricciones de salud",
-            "10. Gestionar climas restringidos de atracción",
-            "11. Ver alturas y pesos",
-            "12. Modificar altura máxima",
-            "13. Modificar altura mínima",
-            "14. Modificar peso máximo",
-            "15. Modificar peso mínimo",
-            "16. Modificar riesgo alto",
-            "17. Ver edad mínima",
-            "18. Ver si es interactiva",
-            "19. Modificar edad mínima",
-            "20. Modificar interactividad"
+        		"1. Crear atracción mecánica",
+        	    "2. Crear atracción cultural",
+        	    "3. Ver atracción",
+        	    "4. Modificar capacidad máxima",
+        	    "5. Modificar empleados mínimos",
+        	    "6. Modificar estado de servicio",
+        	    "7. Modificar exclusividad",
+        	    "8. Ver operadores de atracción",
+        	    "9. Gestionar operadores",
+        	    "10. Gestionar restricciones de salud",
+        	    "11. Gestionar climas restringidos de atracción",
+        	    "12. Ver alturas y pesos",
+        	    "13. Modificar altura máxima",
+        	    "14. Modificar altura mínima",
+        	    "15. Modificar peso máximo",
+        	    "16. Modificar peso mínimo",
+        	    "17. Modificar riesgo alto",
+        	    "18. Ver edad mínima",
+        	    "19. Ver si es interactiva",
+        	    "20. Modificar edad mínima",
+        	    "21. Modificar interactividad"
         };
         JList<String> lista2 = new JList<>(metodos2);
         JScrollPane scroll2 = new JScrollPane(lista2);
@@ -198,7 +199,74 @@ public class VentanaAdministrador {
             if (!e.getValueIsAdjusting()) {
                 panelCentralAtracciones.removeAll();
                 switch (lista2.getSelectedIndex()) {
-                    case 0:
+                case 0:
+                    JPanel panelCrearAtraccionM = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelCrearAtraccionM.add(new JLabel("Nombre:"));
+                    JTextField tfNombreM = new JTextField();
+                    panelCrearAtraccionM.add(tfNombreM);
+
+                    panelCrearAtraccionM.add(new JLabel("Capacidad:"));
+                    JTextField tfCapacidadM = new JTextField();
+                    panelCrearAtraccionM.add(tfCapacidadM);
+
+                    panelCrearAtraccionM.add(new JLabel("Empleados mínimos:"));
+                    JTextField tfEminM = new JTextField();
+                    panelCrearAtraccionM.add(tfEminM);
+
+                    panelCrearAtraccionM.add(new JLabel("Ubicación:"));
+                    JTextField tfUbicM = new JTextField();
+                    panelCrearAtraccionM.add(tfUbicM);
+
+                    panelCrearAtraccionM.add(new JLabel("Exclusividad:"));
+                    JTextField tfExclM = new JTextField();
+                    panelCrearAtraccionM.add(tfExclM);
+
+                    panelCrearAtraccionM.add(new JLabel("Altura máx (cm):"));
+                    JTextField tfAltMax = new JTextField();
+                    panelCrearAtraccionM.add(tfAltMax);
+
+                    panelCrearAtraccionM.add(new JLabel("Altura mín (cm):"));
+                    JTextField tfAltMin = new JTextField();
+                    panelCrearAtraccionM.add(tfAltMin);
+
+                    panelCrearAtraccionM.add(new JLabel("Peso mín (kg):"));
+                    JTextField tfPesMin = new JTextField();
+                    panelCrearAtraccionM.add(tfPesMin);
+
+                    panelCrearAtraccionM.add(new JLabel("Peso máx (kg):"));
+                    JTextField tfPesMax = new JTextField();
+                    panelCrearAtraccionM.add(tfPesMax);
+
+                    panelCrearAtraccionM.add(new JLabel("¿Riesgo alto?:"));
+                    JCheckBox cbRiesgo = new JCheckBox();
+                    panelCrearAtraccionM.add(cbRiesgo);
+
+                    JButton btnCrearM = new JButton("Crear Atracción Mecánica");
+                    panelCrearAtraccionM.add(btnCrearM, BorderLayout.SOUTH);
+
+                    btnCrearM.addActionListener(evt -> {
+                        String nombre       = tfNombreM.getText();
+                        int capacidad       = Integer.parseInt(tfCapacidadM.getText());
+                        int empleadosMin    = Integer.parseInt(tfEminM.getText());
+                        String ubicacion    = tfUbicM.getText();
+                        int exclusividad    = Integer.parseInt(tfExclM.getText());
+                        int alturaMax       = Integer.parseInt(tfAltMax.getText());
+                        int alturaMin       = Integer.parseInt(tfAltMin.getText());
+                        int pesoMin         = Integer.parseInt(tfPesMin.getText());
+                        int pesoMax         = Integer.parseInt(tfPesMax.getText());
+                        boolean riesgoAlto  = cbRiesgo.isSelected();
+
+                        Administrador.crearAtraccionMecanica(nombre, capacidad, empleadosMin, ubicacion, exclusividad, alturaMax, alturaMin, pesoMin, pesoMax, riesgoAlto);
+                        JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se creo correctamente la Atracción Mecanica", JOptionPane.INFORMATION_MESSAGE);
+                    });
+
+                    panelCentralAtracciones.removeAll();
+                    panelCentralAtracciones.add(panelCrearAtraccionM);
+                    panelCentralAtracciones.revalidate();
+                    panelCentralAtracciones.repaint();
+                    break;
+        	
+                    case 1:
                     	JPanel panelCrearAtraccionC = new JPanel(new GridLayout(0, 2, 5, 5)); 
                     	panelCrearAtraccionC.add(new JLabel("Nombre: "));
                     	JTextField tfNombreAC = new JTextField();
@@ -225,8 +293,8 @@ public class VentanaAdministrador {
                     	panelCrearAtraccionC.add(tfEdMin);
                     	
                     	panelCrearAtraccionC.add(new JLabel("¿Es Interactiva?: "));
-                    	JTextField tfEI = new JTextField();
-                    	panelCrearAtraccionC.add(tfEI);
+                    	JCheckBox cbEI = new JCheckBox();
+                    	panelCrearAtraccionC.add(cbEI);
                     	
                     	JButton btnCrearAC = new JButton("Crear Atracción Cultural");
                     	panelCrearAtraccionC.add(btnCrearAC, BorderLayout.SOUTH);
@@ -242,13 +310,7 @@ public class VentanaAdministrador {
                             int exclusividad = Integer.parseInt(exclusividads);
                             String edmins = tfEdMin.getText();
                             int edmin = Integer.parseInt(edmins);
-                            String eis = tfEI.getText().trim().toLowerCase();
-                            boolean ei = false;
-                            if (eis.equals("si") || eis.equals("sí") || eis.equals("true")) {
-                                ei = true;
-                            } else if (eis.equals("no") || eis.equals("false")) {
-                                ei = false;
-                            }
+                            boolean ei = cbEI.isSelected();
 							Administrador.crearAtraccionCultural(nombre, capacidad, emin, ubicacion, exclusividad, edmin, ei);
 							JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se creo correctamente la Atracción Cultural", JOptionPane.INFORMATION_MESSAGE);
 							});
@@ -258,97 +320,97 @@ public class VentanaAdministrador {
                     	panelCentralAtracciones.revalidate();
                     	panelCentralAtracciones.repaint();
                         break;
-                    case 1:
+                    case 2:
                         JPanel pVerAtr = new JPanel();
                         pVerAtr.add(new JLabel("Pantalla: Ver atracción"));
                         panelCentralAtracciones.add(pVerAtr);
                         break;
-                    case 2:
+                    case 3:
                         JPanel pModCap = new JPanel();
                         pModCap.add(new JLabel("Formulario: Modificar capacidad máxima"));
                         panelCentralAtracciones.add(pModCap);
                         break;
-                    case 3:
+                    case 4:
                         JPanel pModEmp = new JPanel();
                         pModEmp.add(new JLabel("Formulario: Modificar empleados mínimos"));
                         panelCentralAtracciones.add(pModEmp);
                         break;
-                    case 4:
+                    case 5:
                         JPanel pModEstado = new JPanel();
                         pModEstado.add(new JLabel("Formulario: Modificar estado de servicio"));
                         panelCentralAtracciones.add(pModEstado);
                         break;
-                    case 5:
+                    case 6:
                         JPanel pModExcl = new JPanel();
                         pModExcl.add(new JLabel("Formulario: Modificar exclusividad"));
                         panelCentralAtracciones.add(pModExcl);
                         break;
-                    case 6:
+                    case 7:
                         JPanel pVerOp = new JPanel();
                         pVerOp.add(new JLabel("Pantalla: Ver operadores de atracción"));
                         panelCentralAtracciones.add(pVerOp);
                         break;
-                    case 7:
+                    case 8:
                         JPanel pGestOp = new JPanel();
                         pGestOp.add(new JLabel("Pantalla: Gestionar operadores"));
                         panelCentralAtracciones.add(pGestOp);
                         break;
-                    case 8:
+                    case 9:
                         JPanel pResSalud = new JPanel();
                         pResSalud.add(new JLabel("Pantalla: Gestionar restricciones de salud"));
                         panelCentralAtracciones.add(pResSalud);
                         break;
-                    case 9:
+                    case 10:
                         JPanel pClimasAtr = new JPanel();
                         pClimasAtr.add(new JLabel("Pantalla: Gestionar climas restringidos de atracción"));
                         panelCentralAtracciones.add(pClimasAtr);
                         break;
-                    case 10:
+                    case 11:
                         JPanel pAltPes = new JPanel();
                         pAltPes.add(new JLabel("Pantalla: Ver alturas y pesos"));
                         panelCentralAtracciones.add(pAltPes);
                         break;
-                    case 11:
+                    case 12:
                         JPanel pModAltMax = new JPanel();
                         pModAltMax.add(new JLabel("Formulario: Modificar altura máxima"));
                         panelCentralAtracciones.add(pModAltMax);
                         break;
-                    case 12:
+                    case 13:
                         JPanel pModAltMin = new JPanel();
                         pModAltMin.add(new JLabel("Formulario: Modificar altura mínima"));
                         panelCentralAtracciones.add(pModAltMin);
                         break;
-                    case 13:
+                    case 14:
                         JPanel pModPesoMax = new JPanel();
                         pModPesoMax.add(new JLabel("Formulario: Modificar peso máximo"));
                         panelCentralAtracciones.add(pModPesoMax);
                         break;
-                    case 14:
+                    case 15:
                         JPanel pModPesoMin = new JPanel();
                         pModPesoMin.add(new JLabel("Formulario: Modificar peso mínimo"));
                         panelCentralAtracciones.add(pModPesoMin);
                         break;
-                    case 15:
+                    case 16:
                         JPanel pModRiesgo = new JPanel();
                         pModRiesgo.add(new JLabel("Formulario: Modificar riesgo alto"));
                         panelCentralAtracciones.add(pModRiesgo);
                         break;
-                    case 16:
+                    case 17:
                         JPanel pVerEdadMin = new JPanel();
                         pVerEdadMin.add(new JLabel("Pantalla: Ver edad mínima"));
                         panelCentralAtracciones.add(pVerEdadMin);
                         break;
-                    case 17:
+                    case 18:
                         JPanel pVerInteract = new JPanel();
                         pVerInteract.add(new JLabel("Pantalla: Ver si es interactiva"));
                         panelCentralAtracciones.add(pVerInteract);
                         break;
-                    case 18:
+                    case 19:
                         JPanel pModEdadMin = new JPanel();
                         pModEdadMin.add(new JLabel("Formulario: Modificar edad mínima"));
                         panelCentralAtracciones.add(pModEdadMin);
                         break;
-                    case 19:
+                    case 20:
                         JPanel pModInteract = new JPanel();
                         pModInteract.add(new JLabel("Formulario: Modificar interactividad"));
                         panelCentralAtracciones.add(pModInteract);
