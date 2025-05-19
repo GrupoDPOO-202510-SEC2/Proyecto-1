@@ -1,6 +1,8 @@
 package interfaz;
 
 import java.awt.GridLayout;
+import java.util.List;
+import java.util.Set;
 import java.awt.BorderLayout;
 import java.awt.Dimension;
 import javax.swing.*;
@@ -696,7 +698,7 @@ public class VentanaAdministrador {
                         panelCentralAtracciones.revalidate();
                         panelCentralAtracciones.repaint();
                         break;
-                    case 16:  // Modificar riesgo alto
+                    case 16:
                         JPanel panelModRiesgo = new JPanel(new GridLayout(0, 2, 5, 5));
                         panelModRiesgo.add(new JLabel("Atraccion:"));
                         JTextField tfAtrRiesgo = new JTextField();
@@ -720,7 +722,7 @@ public class VentanaAdministrador {
                         panelCentralAtracciones.repaint();
                         break;
 
-                    case 17:  // Ver edad mínima
+                    case 17:
                         JPanel panelVerEdad = new JPanel(new GridLayout(0, 1, 5, 5));
                         panelVerEdad.add(new JLabel("Atraccion:"));
                         JTextField tfAtrVerEdad = new JTextField();
@@ -742,7 +744,7 @@ public class VentanaAdministrador {
                         panelCentralAtracciones.repaint();
                         break;
 
-                    case 18:  // Ver si es interactiva
+                    case 18:
                         JPanel panelVerInteract = new JPanel(new GridLayout(0, 1, 5, 5));
                         panelVerInteract.add(new JLabel("Atraccion:"));
                         JTextField tfAtrVerInt = new JTextField();
@@ -764,7 +766,7 @@ public class VentanaAdministrador {
                         panelCentralAtracciones.repaint();
                         break;
 
-                    case 19:  // Modificar edad mínima
+                    case 19:
                         JPanel panelModEdadMin = new JPanel(new GridLayout(0, 2, 5, 5));
                         panelModEdadMin.add(new JLabel("Atraccion:"));
                         JTextField tfAtrModEdad = new JTextField();
@@ -791,7 +793,7 @@ public class VentanaAdministrador {
                         panelCentralAtracciones.repaint();
                         break;
 
-                    case 20:  // Modificar interactividad
+                    case 20:
                         JPanel panelModInteract = new JPanel(new GridLayout(0, 2, 5, 5));
                         panelModInteract.add(new JLabel("Atraccion:"));
                         JTextField tfAtrModInt = new JTextField();
@@ -863,96 +865,433 @@ public class VentanaAdministrador {
             if (!e.getValueIsAdjusting()) {
                 panelCentralEmpleados.removeAll();
                 switch (lista3.getSelectedIndex()) {
-                    case 0:
-                        JPanel pVerLugar = new JPanel();
-                        pVerLugar.add(new JLabel("Pantalla: Ver lugar de trabajo"));
-                        panelCentralEmpleados.add(pVerLugar);
-                        break;
-                    case 1:
-                        JPanel pModLugar = new JPanel();
-                        pModLugar.add(new JLabel("Formulario: Modificar lugar de trabajo"));
-                        panelCentralEmpleados.add(pModLugar);
-                        break;
-                    case 2:
-                        JPanel pVerRol = new JPanel();
-                        pVerRol.add(new JLabel("Pantalla: Ver rol"));
-                        panelCentralEmpleados.add(pVerRol);
-                        break;
-                    case 3:
-                        JPanel pVerTurnos = new JPanel();
-                        pVerTurnos.add(new JLabel("Pantalla: Ver turnos"));
-                        panelCentralEmpleados.add(pVerTurnos);
-                        break;
-                    case 4:
-                        JPanel pModTurnoDia = new JPanel();
-                        pModTurnoDia.add(new JLabel("Formulario: Modificar turno día"));
-                        panelCentralEmpleados.add(pModTurnoDia);
-                        break;
-                    case 5:
-                        JPanel pModTurnoNoche = new JPanel();
-                        pModTurnoNoche.add(new JLabel("Formulario: Modificar turno noche"));
-                        panelCentralEmpleados.add(pModTurnoNoche);
-                        break;
-                    case 6:
-                        JPanel pCrearCafe = new JPanel();
-                        pCrearCafe.add(new JLabel("Formulario: Crear cafetería"));
-                        panelCentralEmpleados.add(pCrearCafe);
-                        break;
-                    case 7:
-                        JPanel pCrearTienda = new JPanel();
-                        pCrearTienda.add(new JLabel("Formulario: Crear tienda"));
-                        panelCentralEmpleados.add(pCrearTienda);
-                        break;
-                    case 8:
-                        JPanel pVerMenu = new JPanel();
-                        pVerMenu.add(new JLabel("Pantalla: Ver menú"));
-                        panelCentralEmpleados.add(pVerMenu);
-                        break;
-                    case 9:
-                        JPanel pVerItems = new JPanel();
-                        pVerItems.add(new JLabel("Pantalla: Ver items"));
-                        panelCentralEmpleados.add(pVerItems);
-                        break;
-                    case 10:
-                        JPanel pGestComidas = new JPanel();
-                        pGestComidas.add(new JLabel("Pantalla: Gestionar comidas del menú"));
-                        panelCentralEmpleados.add(pGestComidas);
-                        break;
-                    case 11:
-                        JPanel pGestItems = new JPanel();
-                        pGestItems.add(new JLabel("Pantalla: Gestionar items de tienda"));
-                        panelCentralEmpleados.add(pGestItems);
-                        break;
-                    case 12:
-                        JPanel pCrearCajAtr = new JPanel();
-                        pCrearCajAtr.add(new JLabel("Formulario: Crear cajero atracción"));
-                        panelCentralEmpleados.add(pCrearCajAtr);
-                        break;
-                    case 13:
-                        JPanel pCrearCajTaq = new JPanel();
-                        pCrearCajTaq.add(new JLabel("Formulario: Crear cajero taquilla"));
-                        panelCentralEmpleados.add(pCrearCajTaq);
-                        break;
-                    case 14:
-                        JPanel pCrearCocinero = new JPanel();
-                        pCrearCocinero.add(new JLabel("Formulario: Crear cocinero"));
-                        panelCentralEmpleados.add(pCrearCocinero);
-                        break;
-                    case 15:
-                        JPanel pAñadirComida = new JPanel();
-                        pAñadirComida.add(new JLabel("Formulario: Añadir comida a cocinero"));
-                        panelCentralEmpleados.add(pAñadirComida);
-                        break;
-                    case 16:
-                        JPanel pCrearOpAtr = new JPanel();
-                        pCrearOpAtr.add(new JLabel("Formulario: Crear operador atracción"));
-                        panelCentralEmpleados.add(pCrearOpAtr);
-                        break;
-                    case 17:
-                        JPanel pCrearSvcGen = new JPanel();
-                        pCrearSvcGen.add(new JLabel("Formulario: Crear servicio general"));
-                        panelCentralEmpleados.add(pCrearSvcGen);
-                        break;
+                case 0: {
+                    JPanel panelVerLugar = new JPanel(new GridLayout(0, 1, 5, 5));
+                    panelVerLugar.add(new JLabel("Login:"));
+                    JTextField tfLoginVerLugar = new JTextField();
+                    panelVerLugar.add(tfLoginVerLugar);
+                    JButton btnVerLugar = new JButton("Ver lugar de trabajo");
+                    panelVerLugar.add(btnVerLugar, BorderLayout.SOUTH);
+                    btnVerLugar.addActionListener(evt -> {
+                        String login = tfLoginVerLugar.getText();
+                        String lugar = Administrador.getLugarDeTrabajo(login);
+                        panelVerLugar.add(new JLabel("Lugar: " + lugar));
+                        panelVerLugar.revalidate();
+                        panelVerLugar.repaint();
+                    });
+                    panelCentralEmpleados.add(panelVerLugar);
+                    break;
+                }
+                case 1: {
+                    JPanel panelModLugar = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelModLugar.add(new JLabel("Login:"));
+                    JTextField tfLoginModLugar = new JTextField();
+                    panelModLugar.add(tfLoginModLugar);
+                    panelModLugar.add(new JLabel("Lugar nuevo:"));
+                    JTextField tfNewLugar = new JTextField();
+                    panelModLugar.add(tfNewLugar);
+                    JButton btnModLugar = new JButton("Modificar lugar");
+                    panelModLugar.add(btnModLugar, BorderLayout.SOUTH);
+                    btnModLugar.addActionListener(evt -> {
+                        Administrador.setLugarDeTrabajo(tfNewLugar.getText(), tfLoginModLugar.getText());
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    panelCentralEmpleados.add(panelModLugar);
+                    break;
+                }
+                case 2: {
+                    JPanel panelVerRol = new JPanel(new GridLayout(0, 1, 5, 5));
+                    panelVerRol.add(new JLabel("Login:"));
+                    JTextField tfLoginVerRol = new JTextField();
+                    panelVerRol.add(tfLoginVerRol);
+                    JButton btnVerRol = new JButton("Ver rol");
+                    panelVerRol.add(btnVerRol, BorderLayout.SOUTH);
+                    btnVerRol.addActionListener(evt -> {
+                        String rol = Administrador.getRol(tfLoginVerRol.getText());
+                        panelVerRol.add(new JLabel("Rol: " + rol));
+                        panelVerRol.revalidate();
+                        panelVerRol.repaint();
+                    });
+                    panelCentralEmpleados.add(panelVerRol);
+                    break;
+                }
+                case 3: {
+                    JPanel panelVerTurnos = new JPanel(new GridLayout(0, 1, 5, 5));
+                    panelVerTurnos.add(new JLabel("Login:"));
+                    JTextField tfLoginVerTurnos = new JTextField();
+                    panelVerTurnos.add(tfLoginVerTurnos);
+                    JButton btnVerTurnos = new JButton("Ver turnos");
+                    panelVerTurnos.add(btnVerTurnos, BorderLayout.SOUTH);
+                    btnVerTurnos.addActionListener(evt -> {
+                        boolean[] t = Administrador.getTurnos(tfLoginVerTurnos.getText());
+                        panelVerTurnos.add(new JLabel("Día: " + t[0] + ", Noche: " + t[1]));
+                        panelVerTurnos.revalidate();
+                        panelVerTurnos.repaint();
+                    });
+                    panelCentralEmpleados.add(panelVerTurnos);
+                    break;
+                }
+                case 4: {
+                    JPanel panelModTurnoDia = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelModTurnoDia.add(new JLabel("Login:"));
+                    JTextField tfLoginModDia = new JTextField();
+                    panelModTurnoDia.add(tfLoginModDia);
+                    panelModTurnoDia.add(new JLabel("¿Turno diurno?"));
+                    JCheckBox chkTurnoDia = new JCheckBox();
+                    panelModTurnoDia.add(chkTurnoDia);
+                    JButton btnModTurnoDia = new JButton("Modificar turno día");
+                    panelModTurnoDia.add(btnModTurnoDia, BorderLayout.SOUTH);
+                    btnModTurnoDia.addActionListener(evt -> {
+                        Administrador.setTurnoDia(chkTurnoDia.isSelected(), tfLoginModDia.getText());
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    panelCentralEmpleados.add(panelModTurnoDia);
+                    break;
+                }
+                case 5: {
+                    JPanel panelModTurnoNoche = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelModTurnoNoche.add(new JLabel("Login:"));
+                    JTextField tfLoginModNoche = new JTextField();
+                    panelModTurnoNoche.add(tfLoginModNoche);
+                    panelModTurnoNoche.add(new JLabel("¿Turno nocturno?"));
+                    JCheckBox chkTurnoNoche = new JCheckBox();
+                    panelModTurnoNoche.add(chkTurnoNoche);
+                    JButton btnModTurnoNoche = new JButton("Modificar turno noche");
+                    panelModTurnoNoche.add(btnModTurnoNoche, BorderLayout.SOUTH);
+                    btnModTurnoNoche.addActionListener(evt -> {
+                        Administrador.setTurnoNoche(chkTurnoNoche.isSelected(), tfLoginModNoche.getText());
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    panelCentralEmpleados.add(panelModTurnoNoche);
+                    break;
+                }
+                case 6: {
+                    JPanel panelCrearCafe = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelCrearCafe.add(new JLabel("Nombre:"));
+                    JTextField tfNombreCafe = new JTextField();
+                    panelCrearCafe.add(tfNombreCafe);
+                    panelCrearCafe.add(new JLabel("Ubicación:"));
+                    JTextField tfUbicCafe = new JTextField();
+                    panelCrearCafe.add(tfUbicCafe);
+                    JButton btnCrearCafe = new JButton("Crear cafetería");
+                    panelCrearCafe.add(btnCrearCafe, BorderLayout.SOUTH);
+                    btnCrearCafe.addActionListener(evt -> {
+                        Administrador.crearCafeteria(tfNombreCafe.getText(), tfUbicCafe.getText(), "");
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    panelCentralEmpleados.add(panelCrearCafe);
+                    break;
+                }
+                case 7: {
+                    JPanel panelCrearTienda = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelCrearTienda.add(new JLabel("Nombre:"));
+                    JTextField tfNombreTienda = new JTextField();
+                    panelCrearTienda.add(tfNombreTienda);
+                    panelCrearTienda.add(new JLabel("Ubicación:"));
+                    JTextField tfUbicTienda = new JTextField();
+                    panelCrearTienda.add(tfUbicTienda);
+                    JButton btnCrearTienda = new JButton("Crear tienda");
+                    panelCrearTienda.add(btnCrearTienda, BorderLayout.SOUTH);
+                    btnCrearTienda.addActionListener(evt -> {
+                        Administrador.crearTienda(tfNombreTienda.getText(), tfUbicTienda.getText(), "");
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    panelCentralEmpleados.add(panelCrearTienda);
+                    break;
+                }
+                case 8: {
+                    JPanel panelVerMenu = new JPanel(new GridLayout(0, 1, 5, 5));
+                    JButton btnVerMenu = new JButton("Ver menú");
+                    panelVerMenu.add(btnVerMenu, BorderLayout.SOUTH);
+
+                    btnVerMenu.addActionListener(evt -> {
+                        panelVerMenu.removeAll();
+                        panelVerMenu.add(btnVerMenu, BorderLayout.SOUTH);
+                        Set<String> menu = Administrador.getMenu();  // HashSet<String>
+                        for (String item : menu) {
+                            panelVerMenu.add(new JLabel(item));
+                        }
+                        panelVerMenu.revalidate();
+                        panelVerMenu.repaint();
+                    });
+
+                    panelCentralEmpleados.removeAll();
+                    panelCentralEmpleados.add(panelVerMenu);
+                    panelCentralEmpleados.revalidate();
+                    panelCentralEmpleados.repaint();
+                    break;
+                }
+
+                case 9: {
+                    JPanel panelVerItems = new JPanel(new GridLayout(0, 1, 5, 5));
+                    JButton btnVerItems = new JButton("Ver items");
+                    panelVerItems.add(btnVerItems, BorderLayout.SOUTH);
+
+                    btnVerItems.addActionListener(evt -> {
+                        panelVerItems.removeAll();
+                        panelVerItems.add(btnVerItems, BorderLayout.SOUTH);
+                        Set<String> items = Administrador.getItems();  // HashSet<String>
+                        for (String it : items) {
+                            panelVerItems.add(new JLabel(it));
+                        }
+                        panelVerItems.revalidate();
+                        panelVerItems.repaint();
+                    });
+
+                    panelCentralEmpleados.removeAll();
+                    panelCentralEmpleados.add(panelVerItems);
+                    panelCentralEmpleados.revalidate();
+                    panelCentralEmpleados.repaint();
+                    break;
+                }
+                case 10: {
+                    JPanel panelGestComidas = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelGestComidas.add(new JLabel("Comida:"));
+                    JTextField tfComida = new JTextField();
+                    panelGestComidas.add(tfComida);
+                    JButton btnAgComida = new JButton("Agregar");
+                    panelGestComidas.add(btnAgComida, BorderLayout.SOUTH);
+                    JButton btnElComida = new JButton("Eliminar");
+                    panelGestComidas.add(btnElComida, BorderLayout.SOUTH);
+                    btnAgComida.addActionListener(evt -> {
+                        Administrador.addComia(tfComida.getText());
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    btnElComida.addActionListener(evt -> {
+                        Administrador.removeComia(tfComida.getText());
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    panelCentralEmpleados.add(panelGestComidas);
+                    break;
+                }
+                case 11: {
+                    JPanel panelGestItems = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelGestItems.add(new JLabel("Item:"));
+                    JTextField tfItem = new JTextField();
+                    panelGestItems.add(tfItem);
+                    JButton btnAgItem = new JButton("Agregar");
+                    panelGestItems.add(btnAgItem, BorderLayout.SOUTH);
+                    JButton btnElItem = new JButton("Eliminar");
+                    panelGestItems.add(btnElItem, BorderLayout.SOUTH);
+                    btnAgItem.addActionListener(evt -> {
+                        Administrador.additem(tfItem.getText());
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    btnElItem.addActionListener(evt -> {
+                        Administrador.removeitem(tfItem.getText());
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    panelCentralEmpleados.add(panelGestItems);
+                    break;
+                }
+                case 12: {
+                    JPanel panelCrearCajAtr = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelCrearCajAtr.add(new JLabel("Nombre:"));
+                    JTextField tfNombreCajAtr = new JTextField();
+                    panelCrearCajAtr.add(tfNombreCajAtr);
+                    panelCrearCajAtr.add(new JLabel("Login:"));
+                    JTextField tfLoginCajAtr = new JTextField();
+                    panelCrearCajAtr.add(tfLoginCajAtr);
+                    panelCrearCajAtr.add(new JLabel("Password:"));
+                    JTextField tfPassCajAtr = new JTextField();
+                    panelCrearCajAtr.add(tfPassCajAtr);
+                    panelCrearCajAtr.add(new JLabel("Altura:"));
+                    JTextField tfAltCajAtr = new JTextField();
+                    panelCrearCajAtr.add(tfAltCajAtr);
+                    panelCrearCajAtr.add(new JLabel("Peso:"));
+                    JTextField tfPesCajAtr = new JTextField();
+                    panelCrearCajAtr.add(tfPesCajAtr);
+                    panelCrearCajAtr.add(new JLabel("Lugar de trabajo:"));
+                    JTextField tfLugarCajAtr = new JTextField();
+                    panelCrearCajAtr.add(tfLugarCajAtr);
+                    panelCrearCajAtr.add(new JLabel("Turno:"));
+                    JTextField tfTurnoCajAtr = new JTextField();
+                    panelCrearCajAtr.add(tfTurnoCajAtr);
+                    JButton btnCrearCajAtr = new JButton("Crear cajero atracción");
+                    panelCrearCajAtr.add(btnCrearCajAtr, BorderLayout.SOUTH);
+                    btnCrearCajAtr.addActionListener(evt -> {
+                        Administrador.crearCajeroAtraccion(
+                            tfNombreCajAtr.getText(),
+                            tfLoginCajAtr.getText(),
+                            tfPassCajAtr.getText(),
+                            Integer.parseInt(tfAltCajAtr.getText()),
+                            Integer.parseInt(tfPesCajAtr.getText()),
+                            tfLugarCajAtr.getText(),
+                            tfTurnoCajAtr.getText()
+                        );
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    panelCentralEmpleados.add(panelCrearCajAtr);
+                    break;
+                }
+                case 13: {
+                    JPanel panelCrearCajTaq = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelCrearCajTaq.add(new JLabel("Nombre:"));
+                    JTextField tfNombreCajTaq = new JTextField();
+                    panelCrearCajTaq.add(tfNombreCajTaq);
+                    panelCrearCajTaq.add(new JLabel("Login:"));
+                    JTextField tfLoginCajTaq = new JTextField();
+                    panelCrearCajTaq.add(tfLoginCajTaq);
+                    panelCrearCajTaq.add(new JLabel("Password:"));
+                    JTextField tfPassCajTaq = new JTextField( );
+                    panelCrearCajTaq.add(tfPassCajTaq);
+                    panelCrearCajTaq.add(new JLabel("Altura:"));
+                    JTextField tfAltCajTaq = new JTextField();
+                    panelCrearCajTaq.add(tfAltCajTaq);
+                    panelCrearCajTaq.add(new JLabel("Peso:"));
+                    JTextField tfPesCajTaq = new JTextField();
+                    panelCrearCajTaq.add(tfPesCajTaq);
+                    panelCrearCajTaq.add(new JLabel("Turno:"));
+                    JTextField tfTurnoCajTaq = new JTextField();
+                    panelCrearCajTaq.add(tfTurnoCajTaq);
+                    JButton btnCrearCajTaq = new JButton("Crear cajero taquilla");
+                    panelCrearCajTaq.add(btnCrearCajTaq, BorderLayout.SOUTH);
+                    btnCrearCajTaq.addActionListener(evt -> {
+                        Administrador.crearCajeroTaquilla(
+                            tfNombreCajTaq.getText(),
+                            tfLoginCajTaq.getText(),
+                            tfPassCajTaq.getText(),
+                            Integer.parseInt(tfAltCajTaq.getText()),
+                            Integer.parseInt(tfPesCajTaq.getText()),
+                            tfTurnoCajTaq.getText()
+                        );
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);  
+                    });
+                    panelCentralEmpleados.add(panelCrearCajTaq);
+                    break;
+                }
+                case 14: {
+                    JPanel panelCrearCocinero = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelCrearCocinero.add(new JLabel("Nombre:"));
+                    JTextField tfNombreCoc = new JTextField();
+                    panelCrearCocinero.add(tfNombreCoc);
+                    panelCrearCocinero.add(new JLabel("Login:"));
+                    JTextField tfLoginCoc = new JTextField();
+                    panelCrearCocinero.add(tfLoginCoc);
+                    panelCrearCocinero.add(new JLabel("Password:"));
+                    JTextField tfPassCoc = new JTextField();
+                    panelCrearCocinero.add(tfPassCoc);
+                    panelCrearCocinero.add(new JLabel("Altura:"));
+                    JTextField tfAltCoc = new JTextField();
+                    panelCrearCocinero.add(tfAltCoc);
+                    panelCrearCocinero.add(new JLabel("Peso:"));
+                    JTextField tfPesCoc = new JTextField();
+                    panelCrearCocinero.add(tfPesCoc);
+                    panelCrearCocinero.add(new JLabel("Turno:"));
+                    JTextField tfTurnoCoc = new JTextField();
+                    panelCrearCocinero.add(tfTurnoCoc);
+                    panelCrearCocinero.add(new JLabel("Lugar de trabajo:"));
+                    JTextField tfLugarCoc = new JTextField();
+                    panelCrearCocinero.add(tfLugarCoc);
+                    JButton btnCrearCoc = new JButton("Crear cocinero");
+                    panelCrearCocinero.add(btnCrearCoc, BorderLayout.SOUTH);
+                    btnCrearCoc.addActionListener(evt -> {
+                        Administrador.crearCocinero(
+                            tfNombreCoc.getText(),
+                            tfLoginCoc.getText(),
+                            tfPassCoc.getText(),
+                            Integer.parseInt(tfAltCoc.getText()),
+                            Integer.parseInt(tfPesCoc.getText()),
+                            tfTurnoCoc.getText(),
+                            tfLugarCoc.getText()
+                        );
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    panelCentralEmpleados.add(panelCrearCocinero);
+                    break;
+                }
+                case 15: {
+                    JPanel panelAddComidaCoc = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelAddComidaCoc.add(new JLabel("Login del cocinero:"));
+                    JTextField tfLoginAddComida = new JTextField();
+                    panelAddComidaCoc.add(tfLoginAddComida);
+                    panelAddComidaCoc.add(new JLabel("Nombre de la comida:"));
+                    JTextField tfComidaAdd = new JTextField();
+                    panelAddComidaCoc.add(tfComidaAdd);
+                    JButton btnAddComida = new JButton("Añadir comida");
+                    panelAddComidaCoc.add(btnAddComida, BorderLayout.SOUTH);
+                    btnAddComida.addActionListener(evt -> {
+                        Administrador.addComidaCocinero(
+                            tfLoginAddComida.getText(),
+                            tfComidaAdd.getText()
+                        );
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    panelCentralEmpleados.add(panelAddComidaCoc);
+                    break;
+                }
+                case 16: {
+                    JPanel panelCrearOpAtr = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelCrearOpAtr.add(new JLabel("Nombre:"));
+                    JTextField tfNombreOpAtr = new JTextField();
+                    panelCrearOpAtr.add(tfNombreOpAtr);
+                    panelCrearOpAtr.add(new JLabel("Login:"));
+                    JTextField tfLoginOpAtr = new JTextField();
+                    panelCrearOpAtr.add(tfLoginOpAtr);
+                    panelCrearOpAtr.add(new JLabel("Password:"));
+                    JTextField tfPassOpAtr = new JTextField();
+                    panelCrearOpAtr.add(tfPassOpAtr);
+                    panelCrearOpAtr.add(new JLabel("Altura:"));
+                    JTextField tfAltOpAtr = new JTextField();
+                    panelCrearOpAtr.add(tfAltOpAtr);
+                    panelCrearOpAtr.add(new JLabel("Peso:"));
+                    JTextField tfPesOpAtr = new JTextField();
+                    panelCrearOpAtr.add(tfPesOpAtr);
+                    JButton btnCrearOpAtr = new JButton("Crear operador atracción");
+                    panelCrearOpAtr.add(btnCrearOpAtr, BorderLayout.SOUTH);
+                    btnCrearOpAtr.addActionListener(evt -> {
+                        Administrador.crearOperadorAtraccion(
+                            tfNombreOpAtr.getText(),
+                            tfLoginOpAtr.getText(),
+                            tfPassOpAtr.getText(),
+                            Integer.parseInt(tfAltOpAtr.getText()),
+                            Integer.parseInt(tfPesOpAtr.getText())
+                        );
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    panelCentralEmpleados.add(panelCrearOpAtr);
+                    break;
+                }
+                case 17: {
+                    JPanel panelCrearSvcGen = new JPanel(new GridLayout(0, 2, 5, 5));
+                    panelCrearSvcGen.add(new JLabel("Nombre:"));
+                    JTextField tfNombreSvc = new JTextField();
+                    panelCrearSvcGen.add(tfNombreSvc);
+                    panelCrearSvcGen.add(new JLabel("Login:"));
+                    JTextField tfLoginSvc = new JTextField();
+                    panelCrearSvcGen.add(tfLoginSvc);
+                    panelCrearSvcGen.add(new JLabel("Password:"));
+                    JTextField tfPassSvc = new JTextField();
+                    panelCrearSvcGen.add(tfPassSvc);
+                    panelCrearSvcGen.add(new JLabel("Altura:"));
+                    JTextField tfAltSvc = new JTextField();
+                    panelCrearSvcGen.add(tfAltSvc);
+                    panelCrearSvcGen.add(new JLabel("Peso:"));
+                    JTextField tfPesSvc = new JTextField();
+                    panelCrearSvcGen.add(tfPesSvc);
+                    panelCrearSvcGen.add(new JLabel("Lugar de trabajo:"));
+                    JTextField tfLugarSvc = new JTextField();
+                    panelCrearSvcGen.add(tfLugarSvc);
+                    panelCrearSvcGen.add(new JLabel("Turno (DIURNO/NOCTURNO):"));
+                    JTextField tfTurnoSvc = new JTextField();
+                    panelCrearSvcGen.add(tfTurnoSvc);
+                    JButton btnCrearSvcGen = new JButton("Crear servicio general");
+                    panelCrearSvcGen.add(btnCrearSvcGen, BorderLayout.SOUTH);
+                    btnCrearSvcGen.addActionListener(evt -> {
+                        Administrador.crearServicioGeneral(
+                            tfNombreSvc.getText(),
+                            tfLoginSvc.getText(),
+                            tfPassSvc.getText(),
+                            Integer.parseInt(tfAltSvc.getText()),
+                            Integer.parseInt(tfPesSvc.getText()),
+                            tfLugarSvc.getText(),
+                            tfTurnoSvc.getText()
+                        );
+                        JOptionPane.showMessageDialog(null, "Operación Exitosa", "Éxito", JOptionPane.INFORMATION_MESSAGE);
+                    });
+                    panelCentralEmpleados.add(panelCrearSvcGen);
+                    break;
+                }
                     default:
                         panelCentralEmpleados.add(new JLabel("Opción no implementada"));
                 }
