@@ -209,17 +209,16 @@ public class Persistencia {
 			JSONObject jtiquete = new JSONObject();
 			jtiquete.put("tipo", "Tiquete");
 			
-			
-			if(tiquete instanceof TiqueteExclusividad ) {
-				TiqueteExclusividad exclusivo = (TiqueteExclusividad) tiquete; 
-				jtiquete.put("exclusividad", exclusivo.getExclusividad());
-				jtiquete.put("tipo", "Exclusivo");
-			}else if(tiquete instanceof TiqueteTemporada ) {
+			 if(tiquete instanceof TiqueteTemporada ) {
 				TiqueteTemporada temporada = (TiqueteTemporada) tiquete; 
 				jtiquete.put("tipo", "Temporada");
 				jtiquete.put("exclusividad", temporada.getExclusividad());
 				jtiquete.put("fechaInicio", temporada.getFechaInicio());
 				jtiquete.put("fechaFin", temporada.getFechaFin());
+			}else if(tiquete instanceof TiqueteExclusividad ) {
+				TiqueteExclusividad exclusivo = (TiqueteExclusividad) tiquete; 
+				jtiquete.put("exclusividad", exclusivo.getExclusividad());
+				jtiquete.put("tipo", "Exclusivo");
 			}
 			if(tiquete != null) {
 			guardarTiquete(jtiquete, tiquete);

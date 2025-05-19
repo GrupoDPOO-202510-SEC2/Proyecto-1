@@ -12,7 +12,7 @@ public class TiqueteTemporada extends TiqueteExclusividad{
 		super(idTiquete, fastPass, exclusividad);
 		this.fechaFin = fechaFin;
 		this.fechaInicio = fechaInicio;
-		//isValido();
+		isValido();
 	}
 	
 	public String getFechaInicio() {
@@ -27,7 +27,7 @@ public class TiqueteTemporada extends TiqueteExclusividad{
 	public boolean isValido() {
 		if(valido == true) {
 			LocalDate fechaHoy = LocalDate.now();
-			DateTimeFormatter formato = DateTimeFormatter.ofPattern("MM-dd");
+			DateTimeFormatter formato = DateTimeFormatter.ofPattern("YYYY-MM-dd");
 			String fechaHoyStr = fechaHoy.format(formato);
 			
 			LocalDate fechaHoyFormat = LocalDate.parse(fechaHoyStr);

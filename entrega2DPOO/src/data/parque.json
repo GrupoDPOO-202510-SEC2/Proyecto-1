@@ -2,7 +2,7 @@
     "mapaTiendas": {"items": ["gorra tematica"]},
     "taquilla": {
         "ubicacion": "Entrada",
-        "IDs": 1.0E7,
+        "IDs": 1.0000003E7,
         "pedidosTiquetes": []
     },
     "mapaCafeterias": {
@@ -116,7 +116,31 @@
             "disponible": false
         }
     },
-    "tiquetes": {},
+    "tiquetes": {
+        "1.0000001E7": {
+            "tipo": "Exclusivo",
+            "valido": true,
+            "exclusividad": 3,
+            "fastPass": true,
+            "idTiquete": 1.0000001E7
+        },
+        "1.0000002E7": {
+            "tipo": "Exclusivo",
+            "valido": true,
+            "exclusividad": 3,
+            "fastPass": true,
+            "idTiquete": 1.0000002E7
+        },
+        "1.0000003E7": {
+            "tipo": "Temporada",
+            "fechaInicio": "2020-01-01",
+            "valido": true,
+            "exclusividad": 3,
+            "fastPass": false,
+            "idTiquete": 1.0000003E7,
+            "fechaFin": "2020-01-02"
+        }
+    },
     "usuarios": {
         "Administrador": {
             "restricciones": [],
@@ -124,7 +148,15 @@
             "compras": {},
             "altura": 180,
             "peso": 70,
-            "tiquetesComprados": [],
+            "tiquetesComprados": [
+                1.0000001E7,
+                1.0000002E7,
+                1.0000003E7,
+                1.0000004E7,
+                1.0000005E7,
+                1.0000006E7,
+                1.0000003E7
+            ],
             "tiqueteEnUso": 0,
             "login": "sopa",
             "nombre": "Administrador"

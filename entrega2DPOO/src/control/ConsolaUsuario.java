@@ -73,15 +73,16 @@ public class ConsolaUsuario extends ConsolaBasica {
 
     private void ejecutarMenu(Usuario usuario) {
         String[] opcionesMenu = {
-            "1. Comprar tiquete",
-            "2. Ver restricciones",
-            "3. Agregar restricción",
-            "4. Eliminar restricción",
-            "5. Ver tiquetes funcionales",
-            "6. Asignar tiquete en uso",
-            "7. Invalidar tiquete en uso",
-            "8. Ver tiquete en uso",
-            "9. Ver historial de compras"
+            "Comprar tiquete",
+            "Ver restricciones",
+            "Agregar restricción",
+            "Eliminar restricción",
+            "Ver tiquetes funcionales",
+            "Asignar tiquete en uso",
+            "Invalidar tiquete en uso",
+            "Ver tiquete en uso",
+            "Ver historial de compras",
+            "Salir"
         };
 
         boolean continuar = true;

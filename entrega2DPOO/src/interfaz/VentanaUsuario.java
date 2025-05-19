@@ -1,8 +1,11 @@
 package interfaz;
 
 import java.awt.BorderLayout;
+import java.awt.CardLayout;
 import java.awt.Dimension;
 import java.awt.GridLayout;
+import java.awt.event.ActionEvent;
+import java.awt.event.ActionListener;
 
 import javax.swing.*;
 
@@ -13,6 +16,14 @@ import usuario.Usuario;
 public class VentanaUsuario extends JFrame{
 	private JPanel panelUsuario;
 	private Usuario usuario;
+
+	int tipo = 0;
+	int exclusividad = 0;
+	String fechai;
+	String fechaf;
+	
+	
+	
 	
 	public VentanaUsuario(Usuario usuario) {
 		
@@ -46,53 +57,186 @@ public class VentanaUsuario extends JFrame{
                 switch (lista1.getSelectedIndex()) {
                     case 0:
                     	
+                    	JPanel izquierda = new JPanel(); 
+                    	izquierda.setLayout(new BoxLayout(izquierda ,BoxLayout.Y_AXIS));
                     	
-                    	JPanel panelComprarTiquete = new JPanel(new GridLayout(0, 2, 5, 5)); 
+                        
+                    	JPanel temporada = new JPanel(new GridLayout(0, 2, 5, 5)); 
                     	
-                    	JPanel panelBotones = new JPanel(new GridLayout(3, 0, 5, 5));
+                    	JPanel panelTipos = new JPanel(new GridLayout(3, 0, 5, 5));
+                    	
+                    	JPanel panelExclusividades = new JPanel(new GridLayout(4, 0, 5, 5));
+                    	
+                    	
                     	
                     	JRadioButton tiqueteIndividualRadio = new JRadioButton("Tiquete individual");
                     	JRadioButton tiqueteTemporadaRadio = new JRadioButton("Tiquete temporada");
                     	JRadioButton tiqueteExclusividadRadio = new JRadioButton("Tiquete exclusividad");
                     	
-                    	ButtonGroup group = new ButtonGroup();
+                    	panelTipos.add(tiqueteIndividualRadio);
+                    	panelTipos.add(tiqueteExclusividadRadio);
+                    	panelTipos.add(tiqueteTemporadaRadio);
+                    	
+                    	JRadioButton basico = new JRadioButton("Tiquete Basico ");
+                    	JRadioButton familiar = new JRadioButton("Tiquete Familiar");
+                    	JRadioButton oro = new JRadioButton("Tiquete Oro");
+                    	JRadioButton diamante = new JRadioButton("Tiquete Diamante");
+                    	
+
+                    	JTextField fechaInicial = new JTextField();
+                    	JTextField fechaFinal = new JTextField();
+
+                        basico.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {exclusividad = 1;}});
+
+                        familiar.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {exclusividad = 2;}});
+
+                        oro.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {exclusividad = 3;}});
+
+                        diamante.addActionListener(new ActionListener() {
+                            @Override
+                            public void actionPerformed(ActionEvent e) {exclusividad = 4;}});
+
+                    	
+                    	
+                    	JButton btnCrear = new JButton("Comprar Tiquete");
+                    	
+                    	JCheckBox fastPass = new JCheckBox("Es Fast Pass");
+                    	
+                        btnCrear.addActionListener(evt -> {
+                        	
+                        	boolean fazpas = fastPass.isSelected();
+                        	
+							if (tipo == 3) {
+							   usuario.comprarTiquete("TiqueteIndividual", "", "", 5, fazpas);
+							} else if (tipo == 1) {
+								if (exclusividad != 0) {
+		                        	fechaf = fechaFinal.getText();
+		                        	fechai = fechaInicial.getText();
+		                        	
+									usuario.comprarTiquete("TiqueteTemporada", fechai , fechaf , exclusividad, fazpas);
+								}else {
+									JOptionPane.showMessageDialog(null, "Error de Construccion", "Porfavor seleccione un nivel de exclusividad", JOptionPane.INFORMATION_MESSAGE);
+								}
+							} else if (tipo == 2) {
+								if (exclusividad != 0) {
+									usuario.comprarTiquete("TiqueteExclusivo", "", "", exclusividad, fazpas);
+								}else {
+									JOptionPane.showMessageDialog(null, "Error de Construccion", "Porfavor seleccione un nivel de exclusividad", JOptionPane.INFORMATION_MESSAGE);
+								}
+							} else {
+								JOptionPane.showMessageDialog(null, "Error de Construccion", "Porfavor seleccione un tipo de tiquete", JOptionPane.INFORMATION_MESSAGE);
+							}
+                        });
+                    	
+                    	tiqueteTemporadaRadio.addActionListener(evt -> {
+                    		
+                    		tipo = 1;
+                    		panelUsuario.removeAll();
+                    		
+                    		panelExclusividades.removeAll();
+                        	panelExclusividades.add(basico);
+	                    	panelExclusividades.add(familiar);
+	                    	panelExclusividades.add(oro);
+	                    	panelExclusividades.add(diamante);
+	                    	
+	                    	temporada.removeAll();
+	                    	
+	                    	temporada.add(new JLabel("Fecha Inicial:"));
+                        	temporada.add(fechaInicial);
+                        	
+                        	temporada.add(new JLabel("Fecha Fin:"));
+                        	temporada.add(fechaFinal);
+                        	
+	                    	izquierda.add(panelExclusividades);
+	                    	izquierda.add(temporada);
+	                    	izquierda.add(fastPass);
+	                    	izquierda.add(new JLabel(""));
+	                    	izquierda.add(new JLabel(""));
+	                    	izquierda.add(btnCrear);
+	                    	
+                            panelUsuario.add(izquierda);
+                            panelUsuario.revalidate();
+                            panelUsuario.repaint();
+                            
+                            
+                    		
+						});
+                    	
+                    	tiqueteExclusividadRadio.addActionListener(evt -> {
+                    		
+                    		tipo = 2;
+                    		panelUsuario.removeAll();
+                    		temporada.removeAll();
+                    		panelExclusividades.removeAll();
+                        	panelExclusividades.add(basico);
+	                    	panelExclusividades.add(familiar);
+	                    	panelExclusividades.add(oro);
+	                    	panelExclusividades.add(diamante);
+	                    	
+	                    	izquierda.add(panelExclusividades);
+	                    	izquierda.add(fastPass);
+	                    	izquierda.add(new JLabel(""));
+	                    	izquierda.add(new JLabel(""));
+	                    	izquierda.add(btnCrear);
+                            panelUsuario.add(izquierda);
+                            panelUsuario.revalidate();
+                            panelUsuario.repaint();
+                            
+                            
+                    		
+						});
+                    	
+                    	tiqueteIndividualRadio.addActionListener(evt -> {
+                    		
+                    		tipo = 3;
+                    		temporada.removeAll();
+                    		panelExclusividades.removeAll();
+                    		izquierda.add(fastPass);
+                    		izquierda.add(new JLabel(""));
+                    		izquierda.add(btnCrear);
+                    		panelUsuario.removeAll();
+                            panelUsuario.add(izquierda);
+                            panelUsuario.revalidate();
+                            panelUsuario.repaint();
+                            
+                            
+                            
+                    		
+						});
+                        
+                        ButtonGroup group = new ButtonGroup();
                     	group.add(tiqueteIndividualRadio);
                     	group.add(tiqueteExclusividadRadio);
                     	group.add(tiqueteTemporadaRadio);
                     	
-                    	panelBotones.add(tiqueteIndividualRadio);
-                    	panelBotones.add(tiqueteExclusividadRadio);
-                    	panelBotones.add(tiqueteTemporadaRadio);
-                    	
-                    	panelComprarTiquete.add(new JLabel("Nombre:"));
-                    	JTextField tfNombre = new JTextField();
-                    	panelComprarTiquete.add(tfNombre);
-
-                    	panelComprarTiquete.add(new JLabel("Horario:"));
-                    	JTextField tfHorario = new JTextField();
-                    	panelComprarTiquete.add(tfHorario);
-
-                    	panelComprarTiquete.add(new JLabel("Ubicación:"));
-                    	JTextField tfUbicacion = new JTextField();
-                    	panelComprarTiquete.add(tfUbicacion);
-                    	
-                    	JButton btnCrear = new JButton("Crear espectáculo");
-                    	panelComprarTiquete.add(btnCrear, BorderLayout.SOUTH);
-                        
-                        btnCrear.addActionListener(evt -> {
-                            String nombre   = tfNombre.getText();
-                            String horario  = tfHorario.getText();
-                            String ubicacion= tfUbicacion.getText();
-							Administrador.crearEspectaculo(nombre, horario, ubicacion);
-							JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se creo correctamente el espectaculo", JOptionPane.INFORMATION_MESSAGE);
-							});
+                    	ButtonGroup exclusividades = new ButtonGroup();
+                    	exclusividades.add(basico);
+                    	exclusividades.add(familiar);
+                    	exclusividades.add(oro);
+                    	exclusividades.add(diamante);
                     	
                         panelUsuario.removeAll();
-                        panelUsuario.add(panelBotones);
-                        panelUsuario.add(panelComprarTiquete);
+                        izquierda.removeAll();
+                        izquierda.add(panelTipos);
+                        izquierda.add(new JLabel(""));
+                        izquierda.add(new JLabel("Configura tu tiquete"));
+                        izquierda.add(new JLabel(""));
+                        izquierda.add(panelExclusividades);
+                        izquierda.add(temporada);
+                        izquierda.add(fastPass);
+                        izquierda.add(btnCrear);
+                        panelUsuario.add(izquierda);
                         panelUsuario.revalidate();
                         panelUsuario.repaint();
+                        
                         break;
+                        
                     case 1:
                         JPanel panelCambiarFecha = new JPanel(new GridLayout(0, 2, 5, 5));
                         panelCambiarFecha.add(new JLabel("Nombre: "));
