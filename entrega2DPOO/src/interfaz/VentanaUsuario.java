@@ -48,6 +48,22 @@ public class VentanaUsuario extends JFrame{
                     	
                     	
                     	JPanel panelComprarTiquete = new JPanel(new GridLayout(0, 2, 5, 5)); 
+                    	
+                    	JPanel panelBotones = new JPanel(new GridLayout(3, 0, 5, 5));
+                    	
+                    	JRadioButton tiqueteIndividualRadio = new JRadioButton("Tiquete individual");
+                    	JRadioButton tiqueteTemporadaRadio = new JRadioButton("Tiquete temporada");
+                    	JRadioButton tiqueteExclusividadRadio = new JRadioButton("Tiquete exclusividad");
+                    	
+                    	ButtonGroup group = new ButtonGroup();
+                    	group.add(tiqueteIndividualRadio);
+                    	group.add(tiqueteExclusividadRadio);
+                    	group.add(tiqueteTemporadaRadio);
+                    	
+                    	panelBotones.add(tiqueteIndividualRadio);
+                    	panelBotones.add(tiqueteExclusividadRadio);
+                    	panelBotones.add(tiqueteTemporadaRadio);
+                    	
                     	panelComprarTiquete.add(new JLabel("Nombre:"));
                     	JTextField tfNombre = new JTextField();
                     	panelComprarTiquete.add(tfNombre);
@@ -72,6 +88,7 @@ public class VentanaUsuario extends JFrame{
 							});
                     	
                         panelUsuario.removeAll();
+                        panelUsuario.add(panelBotones);
                         panelUsuario.add(panelComprarTiquete);
                         panelUsuario.revalidate();
                         panelUsuario.repaint();
