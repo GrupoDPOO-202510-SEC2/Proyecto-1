@@ -12,7 +12,7 @@ public class TiqueteTemporada extends TiqueteExclusividad{
 		super(idTiquete, fastPass, exclusividad);
 		this.fechaFin = fechaFin;
 		this.fechaInicio = fechaInicio;
-		isValido();
+		//isValido();
 	}
 	
 	public String getFechaInicio() {

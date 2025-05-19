@@ -35,20 +35,20 @@ public class CajeroTaquilla extends Empleado{
 		}
 	}
 	
-	public void venderTiquete() {
+	public static void venderTiquete() {
 		PedidoTiquete pedido = parque.taquilla.pedidoEnFila();
 		
 		Double idTiquete = Taquilla.generarCodigo();
 		
 		Tiquete nuevoTiquete = null;
 		
-		if(pedido.getTipo() == "TiqueteExclusivo") {
+		if(pedido.getTipo().equals("TiqueteExclusivo")) {
 			nuevoTiquete = new TiqueteExclusividad(idTiquete, pedido.isFastPass(), pedido.getExclusividad());
 		}
-		else if(pedido.getTipo() == "TiqueteTemporada") {
+		else if(pedido.getTipo().equals("TiqueteTemporada")) {
 			nuevoTiquete = new TiqueteTemporada(idTiquete, pedido.isFastPass(), pedido.getExclusividad(), pedido.getFechaInicioParaTemporales(), pedido.getFechaFinParaTemporales());
 		}
-		else if(pedido.getTipo() == "TiqueteIndividual") {
+		else if(pedido.getTipo().equals("TiqueteIndividual")) {
 			nuevoTiquete = new Tiquete(idTiquete, pedido.isFastPass());
 		}
 		

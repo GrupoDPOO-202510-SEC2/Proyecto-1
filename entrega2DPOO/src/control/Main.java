@@ -16,13 +16,11 @@ public class Main extends ConsolaBasica {
     	//Persistencia.cargarParque()
     	
         Usuario.parque = Persistencia.cargarParque();
-        Administrador admin = new Administrador("Administrador", "sopa", "sopa", 180, 70);
-        Usuario.parque.usuarios.put("sopa", admin);
         
         new Ventana();
         
         
-        String a =  """
+        String consola =  """
         String[] opciones = {
             "Consola de Usuario",
             "Consola de Administrador"

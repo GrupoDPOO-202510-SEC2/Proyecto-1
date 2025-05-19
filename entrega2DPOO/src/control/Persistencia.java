@@ -492,7 +492,6 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		
 		jpedido.put("loginUsuario", pedido.getLogin());
 		jpedido.put("tipo", pedido.getTipo());
-		jpedido.put("atraccionParaIndividuales", pedido.getAtraccionParaIndividuales());
 		jpedido.put("fechaInicioParaTemporales", pedido.getFechaInicioParaTemporales());
 		jpedido.put("fechaFinParaTemporales", pedido.getFechaFinParaTemporales());
 		jpedido.put("exclusividad", pedido.getExclusividad());
@@ -571,7 +570,7 @@ private static void guardarMapaTiendas(JSONObject jparque, HashMap<String, Tiend
 		ArrayList<Double> tiquetesComprados = new ArrayList<Double>();
 		JSONArray jcomprados = jproducto.getJSONArray("tiquetesComprados");
 		for(int i = 0;i<jcomprados.length();i++) {
-			Double id = jrestricciones.getDouble(i);
+			Double id = jcomprados.getDouble(i);
 			tiquetesComprados.add(id);
 		}
 		
@@ -1368,8 +1367,9 @@ private static Cajero cargarCajero(JSONObject jproducto, Parque parque) throws E
 
 	private static PedidoTiquete cargarPedido(JSONObject jpedido) throws Exception {
 		
-		PedidoTiquete pedido = new PedidoTiquete(jpedido.getString("loginUsuario"),jpedido.getString("tipo") ,jpedido.getString("atraccionParaIndividuales" ) 
-				, jpedido.getString("fechaInicioParaTemporales" ), jpedido.getString("fechaFinParaTemporales"), jpedido.getInt("exclusividad"), jpedido.getBoolean("fastPass") );
+		PedidoTiquete pedido = new PedidoTiquete(jpedido.getString("loginUsuario"),jpedido.getString("tipo"),
+				jpedido.getString("fechaInicioParaTemporales" ), jpedido.getString("fechaFinParaTemporales"),
+				jpedido.getInt("exclusividad"), jpedido.getBoolean("fastPass") );
 		return pedido;
 	}
 	

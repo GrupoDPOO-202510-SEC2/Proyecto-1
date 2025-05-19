@@ -233,7 +233,7 @@ public class Ventana extends JFrame {
         add(panelUsuarioLogin, "Panel Usuario login");
         add(panelUsuarioRegister, "Panel Usuario register");
         
-        setResizable(false);
+         
         setSize(400, 700);
         setVisible(true);
         setLocationRelativeTo(null);

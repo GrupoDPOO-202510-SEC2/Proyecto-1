@@ -15,13 +15,13 @@ class TaquillaTest {
 	@Test
 	void testNuevaPeticion() {
 		Taquilla taquilla = generarTaquilla();
-		PedidoTiquete pedido = new PedidoTiquete("ttlogin", "TiqueteExclusivo", "Rueda de la Fortuna", "2024-02-03", "2024-03-03", 0, true);
+		PedidoTiquete pedido = new PedidoTiquete("ttlogin", "TiqueteExclusivo", "2024-02-03", "2024-03-03", 0, true);
 		
 		taquilla.nuevaPeticion(pedido);
 		
 		assertEquals(1, taquilla.getPedidosTiquetes().size());
 		
-		PedidoTiquete pedido2 = new PedidoTiquete("cclogin", "TiqueteTemporada", "Rueda de la Fortuna", "2024-02-03", "2024-03-03", 0, false);
+		PedidoTiquete pedido2 = new PedidoTiquete("cclogin", "TiqueteTemporada", "2024-02-03", "2024-03-03", 0, false);
 		
 		taquilla.nuevaPeticion(pedido2);
 		
@@ -32,7 +32,7 @@ class TaquillaTest {
 	@Test
 	void testPedidoEnFila() {
 		Taquilla taquilla = generarTaquilla();
-		PedidoTiquete pedido = new PedidoTiquete("ttlogin", "TiqueteExclusivo", "Rueda de la Fortuna", "2024-02-03", "2024-03-03", 0, true);
+		PedidoTiquete pedido = new PedidoTiquete("ttlogin", "TiqueteExclusivo", "2024-02-03", "2024-03-03", 0, true);
 		taquilla.nuevaPeticion(pedido);
 		
 		PedidoTiquete pedidoEnFila = taquilla.pedidoEnFila();
@@ -41,7 +41,7 @@ class TaquillaTest {
 		assertEquals(0, taquilla.getPedidosTiquetes().size());
 		
 		taquilla.nuevaPeticion(pedidoEnFila);
-		PedidoTiquete pedido2 = new PedidoTiquete("cclogin", "TiqueteTemporada", "Rueda de la Fortuna", "2024-02-03", "2024-03-03", 0, false);
+		PedidoTiquete pedido2 = new PedidoTiquete("cclogin", "TiqueteTemporada", "2024-02-03", "2024-03-03", 0, false);
 		taquilla.nuevaPeticion(pedido2);
 		
 		PedidoTiquete nuevoPedidoEnFila = taquilla.pedidoEnFila();

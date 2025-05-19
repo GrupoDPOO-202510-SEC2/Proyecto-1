@@ -115,9 +115,11 @@ public class Usuario {
 		tiquetesComprados.add(tiquete.getIdTiquete());
 	}
 	
-	public void comprarTiquete(String tipo, String atraccion, String fInicio, String fFin, int exclusividad, boolean fastPass) {
-		PedidoTiquete nuevoPedido = new PedidoTiquete(this.login, tipo, atraccion, fInicio, fFin, exclusividad, fastPass);
+	public void comprarTiquete(String tipo, String fInicio, String fFin, int exclusividad, boolean fastPass) {
+		PedidoTiquete nuevoPedido = new PedidoTiquete(this.login, tipo, fInicio, fFin, exclusividad, fastPass);
 		parque.getTaquilla().nuevaPeticion(nuevoPedido);
+
+		CajeroTaquilla.venderTiquete();
 	}
 	
 	public void agregarRestriccion(String nuevaRestriccion) {

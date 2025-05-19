@@ -18,7 +18,7 @@ class CajeroTaquillaTest {
 		parque.usuarios.put("cclogin", usuario);
 		Tiquete tiquete = new Tiquete(10000001, false);
 		parque.tiquetes.put(tiquete.getIdTiquete(), tiquete);
-		PedidoTiquete pedido = new PedidoTiquete("cclogin", "TiqueteExclusividad", "", "", "", 3, false);
+		PedidoTiquete pedido = new PedidoTiquete("cclogin", "TiqueteExclusividad", "", "", 3, false);
 		parque.taquilla.addPedidoTiquete(pedido);
 		CajeroTaquilla.parque = parque;
 		CajeroTaquilla cajero = new CajeroTaquilla("Tulio", "ttlogin", "1234", 175, 56, "Taquilla");

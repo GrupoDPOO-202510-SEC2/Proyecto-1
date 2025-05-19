@@ -73,16 +73,15 @@ public class ConsolaUsuario extends ConsolaBasica {
 
     private void ejecutarMenu(Usuario usuario) {
         String[] opcionesMenu = {
-            "Comprar tiquete",
-            "Ver restricciones",
-            "Agregar restricción",
-            "Eliminar restricción",
-            "Ver tiquetes funcionales",
-            "Asignar tiquete en uso",
-            "Invalidar tiquete en uso",
-            "Ver tiquete en uso",
-            "Ver historial de compras",
-            "Salir"
+            "1. Comprar tiquete",
+            "2. Ver restricciones",
+            "3. Agregar restricción",
+            "4. Eliminar restricción",
+            "5. Ver tiquetes funcionales",
+            "6. Asignar tiquete en uso",
+            "7. Invalidar tiquete en uso",
+            "8. Ver tiquete en uso",
+            "9. Ver historial de compras"
         };
 
         boolean continuar = true;
@@ -92,12 +91,11 @@ public class ConsolaUsuario extends ConsolaBasica {
             switch (opcion) {
                 case 1:
                     String tipo = pedirCadenaAlUsuario("Tipo de tiquete");
-                    String atraccion = pedirCadenaAlUsuario("Atracción asociada");
                     String fInicio = pedirCadenaAlUsuario("Fecha de inicio (yyyy-mm-dd)");
                     String fFin = pedirCadenaAlUsuario("Fecha de fin (yyyy-mm-dd)");
                     int exclusividad = pedirEnteroAlUsuario("Nivel de exclusividad (1-4)");
                     boolean fastPass = pedirConfirmacionAlUsuario("¿Desea Fast Pass?");
-                    usuario.comprarTiquete(tipo, atraccion, fInicio, fFin, exclusividad, fastPass);
+                    usuario.comprarTiquete(tipo, fInicio, fFin, exclusividad, fastPass);
                     break;
 
                 case 2:
