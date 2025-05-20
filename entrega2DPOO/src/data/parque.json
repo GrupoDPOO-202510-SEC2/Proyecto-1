@@ -2,7 +2,7 @@
     "mapaTiendas": {"items": ["gorra tematica"]},
     "taquilla": {
         "ubicacion": "Entrada",
-        "IDs": 1.0000003E7,
+        "IDs": 1.0000004E7,
         "pedidosTiquetes": []
     },
     "mapaCafeterias": {
@@ -139,6 +139,12 @@
             "fastPass": false,
             "idTiquete": 1.0000003E7,
             "fechaFin": "2020-01-02"
+        },
+        "1.0000004E7": {
+            "tipo": "Tiquete",
+            "valido": true,
+            "fastPass": true,
+            "idTiquete": 1.0000004E7
         }
     },
     "usuarios": {
@@ -152,6 +158,7 @@
                 1.0000001E7,
                 1.0000002E7,
                 1.0000003E7,
+                1.0000004E7
             ],
             "tiqueteEnUso": 0,
             "login": "sopa",

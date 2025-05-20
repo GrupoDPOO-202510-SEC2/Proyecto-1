@@ -4,6 +4,7 @@ import java.awt.BorderLayout;
 import java.awt.CardLayout;
 import java.awt.Component;
 import java.awt.Dimension;
+import java.awt.Font;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
@@ -37,13 +38,11 @@ public class VentanaUsuario extends JFrame{
         String[] metodos1 = {
         		"Comprar tiquete",
                 "Ver tiquetes funcionales",
+                "Ver todos los tiquetes comprados",
+                "Ver tiquete en uso",
                 "Agregar restricción",
                 "Eliminar restricción",
                 "Ver restricciones",
-                "Asignar tiquete en uso",
-                "Invalidar tiquete en uso",
-                "Ver tiquete en uso",
-                "Ver historial de compras",
         };
         JList<String> lista1 = new JList<>(metodos1);
         JScrollPane scroll1 = new JScrollPane(lista1);
@@ -123,18 +122,22 @@ public class VentanaUsuario extends JFrame{
 		                        	fechaf = fechaFinal.getText();
 		                        	fechai = fechaInicial.getText();
 		                        	
-									usuario.comprarTiquete("TiqueteTemporada", fechai , fechaf , exclusividad, fazpas);
+		                        	if (fechaf.equals("") || fechaf.equals("")) {
+		                        		JOptionPane.showMessageDialog(null,  "Porfavor ingresar las fechas del tiquete","Error de Construccion", JOptionPane.INFORMATION_MESSAGE);
+		                        	}else {
+		                        		usuario.comprarTiquete("TiqueteTemporada", fechai , fechaf , exclusividad, fazpas);
+		                        	}
 								}else {
-									JOptionPane.showMessageDialog(null, "Error de Construccion", "Porfavor seleccione un nivel de exclusividad", JOptionPane.INFORMATION_MESSAGE);
+									JOptionPane.showMessageDialog(null,  "Porfavor seleccione un nivel de exclusividad","Error de Construccion", JOptionPane.INFORMATION_MESSAGE);
 								}
 							} else if (tipo == 2) {
 								if (exclusividad != 0) {
 									usuario.comprarTiquete("TiqueteExclusivo", "", "", exclusividad, fazpas);
 								}else {
-									JOptionPane.showMessageDialog(null, "Error de Construccion", "Porfavor seleccione un nivel de exclusividad", JOptionPane.INFORMATION_MESSAGE);
+									JOptionPane.showMessageDialog(null, "Porfavor seleccione un nivel de exclusividad","Error de Construccion",  JOptionPane.INFORMATION_MESSAGE);
 								}
 							} else {
-								JOptionPane.showMessageDialog(null, "Error de Construccion", "Porfavor seleccione un tipo de tiquete", JOptionPane.INFORMATION_MESSAGE);
+								JOptionPane.showMessageDialog(null, "Porfavor seleccione un tipo de tiquete","Error de Construccion",  JOptionPane.INFORMATION_MESSAGE);
 							}
                         });
                     	
@@ -264,64 +267,122 @@ public class VentanaUsuario extends JFrame{
 		                });
 		                    	
                     	panelUsuario.removeAll();
+                    	JLabel instrucciones1 = new JLabel("Dale una sola vez a uno de los codigos de los tiquetes.", SwingConstants.CENTER);
+                    	instrucciones1.setFont(instrucciones1.getFont().deriveFont(15f).deriveFont(Font.BOLD));
+                        JLabel instrucciones2 = new JLabel("te mostrara el tiquete en pantalla.", SwingConstants.CENTER);
+                        instrucciones2.setFont(instrucciones2.getFont().deriveFont(15f).deriveFont(Font.BOLD));
+                        
+                        panelUsuario.add(instrucciones1);
+                        panelUsuario.add(instrucciones2);
                     	panelUsuario.add(scrollTiquetes, BorderLayout.CENTER);
                     	panelUsuario.revalidate();
                     	panelUsuario.repaint();
                         break;
                     case 2:
-                        JPanel panelVerEsp = new JPanel(new GridLayout(0, 1, 5, 5));
-                        panelVerEsp.add(new JLabel("Nombre: "));
-                        JTextField tfNombre2 = new JTextField();
-                        panelVerEsp.add(tfNombre2);
-                        JButton btnCrear2 = new JButton("Ver");
-                    	panelVerEsp.add(btnCrear2, BorderLayout.SOUTH);
+                    	tiquetes = this.usuario.getTiquetesComprados();
+                    	tiquetesString = new String[tiquetes.size()];
                     	
-                    	btnCrear2.addActionListener(evt -> {
-                    		String nombre2 = tfNombre2.getText();
-                            Espectaculo esp = Administrador.getEspectaculo(nombre2);
-							panelVerEsp.add(new JLabel("Nombre: "+ esp.getNombre()));
-	                        panelVerEsp.add(new JLabel("Ubicación: "+ esp.getUbicacion()));
-	                        panelVerEsp.add(new JLabel("Horario: "+ esp.getHorario()));
-	                        panelVerEsp.add(new JLabel("Fecha Inicio: "+ esp.getFechaInicio()));
-	                        panelVerEsp.add(new JLabel("Fecha Fin: "+ esp.getFechaFin()));
-							});
+                    	for(int i = 0; i < tiquetes.size(); i++) {
+                    		tiquetesString[i] = (tiquetes.get(i).toString());
+                    	}
+                    	listaTiquetes = new JList<String>(tiquetesString);
+                    	scrollTiquetes = new JScrollPane(listaTiquetes);
+                    	scrollTiquetes.setPreferredSize(new Dimension(300, 600));
+                    	
+                    	listaTiquetes.addListSelectionListener(ev -> {
+						    if (!ev.getValueIsAdjusting()) {
+						    	String codigoTiquete = listaTiquetes.getSelectedValue();
+						    	Tiquete tiquete = Usuario.parque.tiquetes.get(Double.parseDouble(codigoTiquete));
+						    	
+						    	new VentanaBoleta(tiquete);						    	
+								
+							}
+		                });
+		                    	
                     	panelUsuario.removeAll();
-                    	panelUsuario.add(panelVerEsp);
+                    	instrucciones1 = new JLabel("Dale una sola vez a uno de los codigos de los tiquetes.", SwingConstants.CENTER);
+                    	instrucciones1.setFont(instrucciones1.getFont().deriveFont(15f).deriveFont(Font.BOLD));
+                        instrucciones2 = new JLabel("te mostrara el tiquete en pantalla.", SwingConstants.CENTER);
+                        instrucciones2.setFont(instrucciones2.getFont().deriveFont(15f).deriveFont(Font.BOLD));
+                        
+                        panelUsuario.add(instrucciones1);
+                        panelUsuario.add(instrucciones2);
+                    	panelUsuario.add(scrollTiquetes, BorderLayout.CENTER);
                     	panelUsuario.revalidate();
                     	panelUsuario.repaint();
                         break;
                     case 3:
-                        JPanel panelClimas = new JPanel(new GridLayout(0, 2, 5, 5));
-                        panelClimas.add(new JLabel("Nombre: "));
-                        JTextField tfNombre3 = new JTextField();
-                        panelClimas.add(tfNombre3);
+                        
+                    	Tiquete tiquete = usuario.getTiqueteEnUso();
                     	
-                    	panelClimas.add(new JLabel("Clima: "));
-                        JTextField tfClima = new JTextField();
-                        panelClimas.add(tfClima);
-                        JButton btnagregar = new JButton("Agregar");
-                    	panelClimas.add(btnagregar, BorderLayout.SOUTH);
-                    	JButton btneliminar = new JButton("Eliminar");
-                    	panelClimas.add(btneliminar, BorderLayout.SOUTH);
+                    	if(tiquete != null) {
+                    		new VentanaBoleta(tiquete);	
+                    	}else {
+                    		JOptionPane.showMessageDialog(null,  "El usuario no esta utilizando ningun tiquete actualmente","Error Tiquete no encontrado", JOptionPane.INFORMATION_MESSAGE);
+                    	}
                     	
-                    	btnagregar.addActionListener(evt -> {
-                            String nombre3   = tfNombre3.getText();
-                            String clima  = tfClima.getText();
-							Administrador.agregarClimaRestringidoE(nombre3, clima);
-							JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se agregó correctamente el clima", JOptionPane.INFORMATION_MESSAGE);
-							});
-                    	btneliminar.addActionListener(evt -> {
-                            String nombre3   = tfNombre3.getText();
-                            String clima  = tfClima.getText();
-							Administrador.eliminarClimaRestringidoE(nombre3, clima);
-							JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se eliminó correctamente el clima", JOptionPane.INFORMATION_MESSAGE);
-							});
                     	
                     	panelUsuario.removeAll();
-                    	panelUsuario.add(panelClimas);
+                    	panelUsuario.add(new JLabel("El tiquete se esta mostrando en otra ventana"));
                     	panelUsuario.revalidate();
                     	panelUsuario.repaint();
                         break;
+                    case 4:
+                        
+                    	JPanel panelAgregarRest = new JPanel(new GridLayout(2, 2, 5, 10)); 
+                    	
+						
+						panelAgregarRest.add(new JLabel("Restriccion:"));
+                    	JTextField jRestriccion = new JTextField();
+                    	panelAgregarRest.add(jRestriccion);
+                    	
+                    	JButton btnCrearRestriccion = new JButton("Agregar Restriccion");
+                    	panelAgregarRest.add(btnCrearRestriccion, BorderLayout.SOUTH);
+                        
+                    	btnCrearRestriccion.addActionListener(evt -> {
+                            String restriccion   = jRestriccion.getText();
+							this.usuario.agregarRestriccion(restriccion);
+							});
+                    	
+                    	panelUsuario.removeAll();
+                    	panelUsuario.add(panelAgregarRest);
+                    	panelUsuario.revalidate();
+                    	panelUsuario.repaint();
+                        break;
+                    case 5:
+                        
+                    	panelAgregarRest = new JPanel(new GridLayout(2, 2, 5, 10)); 
+                    	
+						
+						panelAgregarRest.add(new JLabel("Restriccion:"));
+                    	jRestriccion = new JTextField();
+                    	panelAgregarRest.add(jRestriccion);
+                    	
+                    	btnCrearRestriccion = new JButton("Eliminar Restriccion");
+                    	panelAgregarRest.add(btnCrearRestriccion, BorderLayout.SOUTH);
+                        
+                    	btnCrearRestriccion.addActionListener(evt -> {
+                            String restriccion   = jRestriccion.getText();
+							this.usuario.eliminarRestriccion(restriccion);
+							});
+                    	
+                    	panelUsuario.removeAll();
+                    	panelUsuario.add(panelAgregarRest);
+                    	panelUsuario.revalidate();
+                    	panelUsuario.repaint();
+                        break;
+                      
+                    case 6:
+                    	
+                    	Object[] restriccionesA = this.usuario.getRestricciones().toArray();
+                    	JList jRestricciones = new JList(restriccionesA); 
+                    	
+                    	panelUsuario.removeAll();
+                    	panelUsuario.add(jRestricciones);
+                    	panelUsuario.revalidate();
+                    	panelUsuario.repaint();
+                        break;
+                        
                     default:
                     	panelUsuario.add(new JLabel("Opción no implementada"));
                 }

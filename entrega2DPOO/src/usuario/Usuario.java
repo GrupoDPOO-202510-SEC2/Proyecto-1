@@ -126,4 +126,9 @@ public class Usuario {
 		restricciones.add(nuevaRestriccion);
 	}
 	
+	public void eliminarRestriccion(String nuevaRestriccion) {
+		restricciones.remove(nuevaRestriccion);
+	}
+	
+	
 }

@@ -50,6 +50,7 @@ public class VentanaBoleta extends JFrame{
 			fazzballs = "si";
 		}
 		
+		String exclusividad = "Diamante";
 		
 		Double idboleta = tiquete.getIdTiquete();
 		String tipo = "Individual";
@@ -62,10 +63,13 @@ public class VentanaBoleta extends JFrame{
 			fechas = tiquetet.getFechaInicio() + " - " + tiquetet.getFechaFin();
 			if(tiquetet.getExclusividad() == 1) {
 				iconoExclusividad = basico;
+				exclusividad = "Basico";
 			}else if(tiquetet.getExclusividad() == 2) {
 				iconoExclusividad = familiar;
+				exclusividad = "Familiar";
 			}else if(tiquetet.getExclusividad() == 3) {
 				iconoExclusividad = oro;
+				exclusividad = "Oro";
 			}
 			
 		}else if(tiquete instanceof TiqueteExclusividad ) {
@@ -74,10 +78,13 @@ public class VentanaBoleta extends JFrame{
 			TiqueteExclusividad tiquetet = (TiqueteExclusividad) tiquete;
 			if(tiquetet.getExclusividad() == 1) {
 				iconoExclusividad = basico;
+				exclusividad = "Basico";
 			}else if(tiquetet.getExclusividad() == 2) {
 				iconoExclusividad = familiar;
+				exclusividad = "Familiar";
 			}else if(tiquetet.getExclusividad() == 3) {
 				iconoExclusividad = oro;
+				exclusividad = "Oro";
 			}
 		}
 		
@@ -86,7 +93,8 @@ public class VentanaBoleta extends JFrame{
 			qr = GeneradorQR.generateQRCodeIcon("No. " + idboleta + "\n" +
 					"Tiquete: " + tipo + "\n"+
 					"Fechas de uso: " + fechas + "\n"+
-					"fastpass: " + fazzballs
+					"Fastpass: " + fazzballs + "\n"+
+					"Exclusividad: " + exclusividad
 					);
 		} catch (WriterException e) {
 			// TODO Auto-generated catch block
@@ -116,6 +124,8 @@ public class VentanaBoleta extends JFrame{
         panelStub.add(new JLabel("Fechas de uso: " + fechas));
         panelStub.add(Box.createVerticalStrut(5));
         panelStub.add(new JLabel(String.format("Valor: $%,.2f", valor)));
+        panelStub.add(Box.createVerticalStrut(5));
+        panelStub.add(new JLabel("FastPass: " + fazzballs));
         panelStub.add(Box.createVerticalGlue());
         panelStub.add(new JLabel(iconoExclusividad));
         contenido.add(panelStub, BorderLayout.WEST);
