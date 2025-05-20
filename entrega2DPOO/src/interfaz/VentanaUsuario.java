@@ -2,14 +2,17 @@ package interfaz;
 
 import java.awt.BorderLayout;
 import java.awt.CardLayout;
+import java.awt.Component;
 import java.awt.Dimension;
 import java.awt.GridLayout;
 import java.awt.event.ActionEvent;
 import java.awt.event.ActionListener;
+import java.util.ArrayList;
 
 import javax.swing.*;
 
 import atraccion.Espectaculo;
+import tiquete.Tiquete;
 import usuario.Administrador;
 import usuario.Usuario;
 
@@ -27,15 +30,16 @@ public class VentanaUsuario extends JFrame{
 	
 	public VentanaUsuario(Usuario usuario) {
 		
+		this.usuario = usuario;
 		
 		
 		// ——— Pestaña Espectáculos ———
         String[] metodos1 = {
         		"Comprar tiquete",
-                "Ver restricciones",
+                "Ver tiquetes funcionales",
                 "Agregar restricción",
                 "Eliminar restricción",
-                "Ver tiquetes funcionales",
+                "Ver restricciones",
                 "Asignar tiquete en uso",
                 "Invalidar tiquete en uso",
                 "Ver tiquete en uso",
@@ -238,32 +242,29 @@ public class VentanaUsuario extends JFrame{
                         break;
                         
                     case 1:
-                        JPanel panelCambiarFecha = new JPanel(new GridLayout(0, 2, 5, 5));
-                        panelCambiarFecha.add(new JLabel("Nombre: "));
-                        JTextField tfNombre1 = new JTextField();
-                        panelCambiarFecha.add(tfNombre1);
                     	
-                    	panelCambiarFecha.add(new JLabel("Fecha Inicial: "));
-                        JTextField tfFechai = new JTextField();
-                        panelCambiarFecha.add(tfFechai);
+                    	ArrayList<Double> tiquetes = this.usuario.getTiquetesFuncionales();
+                    	String[] tiquetesString = new String[tiquetes.size()];
                     	
-                    	panelCambiarFecha.add(new JLabel("Fecha Final: "));
-                        JTextField tfFechaf = new JTextField();
-                        panelCambiarFecha.add(tfFechaf);
+                    	for(int i = 0; i < tiquetes.size(); i++) {
+                    		tiquetesString[i] = (tiquetes.get(i).toString());
+                    	}
+                    	JList<String> listaTiquetes = new JList<String>(tiquetesString);
+                    	JScrollPane scrollTiquetes = new JScrollPane(listaTiquetes);
+                    	scrollTiquetes.setPreferredSize(new Dimension(300, 600));
                     	
-                    	JButton btnCrear1 = new JButton("Crear espectáculo");
-                    	panelCambiarFecha.add(btnCrear1, BorderLayout.SOUTH);
-                    	
-                    	btnCrear1.addActionListener(evt -> {
-                            String nombre1   = tfNombre1.getText();
-                            String fechai  = tfFechai.getText();
-                            String fechaf= tfFechaf.getText();
-							Administrador.cambiarFechaEspectaculo(nombre1, fechai, fechaf);
-							JOptionPane.showMessageDialog(null, "Operacion Exitosa", "Se cambió Correctamente la fecha", JOptionPane.INFORMATION_MESSAGE);
-							});
-                    	
+                    	listaTiquetes.addListSelectionListener(ev -> {
+						    if (!ev.getValueIsAdjusting()) {
+						    	String codigoTiquete = listaTiquetes.getSelectedValue();
+						    	Tiquete tiquete = Usuario.parque.tiquetes.get(Double.parseDouble(codigoTiquete));
+						    	
+						    	new VentanaBoleta(tiquete);						    	
+								
+							}
+		                });
+		                    	
                     	panelUsuario.removeAll();
-                    	panelUsuario.add(panelCambiarFecha);
+                    	panelUsuario.add(scrollTiquetes, BorderLayout.CENTER);
                     	panelUsuario.revalidate();
                     	panelUsuario.repaint();
                         break;
