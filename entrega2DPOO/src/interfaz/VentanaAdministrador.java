@@ -339,6 +339,13 @@ public class VentanaAdministrador {
                     	panelVerAtr.add(btnCrear2, BorderLayout.SOUTH);
                     	
                     	btnCrear2.addActionListener(evt -> {
+
+                    		panelVerAtr.removeAll();
+                    		
+                    		panelVerAtr.add(new JLabel("Nombre: "));
+                            panelVerAtr.add(tfNombre2);
+                        	panelVerAtr.add(btnCrear2, BorderLayout.SOUTH);
+                    		
                     		String nombreA = tfNombre2.getText();
                             Atraccion atr = Administrador.getAtraccion(nombreA);
 							panelVerAtr.add(new JLabel("Nombre: "+ atr.getNombre()));
@@ -346,6 +353,9 @@ public class VentanaAdministrador {
 	                        panelVerAtr.add(new JLabel("Empleados Minimos: "+ atr.getEmpleadosMinimos()));
 	                        panelVerAtr.add(new JLabel("Nivel Exclusividad: "+ atr.getNivelExclusividad()));
 	                        panelVerAtr.add(new JLabel("Capcidad Máxima: "+ atr.getCapacidadMaxima()));
+
+	                    	panelCentralAtracciones.revalidate();
+	                    	panelCentralAtracciones.repaint();
 							});
                     	panelCentralAtracciones.removeAll();
                         panelCentralAtracciones.add(panelVerAtr);
@@ -462,10 +472,20 @@ public class VentanaAdministrador {
                         panelVerOperadores.add(btnVerOp, BorderLayout.SOUTH);
 
                         btnVerOp.addActionListener(evt -> {
+                        	
+                        	panelVerOperadores.removeAll();
+                        	
+                        	panelVerOperadores.add(new JLabel("Nombre de la atracción:"));
+                            panelVerOperadores.add(tfNombreOp);
+                            panelVerOperadores.add(btnVerOp, BorderLayout.SOUTH);
+                        	
                             String nombre = tfNombreOp.getText();
                             int[] op = Administrador.getOperadoresAtraccion(nombre);
                             panelVerOperadores.add(new JLabel("Día: " + op[0]));
                             panelVerOperadores.add(new JLabel("Noche: " + op[1]));
+
+                            panelCentralAtracciones.revalidate();
+                            panelCentralAtracciones.repaint();
                         });
 
                         panelCentralAtracciones.removeAll();
@@ -739,10 +759,20 @@ public class VentanaAdministrador {
                         panelVerEdad.add(btnVerEdad, BorderLayout.SOUTH);
 
                         btnVerEdad.addActionListener(evt -> {
+                        	
+                        	panelVerEdad.removeAll();
+
+                            panelVerEdad.add(new JLabel("Atraccion:"));
+                            panelVerEdad.add(tfAtrVerEdad);
+                            panelVerEdad.add(btnVerEdad, BorderLayout.SOUTH);
+                        	
                             int edadMin = Administrador.getEdadMinima(tfAtrVerEdad.getText());
                             panelVerEdad.add(new JLabel("Edad mínima: " + edadMin));
                             panelVerEdad.revalidate();
                             panelVerEdad.repaint();
+
+                            panelCentralAtracciones.revalidate();
+                            panelCentralAtracciones.repaint();
                         });
 
                         panelCentralAtracciones.removeAll();
@@ -761,10 +791,22 @@ public class VentanaAdministrador {
                         panelVerInteract.add(btnVerInt, BorderLayout.SOUTH);
 
                         btnVerInt.addActionListener(evt -> {
+                        	
+                        	panelVerInteract.removeAll();
+                        	
+
+                            panelVerInteract.add(new JLabel("Atraccion:"));
+                            panelVerInteract.add(tfAtrVerInt);
+                            panelVerInteract.add(btnVerInt, BorderLayout.SOUTH);
+                        	
                             boolean interact = Administrador.isEsInteractiva(tfAtrVerInt.getText());
                             panelVerInteract.add(new JLabel("Es interactiva: " + interact));
                             panelVerInteract.revalidate();
                             panelVerInteract.repaint();
+                            
+
+                            panelCentralAtracciones.revalidate();
+                            panelCentralAtracciones.repaint();
                         });
 
                         panelCentralAtracciones.removeAll();
@@ -880,6 +922,13 @@ public class VentanaAdministrador {
                     JButton btnVerLugar = new JButton("Ver lugar de trabajo");
                     panelVerLugar.add(btnVerLugar, BorderLayout.SOUTH);
                     btnVerLugar.addActionListener(evt -> {
+                    	
+                    	panelVerLugar.removeAll();
+
+                        panelVerLugar.add(new JLabel("Login:"));
+                        panelVerLugar.add(tfLoginVerLugar);
+                        panelVerLugar.add(btnVerLugar, BorderLayout.SOUTH);
+                    	
                         String login = tfLoginVerLugar.getText();
                         String lugar = Administrador.getLugarDeTrabajo(login);
                         panelVerLugar.add(new JLabel("Lugar: " + lugar));
@@ -914,6 +963,14 @@ public class VentanaAdministrador {
                     JButton btnVerRol = new JButton("Ver rol");
                     panelVerRol.add(btnVerRol, BorderLayout.SOUTH);
                     btnVerRol.addActionListener(evt -> {
+                    	
+                    	panelVerRol.removeAll();
+
+                        panelVerRol.add(new JLabel("Login:"));
+                        panelVerRol.add(tfLoginVerRol);
+                        panelVerRol.add(btnVerRol, BorderLayout.SOUTH);
+                    	
+                    	
                         String rol = Administrador.getRol(tfLoginVerRol.getText());
                         panelVerRol.add(new JLabel("Rol: " + rol));
                         panelVerRol.revalidate();
@@ -930,6 +987,13 @@ public class VentanaAdministrador {
                     JButton btnVerTurnos = new JButton("Ver turnos");
                     panelVerTurnos.add(btnVerTurnos, BorderLayout.SOUTH);
                     btnVerTurnos.addActionListener(evt -> {
+                    	
+                    	panelVerTurnos.removeAll();
+
+                        panelVerTurnos.add(new JLabel("Login:"));
+                        panelVerTurnos.add(tfLoginVerTurnos);
+                        panelVerTurnos.add(btnVerTurnos, BorderLayout.SOUTH);
+                    	
                         boolean[] t = Administrador.getTurnos(tfLoginVerTurnos.getText());
                         panelVerTurnos.add(new JLabel("Día: " + t[0] + ", Noche: " + t[1]));
                         panelVerTurnos.revalidate();
