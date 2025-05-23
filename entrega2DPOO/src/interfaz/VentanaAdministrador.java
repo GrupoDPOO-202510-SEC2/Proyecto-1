@@ -109,13 +109,20 @@ public class VentanaAdministrador {
                     	panelVerEsp.add(btnCrear2, BorderLayout.SOUTH);
                     	
                     	btnCrear2.addActionListener(evt -> {
+                            panelVerEsp.removeAll();
                     		String nombre2 = tfNombre2.getText();
+                            panelVerEsp.add(new JLabel("Nombre: "));
+                            panelVerEsp.add(tfNombre2);
+                        	panelVerEsp.add(btnCrear2, BorderLayout.SOUTH);
                             Espectaculo esp = Administrador.getEspectaculo(nombre2);
 							panelVerEsp.add(new JLabel("Nombre: "+ esp.getNombre()));
 	                        panelVerEsp.add(new JLabel("Ubicación: "+ esp.getUbicacion()));
 	                        panelVerEsp.add(new JLabel("Horario: "+ esp.getHorario()));
 	                        panelVerEsp.add(new JLabel("Fecha Inicio: "+ esp.getFechaInicio()));
 	                        panelVerEsp.add(new JLabel("Fecha Fin: "+ esp.getFechaFin()));
+	                    	panelCentralEspectaculos.revalidate();
+	                    	panelCentralEspectaculos.repaint();
+	                        
 							});
                     	panelCentralEspectaculos.removeAll();
                         panelCentralEspectaculos.add(panelVerEsp);

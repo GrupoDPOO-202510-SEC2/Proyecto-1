@@ -106,7 +106,7 @@ public class Ventana extends JFrame {
 //---------------------------------menu usuario---------------------------------------//
 
         
-        JButton botonUsuarioLogin = new JButton("Inicir Sesion");
+        JButton botonUsuarioLogin = new JButton("Iniciar Sesion");
         botonUsuarioLogin.setPreferredSize(new Dimension(150, 30));
         
         JButton botonUsuarioSignIn = new JButton("Registrame");

@@ -149,7 +149,7 @@
     },
     "usuarios": {
         "Administrador": {
-            "restricciones": [],
+            "restricciones": ["soap"],
             "password": "sopa",
             "compras": {},
             "altura": 180,

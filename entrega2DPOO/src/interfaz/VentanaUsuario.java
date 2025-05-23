@@ -36,13 +36,13 @@ public class VentanaUsuario extends JFrame{
 		
 		// ——— Pestaña Espectáculos ———
         String[] metodos1 = {
-        		"Comprar tiquete",
-                "Ver tiquetes funcionales",
-                "Ver todos los tiquetes comprados",
-                "Ver tiquete en uso",
-                "Agregar restricción",
-                "Eliminar restricción",
-                "Ver restricciones",
+        		"1. Comprar tiquete",
+                "2. Ver tiquetes funcionales",
+                "3. Ver todos los tiquetes comprados",
+                "4. Ver tiquete en uso",
+                "5. Agregar restricción",
+                "6. Eliminar restricción",
+                "7. Ver restricciones",
         };
         JList<String> lista1 = new JList<>(metodos1);
         JScrollPane scroll1 = new JScrollPane(lista1);
