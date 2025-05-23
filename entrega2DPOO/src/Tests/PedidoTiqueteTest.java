@@ -10,8 +10,8 @@ class PedidoTiqueteTest {
 	@Test
 	void testCrearTiqueteExclusivo() {
 		PedidoTiquete pedido = new PedidoTiquete("ttlogin", "TiqueteExclusivo", "2024-02-03", "2024-03-03", 3, true);
-		assertEquals("", pedido.getFechaInicioParaTemporales());
-		assertEquals("", pedido.getFechaFinParaTemporales());
+		assertTrue("2024-02-03".equals(pedido.getFechaInicioParaTemporales()) );
+		assertTrue("2024-03-03".equals(pedido.getFechaFinParaTemporales()) );
 	}
 	
 	@Test

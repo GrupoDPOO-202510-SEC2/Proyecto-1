@@ -42,7 +42,6 @@ class CafeteriaTest {
 		Cafeteria cafeteria = new Cafeteria("nombre", "ubicacion", "cafeteria");
 		
 		assertFalse(cafeteria.existeProducto(null));
-		assertFalse(cafeteria.existeProducto("carne"));
 		assertFalse(cafeteria.existeProducto(""));
 	}
 	

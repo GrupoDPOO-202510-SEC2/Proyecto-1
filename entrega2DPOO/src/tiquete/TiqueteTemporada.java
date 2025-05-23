@@ -34,7 +34,7 @@ public class TiqueteTemporada extends TiqueteExclusividad{
 			
 			LocalDate fechaInicioLD = LocalDate.parse(fechaInicio);
 			LocalDate fechaFinLD = LocalDate.parse(fechaFin);
-			if((fechaHoyFormat.compareTo(fechaInicioLD) < 0) || (fechaHoyFormat.compareTo(fechaFinLD) < 0)) {
+			if((!fechaHoyFormat.isAfter(fechaInicioLD)) || (!fechaHoyFormat.isBefore(fechaFinLD))) {
 				valido = false;
 			}
 		}

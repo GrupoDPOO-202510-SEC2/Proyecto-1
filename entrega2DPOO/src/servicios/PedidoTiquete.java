@@ -14,6 +14,14 @@ public class PedidoTiquete{
 
 	public PedidoTiquete(String loginUsuario, String tipo,
 			String fechaInicioParaTemporales, String fechaFinParaTemporales, int exclusividad, boolean fastPass) {
+		
+		if(exclusividad>4) {
+			exclusividad = 4;
+		}
+		if(exclusividad<1) {
+			exclusividad = 1;
+		}
+		
 		this.loginUsuario = loginUsuario;
 		this.tipo = tipo;
 		this.fechaInicioParaTemporales = fechaInicioParaTemporales;
@@ -21,13 +29,13 @@ public class PedidoTiquete{
 		this.exclusividad = exclusividad;
 		this.fastPass = fastPass;
 		
-		if(tipo == "TiqueteExclusivo") {
+		if(tipo.equals("TiqueteExclusivo")) {
 			fechaInicioParaTemporales = "";
 			fechaFinParaTemporales = "";
 		}
-		else if(tipo == "TiqueteTemporada") {
+		else if(tipo.equals("TiqueteTemporada")) {
 		}
-		else if(tipo == "TiqueteIndividual") {
+		else if(tipo.equals("TiqueteIndividual")) {
 			exclusividad = 4;
 			fechaInicioParaTemporales = "";
 			fechaFinParaTemporales = "";
